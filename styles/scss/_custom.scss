@@ -1,0 +1,500 @@
+// Here you can add other styles
+
+body {
+  font-size: 12px;
+}
+
+.sidebar {
+  --cui-sidebar-bg: #0f2744;
+  --cui-sidebar-width: 16.5rem;
+  --cui-sidebar-narrow-width: 4.25rem;
+
+  --cui-sidebar-brand-bg: transparent;
+  --cui-sidebar-brand-height: 72px;
+
+  --cui-sidebar-nav-title-color: rgba(255, 255, 255, 0.38);
+  --cui-sidebar-nav-title-padding-x: 1.25rem;
+  --cui-sidebar-nav-title-margin-top: 0;
+
+  --cui-sidebar-nav-link-padding-x: 1rem;
+  --cui-sidebar-nav-link-padding-y: 0.55rem;
+  --cui-sidebar-nav-link-color: rgba(255, 255, 255, 0.68);
+  --cui-sidebar-nav-link-border-radius: 10px;
+
+  --cui-sidebar-nav-link-hover-bg: rgba(255, 255, 255, 0.06);
+  --cui-sidebar-nav-link-hover-color: #ffffff;
+  --cui-sidebar-nav-link-hover-icon-color: #ffffff;
+
+  --cui-sidebar-nav-link-active-bg: linear-gradient(135deg, #2196f3, #115f98);
+  --cui-sidebar-nav-link-active-color: #ffffff;
+  --cui-sidebar-nav-link-active-icon-color: #ffffff;
+
+  --cui-sidebar-nav-link-icon-color: rgba(255, 255, 255, 0.5);
+  --cui-sidebar-nav-icon-width: 2.5rem;
+  --cui-sidebar-nav-icon-font-size: 1.05rem;
+
+  --cui-sidebar-nav-group-bg: rgba(255, 255, 255, 0.03);
+  --cui-sidebar-nav-group-toggle-show-color: rgba(255, 255, 255, 0.75);
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, sans-serif;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 4px 0 24px rgba(15, 23, 42, 0.08);
+}
+
+.sidebar .nav-link {
+  margin: 2px 10px;
+  width: auto;
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.sidebar.sidebar-narrow-unfoldable:not(:hover) .nav-link,
+.sidebar.sidebar-narrow .nav-link,
+.sidebar.sidebar-narrow-unfoldable:not(:hover) .nav-group-toggle,
+.sidebar.sidebar-narrow .nav-group-toggle {
+  margin-left: 6px;
+  margin-right: 6px;
+  padding-left: 0;
+  padding-right: 0;
+  justify-content: center;
+}
+
+.sidebar.sidebar-narrow-unfoldable:not(:hover) .nav-link,
+.sidebar.sidebar-narrow .nav-link,
+.sidebar.sidebar-narrow-unfoldable:not(:hover) .nav-group-toggle,
+.sidebar.sidebar-narrow .nav-group-toggle {
+  font-size: 0;
+}
+
+.sidebar.sidebar-narrow-unfoldable:not(:hover) .nav-link .nav-icon,
+.sidebar.sidebar-narrow .nav-link .nav-icon,
+.sidebar.sidebar-narrow-unfoldable:not(:hover) .nav-group-toggle .nav-icon,
+.sidebar.sidebar-narrow .nav-group-toggle .nav-icon,
+.sidebar.sidebar-narrow-unfoldable:not(:hover) .nav-link .badge,
+.sidebar.sidebar-narrow .nav-link .badge {
+  font-size: initial;
+}
+
+.sidebar.sidebar-narrow-unfoldable:not(:hover) .nav-link .badge,
+.sidebar.sidebar-narrow .nav-link .badge {
+  display: none;
+}
+
+.sidebar.sidebar-narrow-unfoldable:not(:hover) .nav-link .nav-icon,
+.sidebar.sidebar-narrow .nav-link .nav-icon,
+.sidebar.sidebar-narrow-unfoldable:not(:hover) .nav-group-toggle .nav-icon,
+.sidebar.sidebar-narrow .nav-group-toggle .nav-icon {
+  flex: 0 0 auto;
+  margin-left: 0 !important;
+}
+
+.sidebar.sidebar-narrow-unfoldable:not(:hover) .nav-group-toggle::after,
+.sidebar.sidebar-narrow .nav-group-toggle::after {
+  display: none;
+}
+
+.sidebar .nav-link:hover {
+  transform: translateX(2px);
+}
+
+.sidebar .nav-link.active {
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(33, 150, 243, 0.35);
+}
+
+.sidebar .nav-icon {
+  transition: color 0.15s ease;
+}
+
+.sidebar .nav-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sidebar .nav-group-items .nav-link {
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-left: 3.25rem;
+  font-size: 13px;
+}
+
+.sidebar .nav-group-toggle {
+  margin: 2px 10px;
+  width: auto;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.sidebar .nav-group.show>.nav-group-toggle {
+  color: #ffffff;
+}
+
+.sidebar-nav {
+  padding: 6px 0;
+}
+
+.sidebar-brand {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+// Re-theme CoreUI/Bootstrap form validation colors to match the app's
+// accent blue (valid) / danger red (invalid) instead of the library
+// defaults (green / red).
+:root {
+  --cui-form-valid-color: #115f98;
+  --cui-form-valid-border-color: #115f98;
+  --cui-form-invalid-color: #dc2626;
+  --cui-form-invalid-border-color: #dc2626;
+}
+
+.was-validated .form-control:valid,
+.form-control.is-valid {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23115f98' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e") !important;
+}
+
+.was-validated .form-select:valid,
+.form-select.is-valid {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e"), url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23115f98' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e") !important;
+}
+
+.was-validated .form-control:valid:focus,
+.form-control.is-valid:focus,
+.was-validated .form-select:valid:focus,
+.form-select.is-valid:focus {
+  box-shadow: 0 0 0 0.25rem rgba(17, 95, 152, 0.25) !important;
+}
+
+.was-validated .form-control:invalid:focus,
+.form-control.is-invalid:focus,
+.was-validated .form-select:invalid:focus,
+.form-select.is-invalid:focus {
+  box-shadow: 0 0 0 0.25rem rgba(220, 38, 38, 0.25) !important;
+}
+
+.valid-feedback {
+  color: var(--cui-form-valid-color) !important;
+}
+
+.sidebar-logo-in {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.sidebar-logo-out {
+  color: #ffffff;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.sidebar-brand-strip {
+  width: 100%;
+  height: 72px;
+  max-height: 50px;
+  flex: 0 0 72px;
+  align-self: stretch;
+  background: #ffffff;
+  padding: 0 !important;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.sidebar-logo-wrap {
+  display: flex;
+  align-items: center;
+  // justify-content: center;
+  width: 100%;
+  height: 72px;
+  padding: 10px 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.sidebar-logo-wrap-narrow {
+  padding: 12px;
+}
+
+.sidebar-logo-img {
+  display: block;
+  height: 52px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.sidebar-logo-img-narrow {
+  display: block;
+  height: 59px;
+  width: 56px;
+  object-fit: cover;
+  object-position: 72% center;
+  border-radius: 6px;
+}
+
+strong.roles-view {
+  float: right;
+  color: green;
+}
+
+.drop-heading {
+  color: rgb(51 152 255);
+  font-weight: 600;
+}
+
+.drop-details {
+  color: green;
+}
+
+.expandable-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.expandable-th {
+  padding: 10px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+
+tr.expanded {
+  background-color: lightgray;
+  transition: background-color 0.3s ease;
+}
+
+tr.expanded:hover {
+  background-color: darkgray;
+}
+
+tr.expanded+tr {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.1s ease;
+}
+
+tr.expanded+tr .details {
+  padding: 10px;
+  white-space: normal;
+  overflow: auto;
+}
+
+.pull-right {
+  float: right;
+}
+
+.pull-right-inputgroup {
+  float: right;
+  width: 20% !important;
+}
+
+.notes-card {
+  background-color: #e1e1e1;
+  border-radius: 10px;
+}
+
+.link {
+  cursor: pointer;
+}
+
+// App header
+.app-header {
+  background: #ffffff !important;
+  border-bottom: none !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.app-header-toggler {
+  border-radius: 8px;
+  color: #64748b;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.app-header-toggler:hover {
+  background: #f7f8fa;
+  color: #115f98;
+}
+
+.app-header-nav-link {
+  font-weight: 600;
+  color: #0f172a !important;
+}
+
+.app-header-icons {
+  gap: 4px;
+  margin-right: 4px;
+}
+
+.app-header-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  color: #115f98 !important;
+  background: color-mix(in srgb, #115f98 8%, transparent);
+  cursor: pointer;
+  transition: background-color 0.12s ease, transform 0.12s ease;
+}
+
+.app-header-icon-btn:hover {
+  background: color-mix(in srgb, #115f98 16%, transparent);
+  transform: translateY(-1px);
+}
+
+.app-header-breadcrumb-row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-top: 1px solid #e6e9ef;
+}
+
+.app-header-breadcrumb-row .breadcrumb {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.app-header-breadcrumb-row .breadcrumb-item.active {
+  color: #64748b;
+}
+
+.app-header-breadcrumb-row .breadcrumb-item a {
+  color: #115f98;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.app-header-breadcrumb-row .breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+.app-header-avatar {
+  background: linear-gradient(160deg, #115f98, #123274) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.app-header-dropdown-menu {
+  border-radius: 12px !important;
+  border: 1px solid #e6e9ef !important;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16) !important;
+  overflow: hidden;
+  min-width: 200px;
+}
+
+.app-header-dropdown-title {
+  background: #f7f8fa !important;
+  color: #0f172a;
+}
+
+.sidebar-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.sidebar-footer-username {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  font-weight: 600;
+  padding-left: 14px;
+}
+
+// SweetAlert2 theme — matches the app's accent/rounded design language
+.swal2-popup {
+  border-radius: 14px !important;
+  padding: 28px 24px 24px !important;
+  font-family: inherit !important;
+}
+
+.swal2-title {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  padding: 0 !important;
+  margin-bottom: 8px !important;
+}
+
+.swal2-html-container {
+  font-size: 14px !important;
+  color: #64748b !important;
+  margin: 0 !important;
+}
+
+.swal2-icon {
+  margin: 8px auto 16px !important;
+  transform: scale(0.85);
+}
+
+.swal2-icon.swal2-question {
+  border-color: #115f98 !important;
+  color: #115f98 !important;
+}
+
+.swal2-icon.swal2-success [class^='swal2-success-line'] {
+  background-color: #16a34a !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+  border-color: color-mix(in srgb, #16a34a 30%, transparent) !important;
+}
+
+.swal2-icon.swal2-error {
+  border-color: #dc2626 !important;
+  color: #dc2626 !important;
+}
+
+.swal2-icon.swal2-warning {
+  border-color: #d97706 !important;
+  color: #d97706 !important;
+}
+
+.swal2-actions {
+  gap: 10px !important;
+  margin-top: 20px !important;
+}
+
+.swal2-styled {
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  padding: 10px 20px !important;
+  box-shadow: none !important;
+}
+
+.swal2-confirm.swal2-styled {
+  background-color: #115f98 !important;
+}
+
+.swal2-confirm.swal2-styled:focus {
+  box-shadow: 0 0 0 3px color-mix(in srgb, #115f98 25%, transparent) !important;
+}
+
+.swal2-cancel.swal2-styled {
+  background-color: #dc2626 !important;
+}
+
+.swal2-cancel.swal2-styled:focus {
+  box-shadow: 0 0 0 3px color-mix(in srgb, #dc2626 25%, transparent) !important;
+}
