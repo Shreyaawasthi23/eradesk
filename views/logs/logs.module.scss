@@ -1,0 +1,234 @@
+.page {
+  --fc-bg: #f7f8fa;
+  --fc-surface: #ffffff;
+  --fc-ink: #0f172a;
+  --fc-ink-muted: #64748b;
+  --fc-border: #e6e9ef;
+  --fc-accent: #115f98;
+  --fc-accent-deep: #123274;
+  --fc-success: #16a34a;
+  --fc-danger: #dc2626;
+
+  background: var(--fc-bg);
+  margin: -1rem -1rem 0;
+  padding: 24px;
+  color: var(--fc-ink);
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.pageTitle {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 4px;
+  color: var(--fc-ink);
+}
+
+.pageSubtitle {
+  font-size: 14px;
+  color: var(--fc-ink-muted);
+  margin: 0;
+}
+
+.applyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  background: var(--fc-accent);
+  color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.applyBtn:hover {
+  background: var(--fc-accent-deep);
+}
+
+/* Card */
+
+.card {
+  background: var(--fc-surface);
+  border: 1px solid var(--fc-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Filters */
+
+.filterBar {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--fc-border);
+  flex-wrap: wrap;
+}
+
+.filterField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 240px;
+}
+
+.filterLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--fc-ink-muted);
+}
+
+.filterInput {
+  font-size: 13px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--fc-border);
+  background: var(--fc-surface);
+  color: var(--fc-ink);
+  width: 100%;
+}
+
+.filterInput:focus {
+  outline: none;
+  border-color: var(--fc-accent);
+}
+
+.filterClear {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--fc-border);
+  background: var(--fc-surface);
+  color: var(--fc-ink-muted);
+  cursor: pointer;
+}
+
+.filterClear:hover {
+  border-color: var(--fc-accent);
+  color: var(--fc-accent);
+}
+
+/* Table */
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--fc-ink-muted);
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--fc-border);
+  background: var(--fc-bg);
+  white-space: normal;
+  word-break: break-word;
+}
+
+.table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--fc-border);
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.table tbody tr:hover {
+  background: color-mix(in srgb, var(--fc-accent) 4%, transparent);
+}
+
+.email {
+  color: var(--fc-ink-muted);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--fc-ink-muted);
+  font-size: 14px;
+}
+
+/* Pagination */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 20px;
+}
+
+.pageBtn {
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 8px;
+  border: 1px solid var(--fc-border);
+  background: var(--fc-surface);
+  color: var(--fc-ink-muted);
+  cursor: pointer;
+}
+
+.pageBtn:hover {
+  border-color: var(--fc-accent);
+  color: var(--fc-accent);
+}
+
+.pageBtnActive {
+  composes: pageBtn;
+  background: var(--fc-accent);
+  border-color: var(--fc-accent);
+  color: #ffffff;
+}
+
+.pageBtnActive:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,612 @@
+.page {
+  --dash-bg: #f6f8fb;
+  --dash-surface: #ffffff;
+  --dash-ink: #0f172a;
+  --dash-ink-muted: #64748b;
+  --dash-border: #e6e9ef;
+  --dash-accent: #1a73b8;
+  --dash-accent-deep: #0f2744;
+  --dash-success: #16a34a;
+  --dash-warning: #d97706;
+  --dash-danger: #dc2626;
+
+  background: var(--dash-bg);
+  margin: -1rem -1rem 0;
+  padding: 16px 20px;
+  color: var(--dash-ink);
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.pageTitle {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 2px;
+  color: var(--dash-ink);
+}
+
+.pageSubtitle {
+  font-size: 13px;
+  color: var(--dash-ink-muted);
+  margin: 0 0 14px;
+}
+
+/* Entrance animation */
+
+@keyframes dashFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pageTitle,
+.pageSubtitle {
+  animation: dashFadeUp 0.4s ease both;
+}
+
+.pageSubtitle {
+  animation-delay: 0.05s;
+}
+
+/* Layout grids */
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.kpiGrid > * {
+  animation: dashFadeUp 0.45s ease both;
+}
+
+.kpiGrid > *:nth-child(1) {
+  animation-delay: 0.08s;
+}
+.kpiGrid > *:nth-child(2) {
+  animation-delay: 0.14s;
+}
+.kpiGrid > *:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.kpiGrid > *:nth-child(4) {
+  animation-delay: 0.26s;
+}
+
+.chartGrid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.chartGrid2 > *,
+.chartGridFull > * {
+  animation: dashFadeUp 0.5s ease both;
+  animation-delay: 0.3s;
+}
+
+.chartGrid2 > *:nth-child(2) {
+  animation-delay: 0.36s;
+}
+
+.chartGridFull {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 1024px) {
+  .kpiGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .chartGrid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .kpiGrid {
+    grid-template-columns: 1fr;
+  }
+  .page {
+    padding: 16px;
+  }
+}
+
+/* Card chrome */
+
+.card {
+  background: var(--dash-surface);
+  border: 1px solid var(--dash-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--dash-accent) 25%, var(--dash-border));
+}
+
+.cardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px 12px;
+  padding: 14px 16px 0;
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--dash-ink);
+}
+
+.cardSubtitle {
+  font-size: 13px;
+  color: var(--dash-ink-muted);
+  margin: 2px 0 0;
+}
+
+.cardControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.cardBody {
+  padding: 12px 16px 16px;
+}
+
+/* Dark accent card variant */
+
+.cardDark {
+  composes: card;
+  background: linear-gradient(160deg, #16324f 0%, #0f2744 100%);
+  border-color: #1c3a5e;
+}
+
+.cardDark .cardTitle,
+.cardDark .cardSubtitle {
+  color: #ffffff;
+}
+
+.cardDark .cardSubtitle {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* KPI card */
+
+.kpiCard {
+  composes: card;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kpiLabel {
+  font-size: 13px;
+  color: var(--dash-ink-muted);
+  font-weight: 500;
+}
+
+.kpiValueRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.kpiValue {
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  color: var(--dash-ink);
+}
+
+.kpiTrend {
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.kpiTrendUp {
+  composes: kpiTrend;
+  color: var(--dash-success);
+}
+
+.kpiTrendDown {
+  composes: kpiTrend;
+  color: var(--dash-danger);
+}
+
+.kpiIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2196f3, var(--dash-accent-deep));
+  color: #ffffff;
+  align-self: flex-start;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--dash-accent-deep) 35%, transparent);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kpiCard:hover .kpiIcon {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--dash-accent-deep) 45%, transparent);
+}
+
+/* Year select */
+
+.yearSelectGroup {
+  display: flex;
+  gap: 6px;
+}
+
+.yearSelect {
+  font-size: 13px;
+  padding: 5px 24px 5px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--dash-border);
+  background: var(--dash-surface);
+  color: var(--dash-ink);
+  cursor: pointer;
+}
+
+/* Year pills */
+
+.yearPillGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.yearPillRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px;
+  max-width: 100%;
+}
+
+.yearPill {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--dash-border);
+  background: var(--dash-surface);
+  color: var(--dash-ink-muted);
+  cursor: pointer;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.yearPill:hover {
+  border-color: var(--dash-accent);
+  color: var(--dash-accent);
+}
+
+.yearPillActive {
+  composes: yearPill;
+  background: var(--dash-accent);
+  border-color: var(--dash-accent);
+  color: #ffffff;
+}
+
+.yearPillActive:hover {
+  color: #ffffff;
+}
+
+.yearPillActiveCompare {
+  composes: yearPill;
+  background: var(--dash-accent-deep);
+  border-color: var(--dash-accent-deep);
+  color: #ffffff;
+}
+
+.yearPillActiveCompare:hover {
+  color: #ffffff;
+}
+
+/* Donut center label overlay */
+
+.donutCenterLabel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.donutCenterValue {
+  font-size: 24px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--dash-ink);
+  line-height: 1.2;
+}
+
+.donutCenterCaption {
+  font-size: 12px;
+  color: var(--dash-ink-muted);
+  margin-top: 2px;
+}
+
+/* Half-donut gauge */
+
+.gaugeWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gaugeCenterLabel {
+  position: absolute;
+  top: 62%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.gaugeCenterValue {
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--dash-ink);
+  line-height: 1.2;
+}
+
+.gaugeCenterCaption {
+  font-size: 12px;
+  color: var(--dash-ink-muted);
+  margin-top: 2px;
+}
+
+.gaugeLegend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 16px;
+  margin-top: 8px;
+}
+
+.gaugeLegendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--dash-ink-muted);
+}
+
+.gaugeLegendSwatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* Table */
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--dash-ink-muted);
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--dash-border);
+}
+
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--dash-border);
+  vertical-align: middle;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.table tbody tr:hover {
+  background: var(--dash-bg);
+}
+
+.tableFigure {
+  font-variant-numeric: tabular-nums;
+}
+
+.userCell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userName {
+  font-weight: 600;
+  color: var(--dash-ink);
+}
+
+.userMeta {
+  font-size: 12px;
+  color: var(--dash-ink-muted);
+}
+
+/* User Dashboard table (redesigned) */
+
+.userTable {
+  composes: table;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.userTable thead th {
+  background: var(--dash-bg);
+  border-bottom: 1px solid var(--dash-border);
+}
+
+.userTable thead th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.userTable thead th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.userTable tbody tr {
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.userTable tbody tr:hover {
+  background: color-mix(in srgb, var(--dash-accent) 4%, transparent);
+}
+
+.userAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--dash-accent) 12%, transparent);
+}
+
+.trendCell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 140px;
+}
+
+.trendStats {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.todayBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--dash-accent) 10%, transparent);
+  color: var(--dash-accent);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.progressTrack {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--dash-border);
+  overflow: hidden;
+  margin-top: 6px;
+  min-width: 100px;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 3px;
+}
+
+/* Overview link-menu (replaces native <select> for navigable status links) */
+
+.menuWrap {
+  position: relative;
+}
+
+.menuTrigger {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--dash-border);
+  background: var(--dash-surface);
+  color: var(--dash-accent);
+  cursor: pointer;
+}
+
+.menuTrigger:hover {
+  background: var(--dash-bg);
+}
+
+.menuList {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 20;
+  min-width: 160px;
+  background: var(--dash-surface);
+  border: 1px solid var(--dash-border);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.menuItem {
+  text-align: left;
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--dash-ink);
+  cursor: pointer;
+}
+
+.menuItem:hover {
+  background: var(--dash-bg);
+  color: var(--dash-accent);
+}

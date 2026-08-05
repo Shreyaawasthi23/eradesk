@@ -1,0 +1,195 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  padding: 20px;
+}
+
+.modal {
+  --fc-bg: #f7f8fa;
+  --fc-surface: #ffffff;
+  --fc-ink: #0f172a;
+  --fc-ink-muted: #64748b;
+  --fc-border: #e6e9ef;
+  --fc-accent: #115f98;
+  --fc-accent-deep: #123274;
+  --fc-success: #16a34a;
+  --fc-danger: #dc2626;
+  --fc-warning: #d97706;
+
+  background: var(--fc-surface);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 920px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25);
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--fc-border);
+}
+
+.modalTitle {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--fc-ink);
+}
+
+.modalClose {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--fc-ink-muted);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.modalClose:hover {
+  color: var(--fc-ink);
+}
+
+.modalBody {
+  padding: 24px;
+}
+
+.assetBanner {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  background: var(--fc-bg);
+  border: 1px solid var(--fc-border);
+  border-radius: 10px;
+}
+
+.assetBannerField {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.assetBannerLabel {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fc-ink-muted);
+}
+
+.assetBannerValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fc-ink);
+}
+
+.validityValid {
+  color: var(--fc-success);
+}
+
+.validityExpired {
+  color: var(--fc-danger);
+}
+
+.validityPre {
+  color: var(--fc-warning);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fc-ink);
+}
+
+.formInput {
+  font-size: 14px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--fc-border);
+  background: var(--fc-surface);
+  color: var(--fc-ink);
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: var(--fc-accent);
+}
+
+.formFeedbackInvalid {
+  font-size: 12px;
+  color: var(--fc-danger);
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--fc-border);
+}
+
+.submitBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  background: var(--fc-accent);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.submitBtn:hover {
+  background: var(--fc-accent-deep);
+}
+
+.cancelBtn {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--fc-border);
+  background: var(--fc-surface);
+  color: var(--fc-ink-muted);
+  cursor: pointer;
+}
+
+.cancelBtn:hover {
+  background: var(--fc-bg);
+}
+
+@media (max-width: 720px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .assetBanner {
+    grid-template-columns: 1fr;
+  }
+}
