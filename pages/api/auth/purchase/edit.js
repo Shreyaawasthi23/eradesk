@@ -38,7 +38,7 @@ export default async function handler(req, res) {
     poReceiveDate,
     type,
     modifyDate: new Date(),
-    status: !!status,
+    status: status === true || status === 'true',
     value,
     salesId,
   }

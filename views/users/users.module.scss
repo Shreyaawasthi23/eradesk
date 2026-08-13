@@ -389,6 +389,35 @@
   border-color: var(--u-danger);
 }
 
+.passwordWrap {
+  position: relative;
+  display: flex;
+}
+
+.passwordWrap .formInput {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.passwordToggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--u-ink-muted, #64748b);
+  cursor: pointer;
+}
+
+.passwordToggle:hover {
+  color: var(--u-accent);
+}
+
 .formFeedback {
   font-size: 12px;
 }

@@ -106,6 +106,7 @@ export const CreateSalesParticipant = async (sales, router, getSalesList) => {
     email: sales?.email,
     number: sales?.number,
     userId: sales?.userId,
+    status: sales?.status,
   })
   // console.log(raw)
   var requestOptions = {
@@ -142,6 +143,7 @@ export const EditSalesParticipant = async (sales, router, onSuccess) => {
     email: sales?.email,
     number: sales?.number,
     userId: sales?.userId,
+    status: sales?.status,
   })
   // console.log(raw)
   var requestOptions = {

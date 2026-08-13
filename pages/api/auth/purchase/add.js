@@ -46,7 +46,7 @@ export default async function handler(req, res) {
     modifyDate: now,
     userId: user._id.toString(),
     userName: `${user.firstName} ${user.lastName}`,
-    status: !!status,
+    status: status === true || status === 'true',
     value,
     salesId,
   })

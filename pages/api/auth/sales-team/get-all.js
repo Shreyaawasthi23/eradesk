@@ -6,6 +6,7 @@ function serialize(s) {
     name: s.name,
     email: s.email,
     number: s.number,
+    status: s.status ?? true,
     createDate: s.createDate,
     userEmail: s.userEmail,
   }
@@ -26,6 +27,7 @@ export default async function handler(req, res) {
   const { db } = auth
 
   const search = (req.query.search || '').trim()
+  const status = req.query.status
   const startDate = req.query.startDate
   const endDate = req.query.endDate
 
@@ -33,6 +35,9 @@ export default async function handler(req, res) {
   if (search) {
     const regex = new RegExp(search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i')
     filter.$or = [{ name: regex }, { email: regex }]
+  }
+  if (status === 'true' || status === 'false') {
+    filter.status = status === 'true'
   }
   if (startDate || endDate) {
     filter.createDate = {}

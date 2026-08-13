@@ -226,6 +226,18 @@
   white-space: nowrap;
 }
 
+.statusActive {
+  composes: roleBadge;
+  background: color-mix(in srgb, var(--s-success) 12%, transparent);
+  color: var(--s-success);
+}
+
+.statusInactive {
+  composes: roleBadge;
+  background: color-mix(in srgb, var(--s-danger) 12%, transparent);
+  color: var(--s-danger);
+}
+
 .editBtn {
   font-size: 13px;
   font-weight: 600;

@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   if (!auth) return
   if (!hasAnyRole(auth.roles, ['ROLE_ADMIN'])) return res.status(403).end()
 
-  const { name, email, number, userId } = req.body || {}
+  const { name, email, number, userId, status } = req.body || {}
   const { db } = auth
 
   const existingUser = await db.collection('Users').findOne({ _id: new ObjectId(userId) })
@@ -23,6 +23,7 @@ export default async function handler(req, res) {
     name,
     email,
     number,
+    status: status === undefined ? true : status === true || status === 'true',
     createDate: new Date(),
     userEmail: existingUser.email,
   })

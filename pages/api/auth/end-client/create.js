@@ -40,7 +40,7 @@ export default async function handler(req, res) {
     modifyDate: now,
     userName: `${user.firstName} ${user.lastName}`,
     userId: user._id.toString(),
-    status: !!status,
+    status: status === true || status === 'true',
     salesIds: Array.isArray(salesIds) ? salesIds : [],
   })
 

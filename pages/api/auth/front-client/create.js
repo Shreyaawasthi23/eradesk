@@ -51,7 +51,7 @@ export default async function handler(req, res) {
     userName: `${existingUser.firstName} ${existingUser.lastName}`,
     userId: existingUser._id.toString(),
     frontClientId,
-    status: !!status,
+    status: status === true || status === 'true',
     salesIds: Array.isArray(salesIds) ? salesIds : [],
   })
 

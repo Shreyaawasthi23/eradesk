@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     state,
     country,
     modifyDate: new Date(),
-    status: !!status,
+    status: status === true || status === 'true',
     salesIds: Array.isArray(salesIds) ? salesIds : [],
   }
 

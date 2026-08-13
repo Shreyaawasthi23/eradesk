@@ -13,7 +13,11 @@ export default async function handler(req, res) {
   const { db } = auth
   // Mirrors SalesTeamRepository.findAllList(), which sorts on "CreateDate" (mismatched
   // casing vs the actual "createDate" field) so the sort is effectively a no-op upstream too.
-  const items = await db.collection('SalesTeam').find({}).toArray()
+  // Only active participants are offered — inactive ones shouldn't be selectable going forward.
+  const items = await db
+    .collection('SalesTeam')
+    .find({ status: { $ne: false } })
+    .toArray()
 
   const response = items.map((s) => ({
     id: s._id.toString(),

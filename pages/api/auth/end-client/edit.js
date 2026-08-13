@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     contactNumber,
     contactEmail,
     frontClientId,
-    status: !!status,
+    status: status === true || status === 'true',
     modifyDate: new Date(),
     salesIds: Array.isArray(salesIds) ? salesIds : [],
   }

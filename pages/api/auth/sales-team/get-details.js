@@ -21,6 +21,7 @@ export default async function handler(req, res) {
     name: s.name,
     email: s.email,
     number: s.number,
+    status: s.status ?? true,
     createDate: s.createDate,
     userEmail: s.userEmail,
   })

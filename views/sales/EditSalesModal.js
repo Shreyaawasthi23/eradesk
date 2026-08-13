@@ -44,6 +44,7 @@ const EditSalesModal = ({ salesId, router, onClose, onSaved }) => {
       email: salesDetails.email,
       number: salesDetails.number,
       userId: details?.id,
+      status: salesDetails.status,
       id: salesId,
     },
     validationSchema: Yup.object({
@@ -55,6 +56,9 @@ const EditSalesModal = ({ salesId, router, onClose, onSaved }) => {
         .required('Required')
         .matches(/^[0-9]+$/, 'Invalid input. Only numbers are allowed.'),
       email: Yup.string().email('Invalid email address').required('Required'),
+      status: Yup.boolean()
+        .oneOf([true, false], 'Invalid input. Please select a value.')
+        .required('Status is required'),
     }),
     onSubmit: (values) => {
       EditSalesParticipant(values, router, () => {
@@ -113,7 +117,7 @@ const EditSalesModal = ({ salesId, router, onClose, onSaved }) => {
                     <span className={styles.formFeedbackInvalid}>{formik.errors.email}</span>
                   )}
                 </div>
-                <div className={`${styles.formField} ${styles.full}`}>
+                <div className={styles.formField}>
                   <label className={styles.formLabel}>Contact Number</label>
                   <input
                     type="text"
@@ -126,6 +130,19 @@ const EditSalesModal = ({ salesId, router, onClose, onSaved }) => {
                   {formik.touched.number && formik.errors.number && (
                     <span className={styles.formFeedbackInvalid}>{formik.errors.number}</span>
                   )}
+                </div>
+                <div className={styles.formField}>
+                  <label className={styles.formLabel}>Status</label>
+                  <select
+                    className={styles.filterSelect}
+                    name="status"
+                    value={formik.values.status ?? ''}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  >
+                    <option value={true}>Active</option>
+                    <option value={false}>Deactive</option>
+                  </select>
                 </div>
               </div>
             </div>

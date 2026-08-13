@@ -51,7 +51,7 @@ export default async function handler(req, res) {
     roles: roleRefs,
     firstName,
     lastName,
-    status: false,
+    status: true,
     createDate: now,
     modifyDate: now,
     _class: 'com.assist.java.multitenancy.entity.Users',

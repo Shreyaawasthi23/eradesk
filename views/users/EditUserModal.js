@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
 import { EditUser } from '@/api/user_api'
@@ -19,6 +21,7 @@ const EditUserModal = ({ userId, router, onClose, onSaved }) => {
   const [user, setUser] = useState({})
   const [existingRoles, setExistingRoles] = useState([])
   const [loading, setLoading] = useState(true)
+  const [showPassword, setShowPassword] = useState(false)
 
   const getUserDetailsFromApi = () => {
     var myHeaders = new Headers()
@@ -153,14 +156,25 @@ const EditUserModal = ({ userId, router, onClose, onSaved }) => {
                 </div>
                 <div className={styles.formField}>
                   <label className={styles.formLabel}>Password</label>
-                  <input
-                    type="password"
-                    className={styles.formInput}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.password || ''}
-                    name="password"
-                  />
+                  <div className={styles.passwordWrap}>
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      className={styles.formInput}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.password || ''}
+                      name="password"
+                    />
+                    <button
+                      type="button"
+                      className={styles.passwordToggle}
+                      onClick={() => setShowPassword((s) => !s)}
+                      aria-label={showPassword ? 'Hide password' : 'Show password'}
+                      tabIndex={-1}
+                    >
+                      <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                    </button>
+                  </div>
                   {formik.touched.password && formik.errors.password && (
                     <span className={styles.formFeedbackInvalid}>{formik.errors.password}</span>
                   )}

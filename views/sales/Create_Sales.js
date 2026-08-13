@@ -25,12 +25,14 @@ const Create_Sales = () => {
 
   // Filters
   const [search, setSearch] = useState('')
+  const [statusFilter, setStatusFilter] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
 
   const buildFilterQuery = (filters) => {
     const params = new URLSearchParams()
     if (filters.search) params.set('search', filters.search)
+    if (filters.status) params.set('status', filters.status)
     if (filters.startDate) params.set('startDate', filters.startDate)
     if (filters.endDate) params.set('endDate', filters.endDate)
     return params.toString()
@@ -41,7 +43,7 @@ const Create_Sales = () => {
     setCurrentPage(pageNo)
   }
 
-  const getSalesList = async (page, size, filters = { search, startDate, endDate }) => {
+  const getSalesList = async (page, size, filters = { search, status: statusFilter, startDate, endDate }) => {
     var myHeaders = new Headers()
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
@@ -90,10 +92,11 @@ const Create_Sales = () => {
 
   const clearFilters = () => {
     setSearch('')
+    setStatusFilter('')
     setStartDate('')
     setEndDate('')
     setCurrentPage(0)
-    getSalesList(0, 10, { search: '', startDate: '', endDate: '' })
+    getSalesList(0, 10, { search: '', status: '', startDate: '', endDate: '' })
   }
 
   const formik = useFormik({
@@ -103,6 +106,7 @@ const Create_Sales = () => {
       email: '',
       number: '',
       userId: details?.id,
+      status: true,
     },
     validationSchema: Yup.object({
       name: Yup.string().required('Required'),
@@ -113,6 +117,9 @@ const Create_Sales = () => {
         .required('Required')
         .matches(/^[0-9]+$/, 'Invalid input. Only numbers are allowed.'),
       email: Yup.string().email('Invalid email address').required('Required'),
+      status: Yup.boolean()
+        .oneOf([true, false], 'Invalid input. Please select a value.')
+        .required('Status is required'),
     }),
     onSubmit: (values, { resetForm }) => {
       CreateSalesParticipant(values, router, getSalesList)
@@ -152,6 +159,18 @@ const Create_Sales = () => {
             />
           </div>
           <div className={styles.filterField}>
+            <label className={styles.filterLabel}>Status</label>
+            <select
+              className={styles.filterSelect}
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+            >
+              <option value="">All</option>
+              <option value="true">Active</option>
+              <option value="false">Deactive</option>
+            </select>
+          </div>
+          <div className={styles.filterField}>
             <label className={styles.filterLabel}>Created From</label>
             <input
               type="date"
@@ -186,6 +205,7 @@ const Create_Sales = () => {
                 <th>Email</th>
                 <th>Contact Number</th>
                 <th>Create Date</th>
+                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -207,6 +227,11 @@ const Create_Sales = () => {
                   <td className={styles.email}>{option.email}</td>
                   <td className={styles.email}>{option.number}</td>
                   <td className={styles.email}>{formatDate(option.createDate)}</td>
+                  <td>
+                    <span className={option.status !== false ? styles.statusActive : styles.statusInactive}>
+                      {option.status !== false ? 'Active' : 'Deactive'}
+                    </span>
+                  </td>
                   <td>
                     <button
                       type="button"
@@ -271,7 +296,7 @@ const Create_Sales = () => {
                       <span className={styles.formFeedbackInvalid}>{formik.errors.email}</span>
                     )}
                   </div>
-                  <div className={`${styles.formField} ${styles.full}`}>
+                  <div className={styles.formField}>
                     <label className={styles.formLabel}>Contact Number</label>
                     <input
                       type="text"
@@ -284,6 +309,19 @@ const Create_Sales = () => {
                     {formik.touched.number && formik.errors.number && (
                       <span className={styles.formFeedbackInvalid}>{formik.errors.number}</span>
                     )}
+                  </div>
+                  <div className={styles.formField}>
+                    <label className={styles.formLabel}>Status</label>
+                    <select
+                      className={styles.filterSelect}
+                      name="status"
+                      value={formik.values.status}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    >
+                      <option value={true}>Active</option>
+                      <option value={false}>Deactive</option>
+                    </select>
                   </div>
                 </div>
               </div>

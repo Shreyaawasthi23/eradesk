@@ -16,7 +16,10 @@ export default async function handler(req, res) {
   }
 
   const { db } = auth
-  const users = await db.collection('Users').find({ 'roles.$id': ENGINEER_ROLE_ID }).toArray()
+  const users = await db
+    .collection('Users')
+    .find({ 'roles.$id': ENGINEER_ROLE_ID, status: true })
+    .toArray()
   const roleMap = await getRoleMap(db)
 
   const response = users.map((u) => ({

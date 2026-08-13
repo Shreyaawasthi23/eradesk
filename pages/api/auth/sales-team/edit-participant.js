@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   if (!hasAnyRole(auth.roles, ['ROLE_ADMIN'])) return res.status(403).end()
 
   const { id } = req.query
-  const { name, email, number } = req.body || {}
+  const { name, email, number, status } = req.body || {}
   const { db } = auth
 
   const existing = await db.collection('SalesTeam').findOne({ _id: new ObjectId(id) })
@@ -20,7 +20,9 @@ export default async function handler(req, res) {
     return res.status(200).json({ statusCode: 409, message: 'Participant not found!' })
   }
 
-  await db.collection('SalesTeam').updateOne({ _id: new ObjectId(id) }, { $set: { name, email, number } })
+  await db
+    .collection('SalesTeam')
+    .updateOne({ _id: new ObjectId(id) }, { $set: { name, email, number, status: status === true || status === 'true' } })
 
   return res.status(200).json({ statusCode: 200, message: 'Participant details updated successfully!' })
 }
