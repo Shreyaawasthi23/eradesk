@@ -118,9 +118,9 @@ export const AddAssetReplacement = async (values, setVisible, router, assetList)
     const response = await fetch(
       apiUrl +
         '/auth/assets/add-asset-replacement?assetId=' +
-        values.id +
+        encodeURIComponent(values.id) +
         '&replacementSerial=' +
-        values.replacementSerial +
+        encodeURIComponent(values.replacementSerial) +
         '',
       requestOptions,
     )
@@ -129,22 +129,9 @@ export const AddAssetReplacement = async (values, setVisible, router, assetList)
     } else {
       const data = await response.json()
       if (data.statusCode === 200) {
-        Swal.fire({
-          title: 'Success',
-          text: data.message,
-          icon: 'success',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Done',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            setVisible(false)
-            router.push('/add-assets')
-          } else {
-            setVisible(false)
-          }
-        })
+        setVisible(false)
+        if (assetList) assetList(0, 100)
+        Swal.fire('Success', data.message, 'success')
       } else {
         Swal.fire('Oops!', '' + data.message + '', 'warning')
       }

@@ -43,7 +43,7 @@ const AppHeader = () => {
           <CHeaderToggler className="ps-1 app-header-toggler" onClick={() => setSidebarShow(!sidebarShow)}>
             <CIcon icon={cilMenu} size="lg" />
           </CHeaderToggler>
-          <CHeaderBrand className="mx-auto d-md-none" as={Link} href="/">
+          <CHeaderBrand className="mx-auto d-md-none" component={Link} href="/dashboard">
             <strong
               className="sidebar-brand-full sidebar-logo-out"
               style={{ color: 'rgb(55 66 83)' }}

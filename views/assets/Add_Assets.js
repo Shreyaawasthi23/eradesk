@@ -340,39 +340,12 @@ const Add_Assets = () => {
             <tbody>
               {assetList.content?.map((option, index) => (
                 <tr key={option.id}>
-                  <td style={option.replaced ? { textDecoration: 'line-through' } : null}>
-                    {assetList.number * assetList.size + index}
-                  </td>
-                  <td
-                    className={styles.username}
-                    style={option.replaced ? { textDecoration: 'line-through' } : null}
-                  >
-                    {option.serialNumber}
-                  </td>
-                  <td
-                    className={styles.email}
-                    style={option.replaced ? { textDecoration: 'line-through' } : null}
-                  >
-                    {option.make}
-                  </td>
-                  <td
-                    className={styles.email}
-                    style={option.replaced ? { textDecoration: 'line-through' } : null}
-                  >
-                    {option.model}
-                  </td>
-                  <td
-                    className={styles.email}
-                    style={option.replaced ? { textDecoration: 'line-through' } : null}
-                  >
-                    {option.purchaseOrderNumber}
-                  </td>
-                  <td
-                    className={styles.email}
-                    style={option.replaced ? { textDecoration: 'line-through' } : null}
-                  >
-                    {option.createDate}
-                  </td>
+                  <td>{assetList.number * assetList.size + index}</td>
+                  <td className={styles.username}>{option.serialNumber}</td>
+                  <td className={styles.email}>{option.make}</td>
+                  <td className={styles.email}>{option.model}</td>
+                  <td className={styles.email}>{option.purchaseOrderNumber}</td>
+                  <td className={styles.email}>{option.createDate}</td>
                   <td>
                     <button type="button" className={styles.editBtn} onClick={() => editAsset(option.id)}>
                       Edit
@@ -380,7 +353,6 @@ const Add_Assets = () => {
                     <button
                       type="button"
                       className={styles.editBtn}
-                      disabled={!!option.replaced}
                       onClick={() => openAddReplacement(option)}
                     >
                       Replace

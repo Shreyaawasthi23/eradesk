@@ -81,7 +81,7 @@ const RMA_Status = () => {
   }
 
   const handelRmaStatusUpdate = (e, rmaId) => {
-    UpdateRmaStatus(e.target.value, rmaId, router)
+    UpdateRmaStatus(e.target.value, rmaId, router, () => getAllRma(currentPage, 5000))
   }
 
   const handelExistingPod = async (option) => {

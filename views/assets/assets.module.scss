@@ -273,6 +273,16 @@
   background: var(--fc-bg);
 }
 
+.editBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: var(--fc-ink-muted);
+}
+
+.editBtn:disabled:hover {
+  background: var(--fc-surface);
+}
+
 .emptyState {
   text-align: center;
   padding: 48px 20px;

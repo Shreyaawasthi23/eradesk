@@ -3,6 +3,8 @@ import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
 import { CreateUser } from '@/api/user_api'
 import { useRouter } from 'next/router'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 import styles from './users.module.scss'
 import EditUserModal from './EditUserModal'
@@ -33,6 +35,7 @@ const Users = () => {
   const [currentPage, setCurrentPage] = useState(0)
   const [showModal, setShowModal] = useState(false)
   const [editUserId, setEditUserId] = useState(null)
+  const [showPassword, setShowPassword] = useState(false)
   const router = useRouter()
 
   // Filters
@@ -393,14 +396,25 @@ const Users = () => {
                   </div>
                   <div className={styles.formField}>
                     <label className={styles.formLabel}>Password</label>
-                    <input
-                      type="password"
-                      className={styles.formInput}
-                      value={user.password}
-                      required
-                      name="password"
-                      onChange={handleInputChange}
-                    />
+                    <div className={styles.passwordWrap}>
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        className={styles.formInput}
+                        value={user.password}
+                        required
+                        name="password"
+                        onChange={handleInputChange}
+                      />
+                      <button
+                        type="button"
+                        className={styles.passwordToggle}
+                        onClick={() => setShowPassword((s) => !s)}
+                        aria-label={showPassword ? 'Hide password' : 'Show password'}
+                        tabIndex={-1}
+                      >
+                        <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                      </button>
+                    </div>
                   </div>
                   <div className={`${styles.formField} ${styles.full}`}>
                     <label className={styles.formLabel}>Roles</label>

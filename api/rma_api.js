@@ -128,7 +128,7 @@ export const EditRma = (rma, router, setVisible, resetForm, setSubmitState) => {
     .catch((error) => console.log('error', error))
 }
 
-export const UpdateRmaStatus = async (status, rmaId, router) => {
+export const UpdateRmaStatus = async (status, rmaId, router, onSuccess) => {
   const details = getUserDetails()
   try {
     const myHeaders = new Headers()
@@ -157,15 +157,8 @@ export const UpdateRmaStatus = async (status, rmaId, router) => {
     } else {
       const data = await response.json()
       if (data.statusCode === 200) {
-        Swal.fire({
-          title: 'Success',
-          text: data.message,
-          icon: 'success',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Done',
-        })
+        if (onSuccess) onSuccess()
+        Swal.fire('Success', data.message, 'success')
       } else {
         Swal.fire('Oops!', '' + data.message + '', 'warning')
       }

@@ -153,12 +153,14 @@ const End_Client = () => {
           formik.setFieldValue('contactName', client.contactName)
           formik.setFieldValue('contactNumber', client.contactNumber)
           formik.setFieldValue('contactEmail', client.contactEmail)
+          formik.setFieldValue('salesIds', client.salesIds || [])
         } else {
           formik.setFieldValue(e.target.name, e.target.value)
           formik.setFieldValue('name', '')
           formik.setFieldValue('contactName', '')
           formik.setFieldValue('contactNumber', '')
           formik.setFieldValue('contactEmail', '')
+          formik.setFieldValue('salesIds', [])
         }
       })
     }

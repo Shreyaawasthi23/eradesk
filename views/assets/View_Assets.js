@@ -370,39 +370,12 @@ const View_Assets = () => {
                       }}
                     />
                   </td>
-                  <td style={option.replaced ? { textDecoration: 'line-through' } : null}>
-                    {assetList.number * assetList.size + index}
-                  </td>
-                  <td
-                    className={styles.username}
-                    style={option.replaced ? { textDecoration: 'line-through' } : null}
-                  >
-                    {option.serialNumber}
-                  </td>
-                  <td
-                    className={styles.email}
-                    style={option.replaced ? { textDecoration: 'line-through' } : null}
-                  >
-                    {option.make}
-                  </td>
-                  <td
-                    className={styles.email}
-                    style={option.replaced ? { textDecoration: 'line-through' } : null}
-                  >
-                    {option.model}
-                  </td>
-                  <td
-                    className={styles.email}
-                    style={option.replaced ? { textDecoration: 'line-through' } : null}
-                  >
-                    {option.purchaseOrderNumber}
-                  </td>
-                  <td
-                    className={styles.email}
-                    style={option.replaced ? { textDecoration: 'line-through' } : null}
-                  >
-                    {option.createDate}
-                  </td>
+                  <td>{assetList.number * assetList.size + index}</td>
+                  <td className={styles.username}>{option.serialNumber}</td>
+                  <td className={styles.email}>{option.make}</td>
+                  <td className={styles.email}>{option.model}</td>
+                  <td className={styles.email}>{option.purchaseOrderNumber}</td>
+                  <td className={styles.email}>{option.createDate}</td>
                   <td className={styles.actionCell}>
                     <div className={styles.iconActionGroup}>
                       <button
@@ -419,7 +392,6 @@ const View_Assets = () => {
                             type="button"
                             className={styles.iconActionReplace}
                             title="Replace"
-                            disabled={!!option.replaced}
                             onClick={() => openAddReplacement(option)}
                           >
                             <FontAwesomeIcon icon={faCopy} />

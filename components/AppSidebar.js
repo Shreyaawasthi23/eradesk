@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { useSidebar } from '@/context/SidebarContext'
 import { getUserDetails } from '@/lib/auth'
 
@@ -27,13 +28,15 @@ const AppSidebar = () => {
         setSidebarShow(visible)
       }}
     >
-      <CSidebarBrand className="d-none d-md-flex sidebar-brand-strip" to="/">
-        <span className="sidebar-brand-full sidebar-logo-wrap">
-          <img src="/logo (2).png" alt="ERADESK" className="sidebar-logo-img" />
-        </span>
-        <span className="sidebar-brand-narrow sidebar-logo-wrap sidebar-logo-wrap-narrow">
-          <img src="/favicon.png" alt="ERADESK" className="sidebar-logo-img-narrow" />
-        </span>
+      <CSidebarBrand className="d-none d-md-flex sidebar-brand-strip">
+        <Link href="/dashboard" className="sidebar-logo-link">
+          <span className="sidebar-brand-full sidebar-logo-wrap">
+            <img src="/logo (2).png" alt="ERADESK" className="sidebar-logo-img" />
+          </span>
+          <span className="sidebar-brand-narrow sidebar-logo-wrap sidebar-logo-wrap-narrow">
+            <img src="/favicon.png" alt="ERADESK" className="sidebar-logo-img-narrow" />
+          </span>
+        </Link>
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>

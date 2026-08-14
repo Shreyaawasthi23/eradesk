@@ -56,7 +56,7 @@ const Add_Replacement = ({ visible, setVisible, asset, assetList, ...props }) =>
                 type="text"
                 label="Serial"
                 value={asset.serialNumber}
-                name="replacementSerial"
+                name="serialNumber"
                 disabled
               />
             </CCol>

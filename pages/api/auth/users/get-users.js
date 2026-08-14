@@ -54,6 +54,7 @@ export default async function handler(req, res) {
   const users = await db
     .collection('Users')
     .find(filter)
+    .sort({ createDate: -1 })
     .skip(page * size)
     .limit(size)
     .toArray()
