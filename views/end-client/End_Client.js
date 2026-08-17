@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Swal from 'sweetalert2'
+import * as XLSX from 'xlsx'
 import * as Yup from 'yup'
 import { createEndClient } from '@/api/endclient_api'
 import { apiUrl, tenant } from '@/lib/config'
@@ -25,6 +26,8 @@ const End_Client = () => {
   const [currentPage, setCurrentPage] = useState(0)
   const [showModal, setShowModal] = useState(false)
   const [editId, setEditId] = useState(null)
+  const [selectedRows, setSelectedRows] = useState([])
+  const [downloading, setDownloading] = useState(false)
 
   // Filters
   const [search, setSearch] = useState('')
@@ -135,6 +138,64 @@ const End_Client = () => {
     getEndClientList(0, 10, { search: '', status: '' })
   }
 
+  const exportRows = (rows) => {
+    if (!rows.length) {
+      Swal.fire('No data', 'There is nothing to download.', 'info')
+      return
+    }
+    const sheetData = rows.map((r) => ({
+      'End Client ID': r.endClientId,
+      Name: r.name,
+      'Front Client ID': r.frontClientId,
+      'Contact Person': r.contactName,
+      'Contact Number': r.contactNumber,
+      'Contact Email': r.contactEmail,
+      Status: r.status ? 'Active' : 'Deactive',
+      'Create Date': r.createDate ? new Date(r.createDate).toLocaleString() : '',
+    }))
+    const workbook = XLSX.utils.book_new()
+    const worksheet = XLSX.utils.json_to_sheet(sheetData)
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'End Clients')
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
+    const excelData = new Blob([excelBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    })
+    const downloadLink = document.createElement('a')
+    downloadLink.href = URL.createObjectURL(excelData)
+    downloadLink.download = 'End Clients.xlsx'
+    downloadLink.click()
+  }
+
+  const downloadExcel = async () => {
+    if (selectedRows.length > 0) {
+      const rows = (endClientList.content || []).filter((r) => selectedRows.includes(r.id))
+      exportRows(rows)
+      return
+    }
+
+    setDownloading(true)
+    try {
+      var myHeaders = new Headers()
+      myHeaders.append('X-Tenant', '' + tenant + '')
+      myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
+      const response = await fetch(apiUrl + '/auth/end-client/get-all?status=all', {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+      })
+      if (response.status === 401) {
+        router.push('/')
+        return
+      }
+      const rows = await response.json()
+      exportRows(Array.isArray(rows) ? rows : [])
+    } catch (error) {
+      console.log('error', error)
+    } finally {
+      setDownloading(false)
+    }
+  }
+
   const handelFClientSelect = (e, formik) => {
     if (e.target.value !== 'Select') {
       const client = frontClientList.find((client) => client.id === e.target.value)
@@ -211,11 +272,28 @@ const End_Client = () => {
       <div className={styles.pageHeader}>
         <div>
           <h1 className={styles.pageTitle}>End Clients</h1>
-          <p className={styles.pageSubtitle}>Manage end-client accounts</p>
+          <p className={styles.pageSubtitle}>
+            Manage end-client accounts
+            {selectedRows.length > 0 ? ` · ${selectedRows.length} selected` : ''}
+          </p>
         </div>
-        <button type="button" className={styles.addBtn} onClick={() => setShowModal(true)}>
-          + Add New Client
-        </button>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button
+            type="button"
+            className={styles.filterClear}
+            onClick={downloadExcel}
+            disabled={downloading}
+          >
+            {downloading
+              ? 'Downloading...'
+              : selectedRows.length > 0
+                ? `Download Excel (${selectedRows.length})`
+                : 'Download Excel'}
+          </button>
+          <button type="button" className={styles.addBtn} onClick={() => setShowModal(true)}>
+            + Add New Client
+          </button>
+        </div>
       </div>
 
       <div className={styles.card}>
@@ -255,6 +333,22 @@ const End_Client = () => {
           <table className={styles.table}>
             <thead>
               <tr>
+                <th>
+                  <input
+                    type="checkbox"
+                    checked={
+                      endClientList.content?.length > 0 &&
+                      selectedRows.length === endClientList.content?.length
+                    }
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setSelectedRows(endClientList.content?.map((option) => option.id) || [])
+                      } else {
+                        setSelectedRows([])
+                      }
+                    }}
+                  />
+                </th>
                 <th>#</th>
                 <th>Name</th>
                 <th>End Client ID</th>
@@ -268,6 +362,19 @@ const End_Client = () => {
             <tbody>
               {endClientList.content?.map((option, index) => (
                 <tr key={option.id}>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={selectedRows.includes(option.id)}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setSelectedRows([...selectedRows, option.id])
+                        } else {
+                          setSelectedRows(selectedRows.filter((row) => row !== option.id))
+                        }
+                      }}
+                    />
+                  </td>
                   <td>{endClientList.number * endClientList.size + index}</td>
                   <td>
                     <div className={styles.userCell}>

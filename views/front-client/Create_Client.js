@@ -1,6 +1,8 @@
 import { useFormik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import * as XLSX from 'xlsx'
+import Swal from 'sweetalert2'
 import { createFrontClient } from '@/api/frontclient_api'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
@@ -22,6 +24,8 @@ const Create_Client = () => {
   const [currentPage, setCurrentPage] = useState(0)
   const [showModal, setShowModal] = useState(false)
   const [editId, setEditId] = useState(null)
+  const [selectedRows, setSelectedRows] = useState([])
+  const [downloading, setDownloading] = useState(false)
 
   // Filters
   const [search, setSearch] = useState('')
@@ -142,6 +146,70 @@ const Create_Client = () => {
     getFrontCLients(0, 10, { search: '', status: '' })
   }
 
+  const exportRows = (rows) => {
+    if (!rows.length) {
+      Swal.fire('No data', 'There is nothing to download.', 'info')
+      return
+    }
+    const sheetData = rows.map((r) => ({
+      'Client ID': r.frontClientId,
+      Name: r.name,
+      'Contact Person': r.contactName,
+      'Contact Number': r.contactNumber,
+      'Contact Email': r.contactEmail,
+      'GST Number': r.gstNumber,
+      'PAN Number': r.panNumber,
+      Address: r.address,
+      City: r.city,
+      State: r.state,
+      Country: r.country,
+      Pincode: r.pinCode,
+      Status: r.status ? 'Active' : 'Deactive',
+      'Create Date': r.createDate ? new Date(r.createDate).toLocaleString() : '',
+    }))
+    const workbook = XLSX.utils.book_new()
+    const worksheet = XLSX.utils.json_to_sheet(sheetData)
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Front Clients')
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
+    const excelData = new Blob([excelBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    })
+    const downloadLink = document.createElement('a')
+    downloadLink.href = URL.createObjectURL(excelData)
+    downloadLink.download = 'Front Clients.xlsx'
+    downloadLink.click()
+  }
+
+  const downloadExcel = async () => {
+    if (selectedRows.length > 0) {
+      const rows = (frontClientsList.content || []).filter((r) => selectedRows.includes(r.id))
+      exportRows(rows)
+      return
+    }
+
+    setDownloading(true)
+    try {
+      var myHeaders = new Headers()
+      myHeaders.append('X-Tenant', '' + tenant + '')
+      myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
+      const response = await fetch(apiUrl + '/auth/front-client/get-all-list?status=all', {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+      })
+      if (response.status === 401) {
+        router.push('/')
+        return
+      }
+      const rows = await response.json()
+      exportRows(Array.isArray(rows) ? rows : [])
+    } catch (error) {
+      console.log('error', error)
+    } finally {
+      setDownloading(false)
+    }
+  }
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -211,11 +279,28 @@ const Create_Client = () => {
       <div className={styles.pageHeader}>
         <div>
           <h1 className={styles.pageTitle}>Front Clients</h1>
-          <p className={styles.pageSubtitle}>Manage front-facing client accounts</p>
+          <p className={styles.pageSubtitle}>
+            Manage front-facing client accounts
+            {selectedRows.length > 0 ? ` · ${selectedRows.length} selected` : ''}
+          </p>
         </div>
-        <button type="button" className={styles.addBtn} onClick={() => setShowModal(true)}>
-          + Add New Client
-        </button>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button
+            type="button"
+            className={styles.filterClear}
+            onClick={downloadExcel}
+            disabled={downloading}
+          >
+            {downloading
+              ? 'Downloading...'
+              : selectedRows.length > 0
+                ? `Download Excel (${selectedRows.length})`
+                : 'Download Excel'}
+          </button>
+          <button type="button" className={styles.addBtn} onClick={() => setShowModal(true)}>
+            + Add New Client
+          </button>
+        </div>
       </div>
 
       <div className={styles.card}>
@@ -255,6 +340,22 @@ const Create_Client = () => {
           <table className={styles.table}>
             <thead>
               <tr>
+                <th>
+                  <input
+                    type="checkbox"
+                    checked={
+                      frontClientsList.content?.length > 0 &&
+                      selectedRows.length === frontClientsList.content?.length
+                    }
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setSelectedRows(frontClientsList.content?.map((option) => option.id) || [])
+                      } else {
+                        setSelectedRows([])
+                      }
+                    }}
+                  />
+                </th>
                 <th>#</th>
                 <th>Name</th>
                 <th>Client ID</th>
@@ -268,6 +369,19 @@ const Create_Client = () => {
             <tbody>
               {frontClientsList.content?.map((option, index) => (
                 <tr key={option.id}>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={selectedRows.includes(option.id)}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setSelectedRows([...selectedRows, option.id])
+                        } else {
+                          setSelectedRows(selectedRows.filter((row) => row !== option.id))
+                        }
+                      }}
+                    />
+                  </td>
                   <td>{frontClientsList.number * frontClientsList.size + index}</td>
                   <td>
                     <div className={styles.userCell}>

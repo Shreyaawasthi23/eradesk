@@ -11,9 +11,13 @@ export default async function handler(req, res) {
   if (!auth) return
   if (!hasAnyRole(auth.roles, ['ROLE_ADMIN', 'ROLE_MODERATOR'])) return res.status(403).end()
 
+  // Dropdown callers pass no status (defaults to active-only). Download/export
+  // callers can pass status=all to include inactive records too.
+  const status = req.query.status
+  const filter = status === 'all' ? {} : { status: true }
   const items = await auth.db
     .collection('EndClient')
-    .find({ status: true })
+    .find(filter)
     .sort({ createDate: -1 })
     .toArray()
 

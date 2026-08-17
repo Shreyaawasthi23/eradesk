@@ -36,7 +36,7 @@ export const createEndClient = async (endClient, router) => {
       if (result.statusCode === 200) {
         const confirmedResult = await Swal.fire({
           title: result.message,
-          text: "Now let's Purchase Order",
+          text: "Now let's create Purchase Order",
           icon: 'success',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
