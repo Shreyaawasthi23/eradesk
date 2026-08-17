@@ -26,7 +26,7 @@ export default async function handler(req, res) {
 
   const roles = []
   if (user.roles && user.roles.length) {
-    const roleIds = user.roles.map((r) => r.oid)
+    const roleIds = user.roles.map((r) => r.$id || r.oid)
     const roleDocs = await db.collection('roles').find({ _id: { $in: roleIds } }).toArray()
     roleDocs.forEach((r) => roles.push(r.name))
   }

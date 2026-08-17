@@ -53,7 +53,9 @@ export default async function handler(req, res) {
   const now = new Date()
   const userRoleDocs = await db.collection('roles').find({}).toArray()
   const roleMap = new Map(userRoleDocs.map((r) => [r._id.toString(), r.name]))
-  const currentUserRoles = (user.roles || []).map((r) => roleMap.get(r.oid?.toString())).filter(Boolean)
+  const currentUserRoles = (user.roles || [])
+    .map((r) => roleMap.get((r.$id || r.oid)?.toString()))
+    .filter(Boolean)
 
   await db.collection('Incident').updateOne(
     { _id: new ObjectId(id) },
