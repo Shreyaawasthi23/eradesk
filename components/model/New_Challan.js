@@ -256,6 +256,12 @@ const New_Challan = ({ visible, setVisible, rma }) => {
                     <input
                       type="date"
                       className={styles.formInput}
+                      name="date"
+                      value={
+                        formik.values.date
+                          ? new Date(formik.values.date).toISOString().slice(0, 10)
+                          : ''
+                      }
                       onChange={(e) => handleDateChange(e, formik)}
                       onBlur={formik.handleBlur}
                     />

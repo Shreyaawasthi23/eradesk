@@ -54,7 +54,7 @@ const EditFrontClientModal = ({ clientId, router, salesList, onClose, onSaved })
       id: clientId,
     },
     validationSchema: Yup.object({
-      contactName: Yup.string().max(15, 'Must be 20 characters or less').required('Required'),
+      contactName: Yup.string().required('Required'),
       contactNumber: Yup.string()
         .min(10, 'Must be 10 characters')
         .max(11, 'Must not be more than 11 characters')

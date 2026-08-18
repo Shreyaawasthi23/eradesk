@@ -16,6 +16,13 @@ const rolesOptions = [
   { label: 'ROLE_ENGINEER', value: 'engineer' },
 ]
 
+const ROLE_NAME_TO_VALUE = {
+  ROLE_ADMIN: 'admin',
+  ROLE_MODERATOR: 'mod',
+  ROLE_USER: 'user',
+  ROLE_ENGINEER: 'engineer',
+}
+
 const EditUserModal = ({ userId, router, onClose, onSaved }) => {
   const details = getUserDetails()
   const [user, setUser] = useState({})
@@ -50,7 +57,7 @@ const EditUserModal = ({ userId, router, onClose, onSaved }) => {
     enableReinitialize: true,
     initialValues: {
       username: user.username,
-      roles: [],
+      roles: existingRoles.map((r) => ROLE_NAME_TO_VALUE[r]).filter(Boolean),
       password: user.password,
       firstName: user.firstName,
       lastName: user.lastName,
@@ -195,21 +202,23 @@ const EditUserModal = ({ userId, router, onClose, onSaved }) => {
                 </div>
                 <div className={styles.formField}>
                   <label className={styles.formLabel}>New Roles</label>
-                  <select
-                    className={styles.filterSelect}
-                    value={formik.values.roles}
-                    onChange={(e) => {
-                      const selectedRoles = Array.from(e.target.selectedOptions, (o) => o.value)
-                      formik.setFieldValue('roles', selectedRoles)
-                    }}
-                    multiple
-                  >
+                  <div className={styles.roleCheckboxGroup}>
                     {rolesOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
+                      <label key={option.value} className={styles.roleCheckboxLabel}>
+                        <input
+                          type="checkbox"
+                          checked={formik.values.roles.includes(option.value)}
+                          onChange={(e) => {
+                            const next = e.target.checked
+                              ? [...formik.values.roles, option.value]
+                              : formik.values.roles.filter((r) => r !== option.value)
+                            formik.setFieldValue('roles', next)
+                          }}
+                        />
                         {option.label}
-                      </option>
+                      </label>
                     ))}
-                  </select>
+                  </div>
                 </div>
                 <div className={styles.formField}>
                   <label className={styles.formLabel}>Existing Roles</label>

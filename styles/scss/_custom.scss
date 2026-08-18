@@ -507,3 +507,12 @@ tr.expanded+tr .details {
 .swal2-cancel.swal2-styled:focus {
   box-shadow: 0 0 0 3px color-mix(in srgb, #dc2626 25%, transparent) !important;
 }
+
+.swal2-cancel.swal2-styled.swal-cancel-light {
+  background-color: #e5e7eb !important;
+  color: #374151 !important;
+}
+
+.swal2-cancel.swal2-styled.swal-cancel-light:focus {
+  box-shadow: 0 0 0 3px color-mix(in srgb, #9ca3af 25%, transparent) !important;
+}

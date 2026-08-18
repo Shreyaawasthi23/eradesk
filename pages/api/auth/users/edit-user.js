@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     update.username = username
   }
 
-  if (roles) {
+  if (roles && roles.length > 0) {
     const roleNames = new Set()
     for (const r of roles) roleNames.add(ROLE_SWITCH[r] || 'ROLE_USER')
     const roleDocs = await db

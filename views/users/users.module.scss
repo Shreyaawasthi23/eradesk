@@ -226,6 +226,24 @@
   white-space: nowrap;
 }
 
+.roleCheckboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--u-border, #e2e8f0);
+  border-radius: 8px;
+}
+
+.roleCheckboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
 .editBtn {
   font-size: 13px;
   font-weight: 600;

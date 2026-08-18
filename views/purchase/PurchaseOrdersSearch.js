@@ -30,6 +30,7 @@ const PurchaseOrdersSearch = () => {
 
   const [endClientFilter, setEndClientFilter] = useState('')
   const [poNumber, setPoNumber] = useState('')
+  const [statusFilter, setStatusFilter] = useState('')
 
   const getEndClientList = () => {
     var myHeaders = new Headers()
@@ -77,13 +78,14 @@ const PurchaseOrdersSearch = () => {
     const params = new URLSearchParams()
     if (filters.endClientId) params.set('endClientId', filters.endClientId)
     if (filters.search) params.set('search', filters.search)
+    if (filters.status) params.set('status', filters.status)
     return params.toString()
   }
 
   const getPurchaseList = async (
     page,
     size,
-    filters = { endClientId: endClientFilter, search: poNumber },
+    filters = { endClientId: endClientFilter, search: poNumber, status: statusFilter },
   ) => {
     var myHeaders = new Headers()
     myHeaders.append('X-Tenant', '' + tenant + '')
@@ -121,14 +123,15 @@ const PurchaseOrdersSearch = () => {
 
   const applyFilters = () => {
     setCurrentPage(0)
-    getPurchaseList(0, 10, { endClientId: endClientFilter, search: poNumber })
+    getPurchaseList(0, 10, { endClientId: endClientFilter, search: poNumber, status: statusFilter })
   }
 
   const clearFilters = () => {
     setEndClientFilter('')
     setPoNumber('')
+    setStatusFilter('')
     setCurrentPage(0)
-    getPurchaseList(0, 10, { endClientId: '', search: '' })
+    getPurchaseList(0, 10, { endClientId: '', search: '', status: '' })
   }
 
   const gotToPage = (pageNo) => {
@@ -144,10 +147,10 @@ const PurchaseOrdersSearch = () => {
     Swal.fire({
       icon: 'warning',
       title: 'Are you sure you want to expire PO ?',
-      showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: 'Expire',
-      denyButtonText: 'Cancel',
+      cancelButtonText: 'Cancel',
+      customClass: { cancelButton: 'swal-cancel-light' },
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -221,6 +224,18 @@ const PurchaseOrdersSearch = () => {
               onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
             />
           </div>
+          <div className={styles.filterField} style={{ flex: '1 1 260px' }}>
+            <label className={styles.filterLabel}>Status</label>
+            <select
+              className={styles.filterSelect}
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+            >
+              <option value="">All</option>
+              <option value="true">Active</option>
+              <option value="false">Deactive</option>
+            </select>
+          </div>
         </div>
         <div className={styles.filterFooter}>
           <button type="button" className={styles.applyBtn} onClick={applyFilters}>
@@ -266,6 +281,7 @@ const PurchaseOrdersSearch = () => {
                 <th>PO Received Date</th>
                 <th>Type</th>
                 <th>Value</th>
+                <th>Status</th>
                 <th className={styles.actionHeader}>Action</th>
               </tr>
             </thead>
@@ -292,6 +308,11 @@ const PurchaseOrdersSearch = () => {
                   <td className={styles.email}>{option.poReceiveDate}</td>
                   <td className={styles.email}>{option.type}</td>
                   <td className={styles.email}>INR {option.value}/-</td>
+                  <td>
+                    <span className={option.status ? styles.statusActive : styles.statusInactive}>
+                      {option.status ? 'Active' : 'Deactive'}
+                    </span>
+                  </td>
                   <td className={styles.actionCell}>
                     <div className={styles.iconActionGroup}>
                       <button

@@ -270,6 +270,7 @@ const View_RMA = () => {
         setVisible={setEditRmaVisiable}
         rmaDetails={rmaDetails}
         setRmaDetails={setRmaDetails}
+        onSuccess={getRmaDetails}
       />
       <Edit_Rma_Purchase
         visible={editRmaPurchaseVisible}

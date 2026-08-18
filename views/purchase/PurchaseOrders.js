@@ -159,10 +159,10 @@ const PurchaseOrders = () => {
     Swal.fire({
       icon: 'warning',
       title: 'Are you sure you want to expire PO ?',
-      showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: 'Expire',
-      denyButtonText: 'Cancel',
+      cancelButtonText: 'Cancel',
+      customClass: { cancelButton: 'swal-cancel-light' },
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {

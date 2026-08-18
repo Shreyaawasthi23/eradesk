@@ -82,6 +82,9 @@ const routes = [
 
   { path: '/add-sales-participent', name: 'Create Sales Participent' },
   { path: '/edit-sales-participent/:id', name: 'Edit Sales Participent' },
+
+  { path: '/email-settings', name: 'Email Settings' },
+  { path: '/logs', name: 'Logs' },
 ]
 
 export default routes

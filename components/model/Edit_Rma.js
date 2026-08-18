@@ -33,7 +33,7 @@ import { useRouter } from 'next/router'
 import { getUserDetails } from '@/lib/auth'
 import { EditRma } from '@/api/rma_api'
 
-const Edit_Rma = ({ visible, setVisible, rmaDetails, setRmaDetails, ...props }) => {
+const Edit_Rma = ({ visible, setVisible, rmaDetails, setRmaDetails, onSuccess, ...props }) => {
   const router = useRouter()
   const details = getUserDetails()
   const [submitState, setSubmitState] = useState(false)
@@ -76,7 +76,7 @@ const Edit_Rma = ({ visible, setVisible, rmaDetails, setRmaDetails, ...props }) 
         .required('Required'),
     }),
     onSubmit: (values, { resetForm }) => {
-      EditRma(values, resetForm, router, setVisible, setSubmitState)
+      EditRma(values, router, setVisible, resetForm, setSubmitState, onSuccess)
     },
   })
   return (

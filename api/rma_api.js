@@ -74,7 +74,7 @@ export const raiseRma = async (rma, router, setVisible, resetForm, setSubmitStat
   }
 }
 
-export const EditRma = (rma, router, setVisible, resetForm, setSubmitState) => {
+export const EditRma = (rma, router, setVisible, resetForm, setSubmitState, onSuccess) => {
   const details = getUserDetails()
   var myHeaders = new Headers()
   myHeaders.append('X-Tenant', '' + tenant + '')
@@ -115,10 +115,12 @@ export const EditRma = (rma, router, setVisible, resetForm, setSubmitState) => {
             setVisible(false)
             setSubmitState(false)
             resetForm()
+            if (onSuccess) onSuccess()
           } else {
             setSubmitState(false)
             setVisible(false)
             resetForm()
+            if (onSuccess) onSuccess()
           }
         })
       } else {

@@ -20,16 +20,11 @@ import { apiUrl, tenant } from '@/lib/config'
 import Swal from 'sweetalert2'
 
 function RmaPod_Upload({ visible, setVisible, rma, existingPod, setExistingPod, ...props }) {
-  //   console.log('rma', rma)
-  const binaryData = existingPod?.image?.data.data
-  let imageUrl = 'No POD Exist!'
+  const binaryData = existingPod?.image?.data?.data
+  const existingImageUrl =
+    typeof binaryData === 'string' ? `data:image/png;base64,${binaryData}` : null
 
-  if (typeof binaryData === 'string') {
-    const base64Data = binaryData.replace(/BinData\(0, '([^']+)'\)/, '$1')
-    imageUrl = `data:image/png;base64,${base64Data}`
-  } else {
-    imageUrl = 'No POD Exist!'
-  }
+  const [previewUrl, setPreviewUrl] = useState(null)
 
   const router = useRouter()
   const details = getUserDetails()
@@ -113,6 +108,7 @@ function RmaPod_Upload({ visible, setVisible, rma, existingPod, setExistingPod, 
         onClose={() => {
           setVisible(false)
           setExistingPod(null)
+          setPreviewUrl(null)
         }}
         backdrop="static"
         scrollable
@@ -129,6 +125,7 @@ function RmaPod_Upload({ visible, setVisible, rma, existingPod, setExistingPod, 
                 name="file"
                 onBlur={formik.handleBlur}
                 onChange={(event) => {
+                  const selectedFile = event.target.files[0]
                   if (existingPod !== null) {
                     Swal.fire({
                       title: 'Warning',
@@ -140,11 +137,15 @@ function RmaPod_Upload({ visible, setVisible, rma, existingPod, setExistingPod, 
                       confirmButtonText: 'OK',
                     }).then((result) => {
                       if (result.isConfirmed) {
-                        formik.setFieldValue('file', event.target.files[0])
+                        formik.setFieldValue('file', selectedFile)
+                        setPreviewUrl(selectedFile ? URL.createObjectURL(selectedFile) : null)
                       } else {
                         setVisible(false)
                       }
                     })
+                  } else {
+                    formik.setFieldValue('file', selectedFile)
+                    setPreviewUrl(selectedFile ? URL.createObjectURL(selectedFile) : null)
                   }
                 }}
                 feedbackInvalid={
@@ -155,7 +156,19 @@ function RmaPod_Upload({ visible, setVisible, rma, existingPod, setExistingPod, 
               />
             </CCol>
             <CCol md={12} style={{ textAlign: 'center' }}>
-              <img src={imageUrl} alt="Image" />
+              {previewUrl ? (
+                <>
+                  <p style={{ marginBottom: 4, fontSize: 13, color: '#6b7280' }}>New file preview</p>
+                  <img src={previewUrl} alt="Selected POD preview" style={{ maxWidth: '100%', maxHeight: 300 }} />
+                </>
+              ) : existingImageUrl ? (
+                <>
+                  <p style={{ marginBottom: 4, fontSize: 13, color: '#6b7280' }}>Current POD</p>
+                  <img src={existingImageUrl} alt="Existing POD" style={{ maxWidth: '100%', maxHeight: 300 }} />
+                </>
+              ) : (
+                <p style={{ color: '#6b7280' }}>No POD Exist!</p>
+              )}
             </CCol>
           </CForm>
         </CModalBody>
@@ -165,6 +178,7 @@ function RmaPod_Upload({ visible, setVisible, rma, existingPod, setExistingPod, 
             onClick={() => {
               setVisible(false)
               setExistingPod(null)
+              setPreviewUrl(null)
             }}
           >
             Close

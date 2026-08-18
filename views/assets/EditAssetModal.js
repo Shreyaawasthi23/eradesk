@@ -50,9 +50,7 @@ const EditAssetModal = ({ assetId, router, endClientList, onClose, onSaved }) =>
   }
 
   const handleDateChange = (e, formik) => {
-    const inputValue = e.target.value
-    const jsDate = new Date(inputValue)
-    formik.setFieldValue(e.target.name, jsDate.toISOString())
+    formik.setFieldValue(e.target.name, e.target.value)
   }
 
   const formik = useFormik({
