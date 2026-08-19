@@ -250,7 +250,13 @@ const PurchaseOrders = () => {
       contactName: Yup.string().required('Required'),
       contactEmail: Yup.string().email('Invalid email address').required('Required'),
       startDate: Yup.string().required('Required'),
-      endDate: Yup.string().required('Required'),
+      endDate: Yup.string()
+        .required('Required')
+        .test('after-start', 'End date must not be earlier than start date', function (value) {
+          const { startDate } = this.parent
+          if (!startDate || !value) return true
+          return new Date(value) >= new Date(startDate)
+        }),
       poReceiveDate: Yup.string().required('Required'),
       type: Yup.string().required('Required'),
       status: Yup.boolean()

@@ -82,7 +82,13 @@ const EditAssetModal = ({ assetId, router, endClientList, onClose, onSaved }) =>
         .required('Required'),
       purchaseOrderNumber: Yup.string().required('Required'),
       startDate: Yup.string().required('Required'),
-      endDate: Yup.string().required('Required'),
+      endDate: Yup.string()
+        .required('Required')
+        .test('after-start', 'End date must not be earlier than start date', function (value) {
+          const { startDate } = this.parent
+          if (!startDate || !value) return true
+          return new Date(value) >= new Date(startDate)
+        }),
       sla: Yup.string().required('Required'),
       assetType: Yup.string().required('Required'),
       pinCode: Yup.string().required('Required'),
