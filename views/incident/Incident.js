@@ -441,16 +441,28 @@ const Create_Incident = () => {
               />
             </div>
             <div className={styles.filterField}>
-              <label className={styles.filterLabel}>Engineer</label>
-              <CappedSelect
-                value={engineerId}
-                onChange={(e) => setEngineerId(e.target.value)}
-                options={engineer?.map((element) => ({
-                  value: element.id,
-                  label: `${element.firstName} ${element.lastName}`,
-                }))}
+              <label className={styles.filterLabel}>Serial Number</label>
+              <input
+                type="text"
+                className={styles.filterInput}
+                value={serialNumber}
+                onChange={(e) => setSerialNumber(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
               />
             </div>
+            {canFullSearch && (
+              <div className={styles.filterField}>
+                <label className={styles.filterLabel}>Engineer</label>
+                <CappedSelect
+                  value={engineerId}
+                  onChange={(e) => setEngineerId(e.target.value)}
+                  options={engineer?.map((element) => ({
+                    value: element.id,
+                    label: `${element.firstName} ${element.lastName}`,
+                  }))}
+                />
+              </div>
+            )}
             {canFullSearch && (
               <div className={styles.filterField}>
                 <label className={styles.filterLabel}>PO Number</label>
@@ -465,16 +477,6 @@ const Create_Incident = () => {
             )}
           </div>
           <div className={styles.filterRow}>
-            <div className={styles.filterField}>
-              <label className={styles.filterLabel}>Serial Number</label>
-              <input
-                type="text"
-                className={styles.filterInput}
-                value={serialNumber}
-                onChange={(e) => setSerialNumber(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
-              />
-            </div>
             {canFullSearch && (
               <div className={styles.filterField}>
                 <label className={styles.filterLabel}>Status</label>

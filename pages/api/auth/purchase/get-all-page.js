@@ -19,6 +19,8 @@ export default async function handler(req, res) {
   const search = (req.query.search || '').trim()
   const status = req.query.status
   const endClientId = req.query.endClientId
+  const startDate = req.query.startDate
+  const endDate = req.query.endDate
 
   const filter = {}
   if (search) {
@@ -30,6 +32,11 @@ export default async function handler(req, res) {
   }
   if (endClientId) {
     filter.endClientId = endClientId
+  }
+  if (startDate || endDate) {
+    filter.startDate = {}
+    if (startDate) filter.startDate.$gte = new Date(startDate)
+    if (endDate) filter.startDate.$lte = new Date(endDate + 'T23:59:59.999Z')
   }
 
   const totalElements = await db.collection('PurchaseOrder').countDocuments(filter)

@@ -7,8 +7,8 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  font-size: 14px;
+  gap: 12px;
+  font-size: 12px;
   padding: 9px 12px;
   border-radius: 8px;
   border: 1px solid #e6e9ef;
@@ -29,21 +29,31 @@
 }
 
 .value {
+  flex: 1;
   color: #0f172a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
 
 .placeholder {
+  flex: 1;
   color: #94a3b8;
 }
 
 .chevron {
-  font-size: 11px;
-  color: #64748b;
-  margin-left: 8px;
+  flex: 0 0 auto;
+  width: 10px;
+  height: 6px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"><path fill="%2364748b" d="M0 0l5 6 5-6z"/></svg>');
+  background-repeat: no-repeat;
+  background-size: 10px 6px;
 }
 
 .list {
   z-index: 2000;
+  width: max-content;
   margin: 0;
   padding: 4px;
   list-style: none;
@@ -52,11 +62,12 @@
   border-radius: 10px;
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18);
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .option,
 .optionActive {
-  font-size: 14px;
+  font-size: 12px;
   padding: 8px 10px;
   border-radius: 6px;
   cursor: pointer;

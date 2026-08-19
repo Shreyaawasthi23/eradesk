@@ -19,7 +19,7 @@ const CappedSelect = ({
   disabled,
 }) => {
   const [open, setOpen] = useState(false)
-  const [listPos, setListPos] = useState({ top: 0, left: 0, width: 0 })
+  const [listPos, setListPos] = useState({ top: 0, left: 0, width: 0, maxWidth: 320 })
   const rootRef = useRef(null)
   const triggerRef = useRef(null)
   const listRef = useRef(null)
@@ -30,9 +30,35 @@ const CappedSelect = ({
     const updatePosition = () => {
       if (!triggerRef.current) return
       const rect = triggerRef.current.getBoundingClientRect()
-      setListPos({ top: rect.bottom + 4, left: rect.left, width: rect.width })
+      const viewportWidth = window.innerWidth
+      const naturalWidth = listRef.current ? listRef.current.scrollWidth : rect.width
+      // Cap how much wider than the trigger the list is allowed to get, so
+      // it stays visually attached to the field instead of drifting far to
+      // the left for very long option labels.
+      const maxGrowth = 90
+      const desiredWidth = Math.min(Math.max(rect.width, naturalWidth), rect.width + maxGrowth, 320)
+      // Extra width over a narrow trigger grows to the left only, so the
+      // right edge stays flush with the trigger's right edge and never
+      // spills onto content sitting beside it (e.g. Quick Actions icons).
+      // Nudged slightly right of that flush point so the list doesn't lean
+      // too far left of the field it belongs to.
+      const rightShift = 20
+      let left = rect.right - desiredWidth + rightShift
+      left = Math.max(12, left)
+      if (left + desiredWidth > viewportWidth - 12) {
+        left = Math.max(12, viewportWidth - 12 - desiredWidth)
+      }
+      setListPos({
+        top: rect.bottom + 4,
+        left,
+        width: rect.width,
+        maxWidth: Math.min(320, viewportWidth - 24),
+      })
     }
     updatePosition()
+    // Run again after the list has actually painted so scrollWidth reflects
+    // real option text, then reposition/flip if it now overflows.
+    const raf = requestAnimationFrame(updatePosition)
 
     const handleClickOutside = (e) => {
       const insideTrigger = rootRef.current && rootRef.current.contains(e.target)
@@ -46,6 +72,7 @@ const CappedSelect = ({
     window.addEventListener('scroll', updatePosition, true)
     window.addEventListener('resize', updatePosition)
     return () => {
+      cancelAnimationFrame(raf)
       document.removeEventListener('mousedown', handleClickOutside)
       window.removeEventListener('scroll', updatePosition, true)
       window.removeEventListener('resize', updatePosition)
@@ -71,12 +98,13 @@ const CappedSelect = ({
         disabled={disabled}
         onClick={() => setOpen((o) => !o)}
       >
-        <span className={selected ? styles.value : styles.placeholder}>
+        <span
+          className={selected ? styles.value : styles.placeholder}
+          title={selected ? selected.label : undefined}
+        >
           {selected ? selected.label : placeholder}
         </span>
-        <span className={styles.chevron} aria-hidden="true">
-          &#9662;
-        </span>
+        <span className={styles.chevron} aria-hidden="true" />
       </button>
       {open &&
         typeof document !== 'undefined' &&
@@ -89,7 +117,8 @@ const CappedSelect = ({
               position: 'fixed',
               top: listPos.top,
               left: listPos.left,
-              width: listPos.width,
+              minWidth: listPos.width,
+              maxWidth: listPos.maxWidth,
               maxHeight,
             }}
           >

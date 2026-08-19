@@ -38,15 +38,20 @@ const PurchaseOrders = () => {
   const [editId, setEditId] = useState(null)
 
   // Filters
+  const [showFilters, setShowFilters] = useState(false)
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState('')
   const [endClientFilter, setEndClientFilter] = useState('')
+  const [startDateFilter, setStartDateFilter] = useState('')
+  const [endDateFilter, setEndDateFilter] = useState('')
 
   const buildFilterQuery = (filters) => {
     const params = new URLSearchParams()
     if (filters.search) params.set('search', filters.search)
     if (filters.status) params.set('status', filters.status)
     if (filters.endClientId) params.set('endClientId', filters.endClientId)
+    if (filters.startDate) params.set('startDate', filters.startDate)
+    if (filters.endDate) params.set('endDate', filters.endDate)
     return params.toString()
   }
 
@@ -97,7 +102,13 @@ const PurchaseOrders = () => {
   const getPurchaseList = async (
     page,
     size,
-    filters = { search, status: statusFilter, endClientId: endClientFilter },
+    filters = {
+      search,
+      status: statusFilter,
+      endClientId: endClientFilter,
+      startDate: startDateFilter,
+      endDate: endDateFilter,
+    },
   ) => {
     var myHeaders = new Headers()
     myHeaders.append('X-Tenant', '' + tenant + '')
@@ -151,8 +162,10 @@ const PurchaseOrders = () => {
     setSearch('')
     setStatusFilter('')
     setEndClientFilter('')
+    setStartDateFilter('')
+    setEndDateFilter('')
     setCurrentPage(0)
-    getPurchaseList(0, 10, { search: '', status: '', endClientId: '' })
+    getPurchaseList(0, 10, { search: '', status: '', endClientId: '', startDate: '', endDate: '' })
   }
 
   const expirePo = async (poNumber) => {
@@ -271,12 +284,22 @@ const PurchaseOrders = () => {
           <h1 className={styles.pageTitle}>Purchase Orders</h1>
           <p className={styles.pageSubtitle}>Manage purchase orders</p>
         </div>
-        <button type="button" className={styles.addBtn} onClick={() => setShowModal(true)}>
-          + Add New PO
-        </button>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button
+            type="button"
+            className={styles.filterClear}
+            onClick={() => setShowFilters((s) => !s)}
+          >
+            {showFilters ? 'Hide Search' : 'Search'}
+          </button>
+          <button type="button" className={styles.addBtn} onClick={() => setShowModal(true)}>
+            + Add New PO
+          </button>
+        </div>
       </div>
 
       <div className={styles.card}>
+        {showFilters && (
         <div className={styles.filterBar}>
           <div className={styles.filterFieldWide}>
             <label className={styles.filterLabel}>Search</label>
@@ -291,18 +314,15 @@ const PurchaseOrders = () => {
           </div>
           <div className={styles.filterFieldNarrow}>
             <label className={styles.filterLabel}>End Client</label>
-            <select
-              className={styles.filterSelectNarrow}
+            <CappedSelect
               value={endClientFilter}
               onChange={(e) => setEndClientFilter(e.target.value)}
-            >
-              <option value="">All</option>
-              {endClientList?.map((element) => (
-                <option key={element.id} value={element.id}>
-                  {element.name}
-                </option>
-              ))}
-            </select>
+              placeholder="All"
+              options={[
+                { value: '', label: 'All' },
+                ...(endClientList?.map((element) => ({ value: element.id, label: element.name })) || []),
+              ]}
+            />
           </div>
           <div className={styles.filterField}>
             <label className={styles.filterLabel}>Status</label>
@@ -316,6 +336,26 @@ const PurchaseOrders = () => {
               <option value="false">Deactive</option>
             </select>
           </div>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <div className={styles.filterField}>
+              <label className={styles.filterLabel}>Start Date</label>
+              <input
+                type="date"
+                className={styles.filterInput}
+                value={startDateFilter}
+                onChange={(e) => setStartDateFilter(e.target.value)}
+              />
+            </div>
+            <div className={styles.filterField}>
+              <label className={styles.filterLabel}>End Date</label>
+              <input
+                type="date"
+                className={styles.filterInput}
+                value={endDateFilter}
+                onChange={(e) => setEndDateFilter(e.target.value)}
+              />
+            </div>
+          </div>
           <button type="button" className={styles.applyBtn} onClick={applyFilters}>
             Apply
           </button>
@@ -323,6 +363,7 @@ const PurchaseOrders = () => {
             Clear
           </button>
         </div>
+        )}
 
         <div className={styles.tableWrap}>
           <table className={styles.table}>

@@ -2,7 +2,7 @@ import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
 import Swal from 'sweetalert2'
 
-export const CreateUser = async (user, router) => {
+export const CreateUser = async (user, router, onSuccess) => {
   const details = getUserDetails()
   var myHeaders = new Headers()
   myHeaders.append('X-Tenant', '' + tenant + '')
@@ -25,17 +25,18 @@ export const CreateUser = async (user, router) => {
     redirect: 'follow',
   }
 
-  fetch(apiUrl + '/api/auth/users/signup', requestOptions)
+  return fetch(apiUrl + '/api/auth/users/signup', requestOptions)
     .then((response) => (response.status === 401 ? router.push('/') : response.json()))
     .then((result) => {
-      if (result.message === 'User registered successfully!') {
+      if (result?.message === 'User registered successfully!') {
         Swal.fire(
           'Success!',
           'New user account created. Email sent with login details and instructions.',
           'success',
         )
+        if (onSuccess) onSuccess()
       } else {
-        Swal.fire('Oops!', '' + result.message + '', 'warning')
+        Swal.fire('Oops!', '' + result?.message + '', 'warning')
       }
     })
     .catch((error) => {
@@ -56,7 +57,7 @@ export const EditUser = async (user, router, onSuccess) => {
     password: user.password,
     firstName: user.firstName,
     lastName: user.lastName,
-    userEmail: details?.email,
+    userEmail: user.userEmail,
     status: user.status,
     userId: user.userId,
   })

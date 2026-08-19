@@ -226,6 +226,18 @@
   white-space: nowrap;
 }
 
+.statusActive {
+  composes: roleBadge;
+  background: color-mix(in srgb, var(--u-success, #16a34a) 12%, transparent);
+  color: var(--u-success, #16a34a);
+}
+
+.statusInactive {
+  composes: roleBadge;
+  background: color-mix(in srgb, var(--u-danger, #dc2626) 12%, transparent);
+  color: var(--u-danger, #dc2626);
+}
+
 .roleCheckboxGroup {
   display: flex;
   flex-direction: column;

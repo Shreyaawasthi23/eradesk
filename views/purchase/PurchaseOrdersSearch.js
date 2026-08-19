@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Swal from 'sweetalert2'
+import * as XLSX from 'xlsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faPenToSquare,
@@ -27,10 +28,14 @@ const PurchaseOrdersSearch = () => {
   const [currentPage, setCurrentPage] = useState(0)
   const [selectedRows, setSelectedRows] = useState([])
   const [editId, setEditId] = useState(null)
+  const [downloading, setDownloading] = useState(false)
 
+  const [showFilters, setShowFilters] = useState(false)
   const [endClientFilter, setEndClientFilter] = useState('')
   const [poNumber, setPoNumber] = useState('')
   const [statusFilter, setStatusFilter] = useState('')
+  const [startDateFilter, setStartDateFilter] = useState('')
+  const [endDateFilter, setEndDateFilter] = useState('')
 
   const getEndClientList = () => {
     var myHeaders = new Headers()
@@ -79,13 +84,21 @@ const PurchaseOrdersSearch = () => {
     if (filters.endClientId) params.set('endClientId', filters.endClientId)
     if (filters.search) params.set('search', filters.search)
     if (filters.status) params.set('status', filters.status)
+    if (filters.startDate) params.set('startDate', filters.startDate)
+    if (filters.endDate) params.set('endDate', filters.endDate)
     return params.toString()
   }
 
   const getPurchaseList = async (
     page,
     size,
-    filters = { endClientId: endClientFilter, search: poNumber, status: statusFilter },
+    filters = {
+      endClientId: endClientFilter,
+      search: poNumber,
+      status: statusFilter,
+      startDate: startDateFilter,
+      endDate: endDateFilter,
+    },
   ) => {
     var myHeaders = new Headers()
     myHeaders.append('X-Tenant', '' + tenant + '')
@@ -123,15 +136,23 @@ const PurchaseOrdersSearch = () => {
 
   const applyFilters = () => {
     setCurrentPage(0)
-    getPurchaseList(0, 10, { endClientId: endClientFilter, search: poNumber, status: statusFilter })
+    getPurchaseList(0, 10, {
+      endClientId: endClientFilter,
+      search: poNumber,
+      status: statusFilter,
+      startDate: startDateFilter,
+      endDate: endDateFilter,
+    })
   }
 
   const clearFilters = () => {
     setEndClientFilter('')
     setPoNumber('')
     setStatusFilter('')
+    setStartDateFilter('')
+    setEndDateFilter('')
     setCurrentPage(0)
-    getPurchaseList(0, 10, { endClientId: '', search: '', status: '' })
+    getPurchaseList(0, 10, { endClientId: '', search: '', status: '', startDate: '', endDate: '' })
   }
 
   const gotToPage = (pageNo) => {
@@ -189,6 +210,62 @@ const PurchaseOrdersSearch = () => {
     })
   }
 
+  const exportRows = (rows) => {
+    if (!rows.length) {
+      Swal.fire('No data', 'There is nothing to download.', 'info')
+      return
+    }
+    const sheetData = rows.map((r) => ({
+      'PO Number': r.purchaseOrderNumber,
+      'Start Date': r.startDate,
+      'End Date': r.endDate,
+      'PO Received Date': r.poReceiveDate,
+      Type: r.type,
+      Value: r.value,
+      Status: r.status ? 'Active' : 'Deactive',
+    }))
+    const workbook = XLSX.utils.book_new()
+    const worksheet = XLSX.utils.json_to_sheet(sheetData)
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Purchase Orders')
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
+    const excelData = new Blob([excelBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    })
+    const downloadLink = document.createElement('a')
+    downloadLink.href = URL.createObjectURL(excelData)
+    downloadLink.download = 'Purchase Orders.xlsx'
+    downloadLink.click()
+  }
+
+  const downloadExcel = async () => {
+    if (selectedRows.length > 0) {
+      const rows = (purchaseList.content || []).filter((r) => selectedRows.includes(r.id))
+      exportRows(rows)
+      return
+    }
+
+    setDownloading(true)
+    try {
+      const myHeaders = new Headers()
+      myHeaders.append('X-Tenant', '' + tenant + '')
+      myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
+      const response = await fetch(
+        apiUrl + '/auth/purchase/get-all-page?page=0&size=100000',
+        { method: 'GET', headers: myHeaders, redirect: 'follow' },
+      )
+      if (response.status === 401) {
+        router.push('/')
+        return
+      }
+      const data = await response.json()
+      exportRows(Array.isArray(data?.content) ? data.content : [])
+    } catch (error) {
+      console.log('error', error)
+    } finally {
+      setDownloading(false)
+    }
+  }
+
   useEffect(() => {
     getEndClientList()
     getSalesList()
@@ -198,6 +275,32 @@ const PurchaseOrdersSearch = () => {
 
   return (
     <div className={styles.page}>
+      <div className={styles.pageHeader}>
+        <div />
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button
+            type="button"
+            className={styles.filterClear}
+            onClick={downloadExcel}
+            disabled={downloading}
+          >
+            {downloading
+              ? 'Downloading...'
+              : selectedRows.length > 0
+                ? `Download Excel (${selectedRows.length})`
+                : 'Download Excel'}
+          </button>
+          <button
+            type="button"
+            className={styles.filterClear}
+            onClick={() => setShowFilters((s) => !s)}
+          >
+            <FontAwesomeIcon icon={faMagnifyingGlass} /> {showFilters ? 'Hide Search' : 'Search'}
+          </button>
+        </div>
+      </div>
+
+      {showFilters && (
       <div className={styles.card} style={{ marginBottom: 16 }}>
         <div className={styles.cardHeader}>
           <h2 className={styles.cardHeaderTitle}>Purchase Filters</h2>
@@ -236,6 +339,26 @@ const PurchaseOrdersSearch = () => {
               <option value="false">Deactive</option>
             </select>
           </div>
+          <div style={{ display: 'flex', gap: 12, flex: '1 1 260px' }}>
+            <div className={styles.filterField} style={{ flex: '1 1 120px' }}>
+              <label className={styles.filterLabel}>Start Date</label>
+              <input
+                type="date"
+                className={styles.filterInput}
+                value={startDateFilter}
+                onChange={(e) => setStartDateFilter(e.target.value)}
+              />
+            </div>
+            <div className={styles.filterField} style={{ flex: '1 1 120px' }}>
+              <label className={styles.filterLabel}>End Date</label>
+              <input
+                type="date"
+                className={styles.filterInput}
+                value={endDateFilter}
+                onChange={(e) => setEndDateFilter(e.target.value)}
+              />
+            </div>
+          </div>
         </div>
         <div className={styles.filterFooter}>
           <button type="button" className={styles.applyBtn} onClick={applyFilters}>
@@ -246,6 +369,7 @@ const PurchaseOrdersSearch = () => {
           </button>
         </div>
       </div>
+      )}
 
       <div className={styles.card}>
         <div className={styles.cardHeader}>

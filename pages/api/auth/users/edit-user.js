@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   if (!hasAnyRole(auth.roles, ['ROLE_ADMIN'])) return res.status(403).end()
 
   const { id } = req.query
-  const { username, roles, password, firstName, lastName, status } = req.body || {}
+  const { username, userEmail, roles, password, firstName, lastName, status } = req.body || {}
   const { db } = auth
 
   const update = {
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     lastName,
     password,
     modifyDate: new Date(),
-    status,
+    status: status === true || status === 'true',
   }
 
   let extraMessage = ''
@@ -35,6 +35,17 @@ export default async function handler(req, res) {
     extraMessage = 'but Username already exist!'
   } else {
     update.username = username
+  }
+
+  if (userEmail) {
+    const emailTaken = await db
+      .collection('Users')
+      .findOne({ email: userEmail, _id: { $ne: new ObjectId(id) } })
+    if (emailTaken) {
+      extraMessage = (extraMessage ? extraMessage + ' ' : 'but ') + 'Email already exist!'
+    } else {
+      update.email = userEmail
+    }
   }
 
   if (roles && roles.length > 0) {

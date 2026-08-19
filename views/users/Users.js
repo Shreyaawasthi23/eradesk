@@ -158,14 +158,13 @@ const Users = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await CreateUser(user, router)
+    await CreateUser(user, router, () => getUsers(currentPage, 10))
     setShowModal(false)
     setUser(emptyUser)
     setUsernameCheck('')
     setUsernameMessage('')
     setEmailCheck('')
     setEmailMessage('')
-    getUsers(currentPage, 10)
   }
 
   const editUser = (id) => {
@@ -264,6 +263,7 @@ const Users = () => {
                 <th>User</th>
                 <th>Email</th>
                 <th>Roles</th>
+                <th>Status</th>
                 <th>Create Date</th>
                 <th>Action</th>
               </tr>
@@ -292,6 +292,11 @@ const Users = () => {
                         </span>
                       ))}
                     </div>
+                  </td>
+                  <td>
+                    <span className={option.status ? styles.statusActive : styles.statusInactive}>
+                      {option.status ? 'Active' : 'Deactive'}
+                    </span>
                   </td>
                   <td className={styles.email}>{option.createDate}</td>
                   <td>

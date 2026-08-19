@@ -253,18 +253,6 @@ const mod_nav = [
   },
   {
     component: CNavItem,
-    name: 'RMA',
-    to: '/rma',
-    icon: <FontAwesomeIcon icon={faArrowsRotate} className="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Challan',
-    to: '/view-challans',
-    icon: <FontAwesomeIcon icon={faTruckMoving} className="nav-icon" />,
-  },
-  {
-    component: CNavItem,
     name: 'Incident',
     to: '/incident',
     icon: <FontAwesomeIcon icon={faLifeRing} className="nav-icon" />,
@@ -274,6 +262,18 @@ const mod_nav = [
     name: 'Service Request',
     to: '/incident',
     icon: <FontAwesomeIcon icon={faHeadset} className="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'RMA',
+    to: '/rma',
+    icon: <FontAwesomeIcon icon={faArrowsRotate} className="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Challan',
+    to: '/view-challans',
+    icon: <FontAwesomeIcon icon={faTruckMoving} className="nav-icon" />,
   },
   {
     component: CNavGroup,
@@ -308,18 +308,6 @@ const support_nav = [
   },
   {
     component: CNavItem,
-    name: 'RMA',
-    to: '/rma',
-    icon: <FontAwesomeIcon icon={faArrowsRotate} className="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Challan',
-    to: '/view-challans',
-    icon: <FontAwesomeIcon icon={faTruckMoving} className="nav-icon" />,
-  },
-  {
-    component: CNavItem,
     name: 'Incident',
     to: '/incident',
     icon: <FontAwesomeIcon icon={faLifeRing} className="nav-icon" />,
@@ -329,6 +317,18 @@ const support_nav = [
     name: 'Service Request',
     to: '/incident',
     icon: <FontAwesomeIcon icon={faHeadset} className="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'RMA',
+    to: '/rma',
+    icon: <FontAwesomeIcon icon={faArrowsRotate} className="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Challan',
+    to: '/view-challans',
+    icon: <FontAwesomeIcon icon={faTruckMoving} className="nav-icon" />,
   },
   {
     component: CNavGroup,

@@ -17,9 +17,12 @@ export default async function handler(req, res) {
   const { serialNumber } = req.query
   const page = Number(req.query.page) || 0
   const size = Number(req.query.size) || 10
-  const { db } = auth
+  const { db, user } = auth
 
   const filter = { serialNumber: { $regex: serialNumber, $options: 'i' } }
+  if (auth.roles.length === 1 && auth.roles.includes('ROLE_ENGINEER')) {
+    filter.engineerId = user._id.toString()
+  }
   const totalElements = await db.collection('Incident').countDocuments(filter)
   const items = await db.collection('Incident').find(filter).skip(page * size).limit(size).toArray()
 

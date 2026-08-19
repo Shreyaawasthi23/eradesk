@@ -4,7 +4,7 @@ const ROLE_SWITCH = {
   admin: 'ROLE_ADMIN',
   mod: 'ROLE_MODERATOR',
   engineer: 'ROLE_ENGINEER',
-  user: 'ROLE_ENGINEER',
+  user: 'ROLE_USER',
 }
 
 export default async function handler(req, res) {

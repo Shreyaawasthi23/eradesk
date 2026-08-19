@@ -16,10 +16,20 @@ export default async function handler(req, res) {
   const size = Number(req.query.size) || 10
   const { db } = auth
 
-  const totalElements = await db.collection('DeliveryChallan').countDocuments({})
+  const startDate = req.query.startDate
+  const endDate = req.query.endDate
+
+  const filter = {}
+  if (startDate || endDate) {
+    filter.date = {}
+    if (startDate) filter.date.$gte = new Date(startDate)
+    if (endDate) filter.date.$lte = new Date(endDate + 'T23:59:59.999Z')
+  }
+
+  const totalElements = await db.collection('DeliveryChallan').countDocuments(filter)
   const items = await db
     .collection('DeliveryChallan')
-    .find({})
+    .find(filter)
     .sort({ createDate: -1 })
     .skip(page * size)
     .limit(size)

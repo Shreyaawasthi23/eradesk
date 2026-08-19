@@ -190,14 +190,17 @@ const EditUserModal = ({ userId, router, onClose, onSaved }) => {
                   <label className={styles.formLabel}>Status</label>
                   <select
                     className={styles.filterSelect}
-                    onChange={formik.handleChange}
+                    onChange={(e) => {
+                      const v = e.target.value
+                      formik.setFieldValue('status', v === '' ? '' : v === 'true')
+                    }}
                     onBlur={formik.handleBlur}
                     value={formik.values.status ?? ''}
                     name="status"
                   >
                     <option value="">Select</option>
-                    <option value={true}>Active</option>
-                    <option value={false}>Deactive</option>
+                    <option value="true">Active</option>
+                    <option value="false">Deactive</option>
                   </select>
                 </div>
                 <div className={styles.formField}>

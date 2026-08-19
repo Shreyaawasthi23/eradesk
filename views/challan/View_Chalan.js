@@ -33,15 +33,22 @@ const View_Chalan = () => {
 
   const [selectedRows, setSelectedRows] = useState([])
   const [showFilters, setShowFilters] = useState(false)
+  const [downloading, setDownloading] = useState(false)
 
   // Filters
   const [incidentId, setIncidentId] = useState('')
   const [rmaNo, setRmaNo] = useState('')
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
 
   const canManage =
     details?.roles?.includes('ROLE_ADMIN') || details?.roles?.includes('ROLE_USER')
 
-  const getAllChallans = async (page, size) => {
+  const getAllChallans = async (
+    page,
+    size,
+    filters = { startDate, endDate },
+  ) => {
     var myHeaders = new Headers()
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
@@ -52,9 +59,19 @@ const View_Chalan = () => {
       redirect: 'follow',
     }
 
+    const params = new URLSearchParams()
+    if (filters.startDate) params.set('startDate', filters.startDate)
+    if (filters.endDate) params.set('endDate', filters.endDate)
+    const filterQuery = params.toString()
+
     try {
       const response = await fetch(
-        apiUrl + '/auth/challan/get-all-page?page=' + page + '&size=' + size + '',
+        apiUrl +
+          '/auth/challan/get-all-page?page=' +
+          page +
+          '&size=' +
+          size +
+          (filterQuery ? '&' + filterQuery : ''),
         requestOptions,
       )
       if (response.status === 401) {
@@ -168,34 +185,78 @@ const View_Chalan = () => {
     } else if (rmaNo) {
       runSearch(apiUrl + '/auth/challan/get-by-rma?page=0&size=5000&rmaNo=' + rmaNo)
     } else {
-      getAllChallans(0, 10)
+      getAllChallans(0, 10, { startDate, endDate })
     }
   }
 
   const clearFilters = () => {
     setIncidentId('')
     setRmaNo('')
+    setStartDate('')
+    setEndDate('')
     setCurrentPage(0)
-    getAllChallans(0, 10)
+    getAllChallans(0, 10, { startDate: '', endDate: '' })
   }
 
-  const downloadAsExcel = () => {
-    if (Array.isArray(challanList.content) && challanList.content.length > 0) {
-      const workbook = XLSX.utils.book_new()
-      const worksheet = XLSX.utils.json_to_sheet(challanList.content)
-      XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1')
-
-      const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
-      const excelData = new Blob([excelBuffer], {
-        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      })
-
-      const downloadLink = document.createElement('a')
-      downloadLink.href = URL.createObjectURL(excelData)
-      downloadLink.download = 'Challans Page-' + currentPage + '.xlsx'
-      downloadLink.click()
-    } else {
+  const exportRows = (rows) => {
+    if (!rows.length) {
       alert('No data to download!')
+      return
+    }
+    const sheetData = rows.map((r) => ({
+      'Challan No': r.challanNo,
+      'RMA No': r.rmaId,
+      'Challan Date': formatDate(r.date),
+      PO: r.poNumber,
+      Incident: r.incidentId,
+      'Contact Person': r.toContactName,
+      'Shipped By': r.deliveredBy,
+    }))
+    const workbook = XLSX.utils.book_new()
+    const worksheet = XLSX.utils.json_to_sheet(sheetData)
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Challans')
+
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
+    const excelData = new Blob([excelBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    })
+
+    const downloadLink = document.createElement('a')
+    downloadLink.href = URL.createObjectURL(excelData)
+    downloadLink.download = 'Challans.xlsx'
+    downloadLink.click()
+  }
+
+  const downloadAsExcel = async () => {
+    if (selectedRows.length > 0) {
+      const rows = (challanList.content || []).filter((r) => selectedRows.includes(r.id))
+      exportRows(rows)
+      return
+    }
+
+    setDownloading(true)
+    try {
+      const myHeaders = new Headers()
+      myHeaders.append('X-Tenant', '' + tenant + '')
+      myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
+      const params = new URLSearchParams()
+      if (startDate) params.set('startDate', startDate)
+      if (endDate) params.set('endDate', endDate)
+      const response = await fetch(
+        apiUrl + '/auth/challan/get-all-page?page=0&size=100000' +
+          (params.toString() ? '&' + params.toString() : ''),
+        { method: 'GET', headers: myHeaders, redirect: 'follow' },
+      )
+      if (response.status === 401) {
+        router.push('/')
+        return
+      }
+      const data = await response.json()
+      exportRows(Array.isArray(data?.content) ? data.content : [])
+    } catch (error) {
+      console.log('error', error)
+    } finally {
+      setDownloading(false)
     }
   }
 
@@ -219,8 +280,17 @@ const View_Chalan = () => {
           >
             {showFilters ? 'Hide Search' : 'Search'}
           </button>
-          <button type="button" className={styles.filterClear} onClick={downloadAsExcel}>
-            Download
+          <button
+            type="button"
+            className={styles.filterClear}
+            onClick={downloadAsExcel}
+            disabled={downloading}
+          >
+            {downloading
+              ? 'Downloading...'
+              : selectedRows.length > 0
+                ? `Download (${selectedRows.length})`
+                : 'Download'}
           </button>
         </div>
       </div>
@@ -247,6 +317,24 @@ const View_Chalan = () => {
                   value={rmaNo}
                   onChange={(e) => setRmaNo(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
+                />
+              </div>
+              <div className={styles.filterField}>
+                <label className={styles.filterLabel}>Start Date</label>
+                <input
+                  type="date"
+                  className={styles.filterInput}
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </div>
+              <div className={styles.filterField}>
+                <label className={styles.filterLabel}>End Date</label>
+                <input
+                  type="date"
+                  className={styles.filterInput}
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
                 />
               </div>
               <button type="button" className={styles.applyBtn} onClick={applyFilters}>
