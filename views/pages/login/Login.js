@@ -47,7 +47,7 @@ const Login = () => {
           <form className={styles.form} onSubmit={handleSubmit}>
             <input
               className={styles.input}
-              placeholder="Enter Email"
+              placeholder="Enter your email..."
               autoComplete="username"
               value={username}
               required

@@ -39,22 +39,18 @@ export const createPurchase = async (purchase, router, onSuccess) => {
     } else {
       const result = await response.json()
       if (result.statusCode === 200) {
-        if (onSuccess) {
-          Swal.fire('Great!', '' + result.message + '', 'success')
-          onSuccess()
-        } else {
-          const confirmedResult = await Swal.fire({
-            title: result.message,
-            text: "Now let's add Assets",
-            icon: 'success',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Next',
-          })
-          if (confirmedResult.isConfirmed) {
-            router.push('/add-assets')
-          }
+        if (onSuccess) onSuccess()
+        const confirmedResult = await Swal.fire({
+          title: result.message,
+          text: "Now let's add Assets",
+          icon: 'success',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Next',
+        })
+        if (confirmedResult.isConfirmed) {
+          router.push('/add-assets?endClientId=' + encodeURIComponent(purchase.endClientId || ''))
         }
       } else {
         Swal.fire('Oops!', '' + result.message + '', 'warning')

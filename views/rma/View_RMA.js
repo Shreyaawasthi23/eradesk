@@ -32,7 +32,8 @@ const InfoField = ({ label, value }) => (
 const View_RMA = () => {
   const router = useRouter()
   const { id } = router.query
-  const details = getUserDetails()
+  const [mounted, setMounted] = useState(false)
+  const details = mounted ? getUserDetails() : null
   const [rmaDetails, setRmaDetails] = useState({})
   const [editRmaVisible, setEditRmaVisiable] = useState(false)
 
@@ -130,11 +131,15 @@ const View_RMA = () => {
   }
 
   useEffect(() => {
-    if (!id) return
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted || !id) return
     getRmaDetails()
     getRmaPurchases()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
+  }, [mounted, id])
 
   const color = statusColor(rmaDetails.status)
 

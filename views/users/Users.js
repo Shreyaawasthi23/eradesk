@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Swal from 'sweetalert2'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
 import { CreateUser } from '@/api/user_api'
@@ -82,8 +83,23 @@ const Users = () => {
       .catch((error) => {})
   }
 
+  const emailFormatRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
   const checkEmail = (e) => {
     handleInputChange(e)
+    const email = e.target.value
+
+    if (!email) {
+      setEmailCheck('')
+      setEmailMessage('')
+      return
+    }
+    if (!emailFormatRegex.test(email)) {
+      setEmailCheck(false)
+      setEmailMessage('Invalid email address')
+      return
+    }
+
     var myHeaders = new Headers()
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
@@ -94,7 +110,7 @@ const Users = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/api/auth/users/check-email?email=' + e.target.value + '', requestOptions)
+    fetch(apiUrl + '/api/auth/users/check-email?email=' + email + '', requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result.statusCode === 200) {
@@ -158,6 +174,15 @@ const Users = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!emailFormatRegex.test(user.email)) {
+      setEmailCheck(false)
+      setEmailMessage('Invalid email address')
+      return
+    }
+    if (!user.roles.length) {
+      Swal.fire('Oops!', 'Please select at least one role.', 'warning')
+      return
+    }
     await CreateUser(user, router, () => getUsers(currentPage, 10))
     setShowModal(false)
     setUser(emptyUser)

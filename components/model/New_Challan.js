@@ -29,10 +29,10 @@ const New_Challan = ({ visible, setVisible, rma }) => {
       formik.setFieldValue('fromContact', '9899448062, 9821042253')
     } else if (e.target.value === '2') {
       formik.setFieldValue('fromName', 'LRS Services Private Limited')
-      formik.setFieldValue('fromAddressLane', 'A-26, Sector 63, NOIDA')
-      formik.setFieldValue('fromAddressLaneExt', 'UP 201301')
+      formik.setFieldValue('fromAddressLane', 'Block- C, C-52, First floor, Sector 62 NOIDA')
+      formik.setFieldValue('fromAddressLaneExt', 'UP 201309')
       formik.setFieldValue('fromGst', '09AACCL6399N1ZM')
-      formik.setFieldValue('fromContact', '9899448062, 9821042253')
+      formik.setFieldValue('fromContact', '8527870407, 8750404769')
     }
   }
 

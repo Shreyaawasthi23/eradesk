@@ -241,10 +241,7 @@ const End_Client = () => {
     validationSchema: Yup.object({
       frontClientId: Yup.string().required('Required'),
       name: Yup.string().max(100, 'Must be 100 characters or less').required('Required'),
-      contactName: Yup.string()
-        .max(100, 'Must be 100 characters or less')
-        .min(10, 'Must be 10 characters or more')
-        .required(),
+      contactName: Yup.string().required(),
       contactNumber: Yup.string()
         .min(10, 'Must be 10 characters')
         .max(11, 'Must not be more than 11 characters')
