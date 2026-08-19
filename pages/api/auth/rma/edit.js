@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 
   const { id, remarks } = req.query
   const { db } = auth
-  const { partNumber, description, quantity, contactName, contactNumber, contactEmail, userId } = req.body || {}
+  const { partNumber, description, quantity, status, contactName, contactNumber, contactEmail, userId } = req.body || {}
 
   const existingRma = await db.collection('Rma').findOne({ _id: new ObjectId(id) })
   if (!existingRma) {
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
 
   await db.collection('Rma').updateOne(
     { _id: new ObjectId(id) },
-    { $set: { partNumber, description, quantity, contactName, contactNumber, contactEmail } },
+    { $set: { partNumber, description, quantity, status, contactName, contactNumber, contactEmail, modifyDate: new Date() } },
   )
 
   await db.collection('RmaChangeLog').insertOne({

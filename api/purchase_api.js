@@ -50,7 +50,7 @@ export const createPurchase = async (purchase, router, onSuccess) => {
           confirmButtonText: 'Next',
         })
         if (confirmedResult.isConfirmed) {
-          router.push('/add-assets?endClientId=' + encodeURIComponent(purchase.endClientId || ''))
+          router.push('/add-assets')
         }
       } else {
         Swal.fire('Oops!', '' + result.message + '', 'warning')

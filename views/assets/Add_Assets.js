@@ -267,17 +267,6 @@ const Add_Assets = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    if (!router.isReady) return
-    const { endClientId } = router.query
-    if (endClientId) {
-      formik.setFieldValue('endClientId', endClientId)
-      getPOByEndClient(endClientId)
-      setShowModal(true)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady, router.query.endClientId])
-
   return (
     <div className={styles.page}>
       <div className={styles.pageHeader}>
