@@ -78,9 +78,7 @@ const MultiSelect = ({
         <span className={selectedLabels.length ? styles.value : styles.placeholder}>
           {selectedLabels.length ? selectedLabels.join(', ') : placeholder}
         </span>
-        <span className={styles.chevron} aria-hidden="true">
-          &#9662;
-        </span>
+        <span className={styles.chevron} aria-hidden="true" />
       </button>
       {open &&
         typeof document !== 'undefined' &&

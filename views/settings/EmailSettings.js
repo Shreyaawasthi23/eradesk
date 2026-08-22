@@ -133,7 +133,7 @@ const EmailSettings = () => {
             className={gmailConfigured ? styles.validityValid : styles.validityExpired}
             style={{ fontSize: 12, marginTop: 4 }}
           >
-            {gmailConfigured ? 'Gmail connection configured' : 'Gmail is not configured yet'}
+            {gmailConfigured ? 'Mailbox connection configured' : 'Mailbox is not configured yet'}
           </span>
           <span style={{ fontSize: 12, color: '#1752a6', marginTop: 4, fontWeight: '700' }}>
             The mailbox is checked automatically. Every incoming email creates an incident and

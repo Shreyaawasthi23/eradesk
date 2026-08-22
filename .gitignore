@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+smtp-test-creds.local.json
+smtp-test.js
+graph-test-creds.local.json
+graph-test.js

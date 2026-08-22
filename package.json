@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@azure/msal-node": "^5.6.0",
     "@coreui/chartjs": "^3.1.2",
     "@coreui/coreui": "^4.3.0",
     "@coreui/icons": "^3.1.0",
