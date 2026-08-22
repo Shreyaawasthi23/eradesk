@@ -49,7 +49,7 @@ export default async function handler(req, res) {
   const items = await db
     .collection('SalesTeam')
     .find(filter)
-    .sort({ createDate: -1 })
+    .sort({ createDate: -1, _id: -1 })
     .skip(page * size)
     .limit(size)
     .toArray()
