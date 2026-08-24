@@ -143,12 +143,14 @@ const End_Client = () => {
       Swal.fire('No data', 'There is nothing to download.', 'info')
       return
     }
+    const salesNameById = new Map(salesList?.map((s) => [s.id, s.name]) || [])
     const sheetData = rows.map((r) => ({
       'End Client ID': r.endClientId,
       Name: r.name,
       'Front Client ID': r.frontClientId,
       'Contact Person': r.contactName,
       'Contact Number': r.contactNumber,
+      'Sales Person(s)': (r.salesIds || []).map((id) => salesNameById.get(id)).filter(Boolean).join(', '),
       'Contact Email': r.contactEmail,
       Status: r.status ? 'Active' : 'Deactive',
       'Create Date': r.createDate ? new Date(r.createDate).toLocaleString() : '',
