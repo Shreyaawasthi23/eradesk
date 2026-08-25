@@ -9,6 +9,13 @@ function excelDate(dateNo) {
   return new Date((Number(dateNo) - EXCEL_EPOCH_DIFF) * MILLIS_PER_DAY)
 }
 
+// Excel cells with numeric-looking content (pin codes, PO numbers, etc.)
+// come through as JS numbers rather than strings, so .trim() isn't safe
+// to call directly on row values.
+function trimmed(value) {
+  return String(value ?? '').trim()
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST')
@@ -33,33 +40,33 @@ export default async function handler(req, res) {
   let duplicate = 0
 
   for (const row of rows) {
-    const serialNo = (row.SerialNo || '').trim()
+    const serialNo = trimmed(row.SerialNo)
     const checkAsset = await db.collection('Assets').findOne({ serialNumber: { $regex: serialNo, $options: 'i' } })
     if (checkAsset) {
       duplicate++
       continue
     }
 
-    const endClient = await db.collection('EndClient').findOne({ _id: new ObjectId((row.EndClientId || '').trim()) })
-    const purchaseOrder = await db.collection('PurchaseOrder').findOne({ purchaseOrderNumber: (row.PONumber || '').trim() })
+    const endClient = await db.collection('EndClient').findOne({ _id: new ObjectId(trimmed(row.EndClientId)) })
+    const purchaseOrder = await db.collection('PurchaseOrder').findOne({ purchaseOrderNumber: trimmed(row.PONumber) })
 
     const seq = await nextSequence(db, 'AssetSequence', 'asset_sequence')
     const assetId = `AST00${seq}`
     const now = new Date()
 
     await db.collection('Assets').insertOne({
-      make: (row.Make || '').trim(),
-      model: (row.Model || '').trim(),
+      make: trimmed(row.Make),
+      model: trimmed(row.Model),
       serialNumber: serialNo,
-      purchaseOrderNumber: (row.PONumber || '').trim(),
+      purchaseOrderNumber: trimmed(row.PONumber),
       startDate: excelDate(row.StartDate),
       endDate: excelDate(row.EndDate),
-      sla: (row.SLA || '').trim(),
-      assetType: (row.AssetType || '').trim(),
-      pinCode: (row.PinCode || '').trim(),
-      city: (row.City || '').trim(),
-      state: (row.State || '').trim(),
-      address: (row.Address || '').trim(),
+      sla: trimmed(row.SLA),
+      assetType: trimmed(row.AssetType),
+      pinCode: trimmed(row.PinCode),
+      city: trimmed(row.City),
+      state: trimmed(row.State),
+      address: trimmed(row.Address),
       endClientId: endClient ? endClient._id.toString() : null,
       frontClientId: endClient ? endClient.frontClientId : null,
       purchaseId: purchaseOrder ? purchaseOrder._id.toString() : null,
