@@ -6,10 +6,50 @@ import { getUserDetails } from '@/lib/auth'
 
 import styles from './emailSettings.module.scss'
 
-const DEFAULT_TEMPLATE =
+const DEFAULT_ACK_TEMPLATE =
+  'Hi {{name}},\n\nThank you for your update on incident {{incidentId}}. Our team has received it and will get back to you shortly.\n\nRegards,\nSupport Team'
+
+const DEFAULT_NEW_TICKET_TEMPLATE =
   'Hi {{name}},\n\nThank you for contacting support. Your incident has been logged with reference {{incidentId}}. Our team will get back to you shortly.\n\nRegards,\nSupport Team'
 
+const DEFAULT_EXPIRED_TICKET_TEMPLATE =
+  'Hi {{name}},\n\nThank you for contacting support. Your incident has been logged with reference {{incidentId}}. Please note the AMC/support contract for serial number {{serialNumber}} has expired — our team will reach out regarding renewal along with resolving this request.\n\nRegards,\nSupport Team'
+
+const DEFAULT_NOT_SUPPORTED_TEMPLATE =
+  'Hi {{name}},\n\nThank you for reaching out. We could not find serial number {{serialNumber}} under our AMC/support coverage, so no incident has been created. Please contact our sales team for support options.\n\nRegards,\nSupport Team'
+
 const EmailSettings = () => {
+  const templateTabs = [
+    {
+      key: 'ack',
+      label: 'Acknowledgement',
+      description:
+        "Sent when the incoming email already references an existing case ID (a reply to an open incident) — no new incident is created, and the Sales Team is not cc'd.",
+      placeholders: ['{{name}}', '{{incidentId}}'],
+    },
+    {
+      key: 'newTicket',
+      label: 'New Ticket (Active)',
+      description:
+        "Sent when a new incident is created for a serial number with an active AMC/support contract. Sales Team is cc'd.",
+      placeholders: ['{{name}}', '{{incidentId}}', '{{serialNumber}}'],
+    },
+    {
+      key: 'expiredTicket',
+      label: 'New Ticket (Expired)',
+      description:
+        "Sent when a new incident is created for a serial number whose linked Purchase Order has expired. Sales Team is cc'd.",
+      placeholders: ['{{name}}', '{{incidentId}}', '{{serialNumber}}'],
+    },
+    {
+      key: 'notSupported',
+      label: 'Not Under Support',
+      description:
+        "Sent when no serial number in the email matches our inventory — no incident is created. Sales Team is still cc'd.",
+      placeholders: ['{{name}}', '{{serialNumber}}'],
+    },
+  ]
+
   const details = getUserDetails()
   const router = useRouter()
   const [loading, setLoading] = useState(true)
@@ -17,9 +57,13 @@ const EmailSettings = () => {
   const [gmailConfigured, setGmailConfigured] = useState(false)
   const [enabled, setEnabled] = useState(false)
   const [autoReplyEnabled, setAutoReplyEnabled] = useState(true)
-  const [autoReplyTemplate, setAutoReplyTemplate] = useState(DEFAULT_TEMPLATE)
+  const [ackTemplate, setAckTemplate] = useState(DEFAULT_ACK_TEMPLATE)
+  const [newTicketTemplate, setNewTicketTemplate] = useState(DEFAULT_NEW_TICKET_TEMPLATE)
+  const [expiredTicketTemplate, setExpiredTicketTemplate] = useState(DEFAULT_EXPIRED_TICKET_TEMPLATE)
+  const [notSupportedTemplate, setNotSupportedTemplate] = useState(DEFAULT_NOT_SUPPORTED_TEMPLATE)
   const [dlList, setDlList] = useState([])
   const [dlInput, setDlInput] = useState('')
+  const [activeTemplateTab, setActiveTemplateTab] = useState('ack')
 
   const getSettings = async () => {
     var myHeaders = new Headers()
@@ -43,7 +87,10 @@ const EmailSettings = () => {
           setGmailConfigured(!!data.gmailConfigured)
           setEnabled(!!data.enabled)
           setAutoReplyEnabled(data.autoReplyEnabled ?? true)
-          setAutoReplyTemplate(data.autoReplyTemplate || DEFAULT_TEMPLATE)
+          setAckTemplate(data.ackTemplate || DEFAULT_ACK_TEMPLATE)
+          setNewTicketTemplate(data.newTicketTemplate || DEFAULT_NEW_TICKET_TEMPLATE)
+          setExpiredTicketTemplate(data.expiredTicketTemplate || DEFAULT_EXPIRED_TICKET_TEMPLATE)
+          setNotSupportedTemplate(data.notSupportedTemplate || DEFAULT_NOT_SUPPORTED_TEMPLATE)
           setDlList(Array.isArray(data.dlList) ? data.dlList : [])
         }
       }
@@ -63,7 +110,15 @@ const EmailSettings = () => {
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
-      body: JSON.stringify({ enabled, autoReplyEnabled, autoReplyTemplate, dlList }),
+      body: JSON.stringify({
+        enabled,
+        autoReplyEnabled,
+        ackTemplate,
+        newTicketTemplate,
+        expiredTicketTemplate,
+        notSupportedTemplate,
+        dlList,
+      }),
       redirect: 'follow',
     }
 
@@ -167,16 +222,85 @@ const EmailSettings = () => {
         </div>
 
         <div className={styles.formField} style={{ marginBottom: 16 }}>
-          <label className={styles.formLabel}>Auto-reply template</label>
-          <textarea
-            className={styles.formInput}
-            rows={6}
-            value={autoReplyTemplate}
-            onChange={(e) => setAutoReplyTemplate(e.target.value)}
-          />
-          <span style={{ fontSize: 12, color: 'var(--fc-ink-muted)', marginTop: 4 }}>
-            Use <code>{'{{name}}'}</code> and <code>{'{{incidentId}}'}</code> as placeholders.
-          </span>
+          <label className={styles.formLabel}>Auto-reply templates</label>
+
+          <div
+            style={{
+              display: 'flex',
+              gap: 4,
+              borderBottom: '1px solid var(--fc-border, #e6e9ef)',
+              marginBottom: 12,
+              flexWrap: 'wrap',
+            }}
+          >
+            {templateTabs.map((tab) => (
+              <button
+                key={tab.key}
+                type="button"
+                onClick={() => setActiveTemplateTab(tab.key)}
+                style={{
+                  padding: '8px 14px',
+                  fontSize: 13,
+                  fontWeight: 600,
+                  background: 'transparent',
+                  border: 'none',
+                  borderBottom:
+                    activeTemplateTab === tab.key
+                      ? '2px solid var(--fc-accent, #1752a6)'
+                      : '2px solid transparent',
+                  color:
+                    activeTemplateTab === tab.key
+                      ? 'var(--fc-accent, #1752a6)'
+                      : 'var(--fc-ink-muted, #64748b)',
+                  cursor: 'pointer',
+                }}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {templateTabs
+            .filter((tab) => tab.key === activeTemplateTab)
+            .map((tab) => {
+              const templateValue = {
+                ack: ackTemplate,
+                newTicket: newTicketTemplate,
+                expiredTicket: expiredTicketTemplate,
+                notSupported: notSupportedTemplate,
+              }[tab.key]
+              const templateSetter = {
+                ack: setAckTemplate,
+                newTicket: setNewTicketTemplate,
+                expiredTicket: setExpiredTicketTemplate,
+                notSupported: setNotSupportedTemplate,
+              }[tab.key]
+
+              return (
+                <div key={tab.key}>
+                  <p style={{ fontSize: 12, color: 'var(--fc-ink-muted)', margin: '0 0 6px' }}>
+                    {tab.description}
+                  </p>
+                  <textarea
+                    className={styles.formInput}
+                    rows={7}
+                    value={templateValue}
+                    onChange={(e) => templateSetter(e.target.value)}
+                    style={{ width: '100%', boxSizing: 'border-box', resize: 'vertical' }}
+                  />
+                  <span style={{ fontSize: 12, color: 'var(--fc-ink-muted)', marginTop: 4 }}>
+                    Use{' '}
+                    {tab.placeholders.map((p, i) => (
+                      <React.Fragment key={p}>
+                        <code>{p}</code>
+                        {i < tab.placeholders.length - 1 ? ', ' : ''}
+                      </React.Fragment>
+                    ))}{' '}
+                    as placeholders.
+                  </span>
+                </div>
+              )
+            })}
         </div>
 
         <div className={styles.formField} style={{ marginBottom: 16 }}>

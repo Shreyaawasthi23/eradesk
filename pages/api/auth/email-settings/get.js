@@ -1,5 +1,5 @@
 import { authenticate, hasAnyRole } from '@/lib/apiAuth'
-import { isGraphMailConfigured } from '@/lib/graphMail'
+import { isMailConfigured, getSupportEmail } from '@/lib/mailProvider'
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -14,12 +14,15 @@ export default async function handler(req, res) {
   const settings = await auth.db.collection('EmailSettings').findOne({})
 
   return res.status(200).json({
-    supportEmail: process.env.GRAPH_MAILBOX || '',
+    supportEmail: getSupportEmail(),
     subjectMarker: process.env.MAIL_SUBJECT_MARKER || '[Support]',
-    gmailConfigured: isGraphMailConfigured(),
+    gmailConfigured: isMailConfigured(),
     enabled: settings?.enabled ?? false,
     autoReplyEnabled: settings?.autoReplyEnabled ?? true,
-    autoReplyTemplate: settings?.autoReplyTemplate || '',
+    ackTemplate: settings?.ackTemplate || '',
+    newTicketTemplate: settings?.newTicketTemplate || settings?.autoReplyTemplate || '',
+    expiredTicketTemplate: settings?.expiredTicketTemplate || '',
+    notSupportedTemplate: settings?.notSupportedTemplate || '',
     dlList: settings?.dlList || [],
   })
 }
