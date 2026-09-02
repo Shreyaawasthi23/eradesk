@@ -24,6 +24,7 @@ import {
 
 import AppBreadcrumb from './AppBreadcrumb'
 import AppHeaderDropdown from './header/AppHeaderDropdown'
+import NotificationBell from './header/NotificationBell'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChartLine, faCirclePlus, faShieldHalved } from '@fortawesome/free-solid-svg-icons'
 import New_Incident from './model/New_Incident'
@@ -83,8 +84,18 @@ const AppHeader = () => {
                   <FontAwesomeIcon icon={faShieldHalved} />
                 </CNavLink>
               </CNavItem>
+              <NotificationBell />
             </CHeaderNav>
           ) : null}
+          {!(
+            details?.roles?.includes('ROLE_ADMIN') ||
+            details?.roles?.includes('ROLE_USER') ||
+            details?.roles?.includes('ROLE_MODERATOR')
+          ) && (
+            <CHeaderNav className="app-header-icons">
+              <NotificationBell />
+            </CHeaderNav>
+          )}
 
           <CHeaderNav className="ms-3">
             <AppHeaderDropdown />

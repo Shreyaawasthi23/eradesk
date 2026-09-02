@@ -85,6 +85,49 @@ const routes = [
 
   { path: '/email-settings', name: 'Email Settings' },
   { path: '/logs', name: 'Logs' },
+
+  { path: '/knowledge', name: 'Knowledge Base' },
+  { path: '/knowledge/:id', name: 'Article' },
+
+  { path: '/problem', name: 'Problems' },
+  { path: '/problem/:id', name: 'Problem' },
+
+  { path: '/change', name: 'Changes' },
+  { path: '/change/:id', name: 'Change' },
+
+  { path: '/release', name: 'Releases' },
+  { path: '/release/:id', name: 'Release' },
+
+  { path: '/cmdb', name: 'Configuration Items' },
+  { path: '/cmdb/:id', name: 'Configuration Item' },
+
+  { path: '/discovery', name: 'Asset Discovery' },
+
+  { path: '/software', name: 'Software' },
+  { path: '/software/:id', name: 'Software Detail' },
+
+  { path: '/vendor', name: 'Vendors' },
+  { path: '/contract', name: 'Contracts' },
+  { path: '/contract/:id', name: 'Contract' },
+
+  { path: '/approvals', name: 'Approvals' },
+
+  { path: '/audit', name: 'Audit Log' },
+
+  { path: '/survey', name: 'Surveys' },
+
+  { path: '/maintenance', name: 'Maintenance Windows' },
+  { path: '/announcement', name: 'Announcements' },
+
+  { path: '/sla', name: 'SLA Configuration' },
+
+  { path: '/rules', name: 'Business Rules' },
+
+  { path: '/catalog', name: 'Service Catalog' },
+
+  { path: '/monitoring', name: 'Monitoring Integrations' },
+
+  { path: '/reports', name: 'Report Builder' },
 ]
 
 export default routes
