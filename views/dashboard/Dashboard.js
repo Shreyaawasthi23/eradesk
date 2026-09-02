@@ -520,10 +520,10 @@ const Dashboard = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [salesYear, salesCompareYear])
 
-  const poChartColors = { primary: '#1a73b8', secondary: '#0f2744' }
+  const poChartColors = { primary: '#0f766e', secondary: '#0d2b2e' }
   const poChartPalette = [
-    '#2196F3', '#22C58B', '#17A2A8', '#F4623A', '#C0392B', '#0f2744',
-    '#8E44AD', '#F1C40F', '#16A085', '#D35400', '#7F8C8D', '#1a73b8',
+    '#d97706', '#22C58B', '#17A2A8', '#F4623A', '#C0392B', '#0d2b2e',
+    '#8E44AD', '#F1C40F', '#0f766e', '#D35400', '#7F8C8D', '#0f766e',
     '#27AE60', '#E67E22', '#95A5A6', '#3498DB', '#E74C3C', '#1ABC9C',
     '#9B59B6', '#F39C12',
   ]

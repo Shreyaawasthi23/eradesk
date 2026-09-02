@@ -58,8 +58,8 @@
 
 .ratingBtnActive {
   composes: ratingBtn;
-  background: #115f98;
-  border-color: #115f98;
+  background: #0f766e;
+  border-color: #0f766e;
   color: #ffffff;
 }
 
@@ -97,7 +97,7 @@
   padding: 12px;
   border-radius: 8px;
   border: none;
-  background: #115f98;
+  background: #0f766e;
   color: #ffffff;
   font-weight: 600;
   font-size: 15px;
@@ -105,7 +105,7 @@
 }
 
 .submitBtn:hover {
-  background: #123274;
+  background: #134e4a;
 }
 
 .thankYou {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
 
-const priorityColor = { HIGH: '#dc2626', NORMAL: '#115f98', LOW: '#64748b' }
+const priorityColor = { HIGH: '#dc2626', NORMAL: '#0f766e', LOW: '#64748b' }
 
 // Drop-in banner showing currently-active announcements — designed to sit at the top of the
 // dashboard or portal home. Self-contained (fetches its own data), renders nothing if there's
@@ -33,8 +33,8 @@ const AnnouncementBanner = () => {
           style={{
             padding: '10px 16px',
             borderRadius: 8,
-            background: `${priorityColor[a.priority] || '#115f98'}14`,
-            borderLeft: `4px solid ${priorityColor[a.priority] || '#115f98'}`,
+            background: `${priorityColor[a.priority] || '#0f766e'}14`,
+            borderLeft: `4px solid ${priorityColor[a.priority] || '#0f766e'}`,
             fontSize: 13,
           }}
         >

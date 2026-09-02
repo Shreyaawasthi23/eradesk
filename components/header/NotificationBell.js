@@ -129,7 +129,7 @@ const NotificationBell = () => {
             <button
               type="button"
               onClick={markAllRead}
-              style={{ border: 'none', background: 'none', color: '#115f98', fontSize: 12, cursor: 'pointer' }}
+              style={{ border: 'none', background: 'none', color: '#0f766e', fontSize: 12, cursor: 'pointer' }}
             >
               Mark all read
             </button>

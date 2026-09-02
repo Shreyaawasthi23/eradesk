@@ -3,6 +3,7 @@
 body {
   font-size: 14px;
   line-height: 1.55;
+  background: #f7f6f2;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -11,10 +12,18 @@ h1, h2, h3, h4, h5, h6 {
 
 .card {
   border-radius: 12px;
+  border: 1px solid #eceae3;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -12px rgba(15, 23, 42, 0.08);
 }
 
 .card-body {
   padding: 1.25rem 1.5rem;
+}
+
+:root {
+  --accent-warm: #d97706;
+  --accent-warm-ink: #ffffff;
+  --accent-teal: #0f766e;
 }
 
 .table th,
@@ -61,7 +70,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sidebar {
-  --cui-sidebar-bg: #0f2744;
+  --cui-sidebar-bg: linear-gradient(185deg, #0d2b2e 0%, #123b3a 100%);
   --cui-sidebar-width: 16.5rem;
   --cui-sidebar-narrow-width: 4.25rem;
 
@@ -81,7 +90,7 @@ h1, h2, h3, h4, h5, h6 {
   --cui-sidebar-nav-link-hover-color: #ffffff;
   --cui-sidebar-nav-link-hover-icon-color: #ffffff;
 
-  --cui-sidebar-nav-link-active-bg: linear-gradient(135deg, #2196f3, #115f98);
+  --cui-sidebar-nav-link-active-bg: linear-gradient(135deg, #14b8a6, #0f766e);
   --cui-sidebar-nav-link-active-color: #ffffff;
   --cui-sidebar-nav-link-active-icon-color: #ffffff;
 
@@ -204,8 +213,8 @@ h1, h2, h3, h4, h5, h6 {
 // accent blue (valid) / danger red (invalid) instead of the library
 // defaults (green / red).
 :root {
-  --cui-form-valid-color: #115f98;
-  --cui-form-valid-border-color: #115f98;
+  --cui-form-valid-color: #0f766e;
+  --cui-form-valid-border-color: #0f766e;
   --cui-form-invalid-color: #dc2626;
   --cui-form-invalid-border-color: #dc2626;
 }
@@ -388,7 +397,7 @@ tr.expanded+tr .details {
 
 .app-header-toggler:hover {
   background: #f7f8fa;
-  color: #115f98;
+  color: #0f766e;
 }
 
 .app-header-nav-link {
@@ -408,14 +417,14 @@ tr.expanded+tr .details {
   width: 36px;
   height: 36px;
   border-radius: 9px;
-  color: #115f98 !important;
-  background: color-mix(in srgb, #115f98 8%, transparent);
+  color: #0f766e !important;
+  background: color-mix(in srgb, #0f766e 8%, transparent);
   cursor: pointer;
   transition: background-color 0.12s ease, transform 0.12s ease;
 }
 
 .app-header-icon-btn:hover {
-  background: color-mix(in srgb, #115f98 16%, transparent);
+  background: color-mix(in srgb, #0f766e 16%, transparent);
   transform: translateY(-1px);
 }
 
@@ -435,7 +444,7 @@ tr.expanded+tr .details {
 }
 
 .app-header-breadcrumb-row .breadcrumb-item a {
-  color: #115f98;
+  color: #0f766e;
   text-decoration: none;
   font-weight: 600;
 }
@@ -445,7 +454,7 @@ tr.expanded+tr .details {
 }
 
 .app-header-avatar {
-  background: linear-gradient(160deg, #115f98, #123274) !important;
+  background: linear-gradient(160deg, #0f766e, #134e4a) !important;
   color: #ffffff !important;
   font-weight: 700;
   cursor: pointer;
@@ -513,8 +522,8 @@ tr.expanded+tr .details {
 }
 
 .swal2-icon.swal2-question {
-  border-color: #115f98 !important;
-  color: #115f98 !important;
+  border-color: #0f766e !important;
+  color: #0f766e !important;
 }
 
 .swal2-icon.swal2-success [class^='swal2-success-line'] {
@@ -549,11 +558,11 @@ tr.expanded+tr .details {
 }
 
 .swal2-confirm.swal2-styled {
-  background-color: #115f98 !important;
+  background-color: #0f766e !important;
 }
 
 .swal2-confirm.swal2-styled:focus {
-  box-shadow: 0 0 0 3px color-mix(in srgb, #115f98 25%, transparent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #0f766e 25%, transparent) !important;
 }
 
 .swal2-cancel.swal2-styled {
