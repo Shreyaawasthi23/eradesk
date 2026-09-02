@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import Swal from 'sweetalert2'
 import * as XLSX from 'xlsx'
 import * as Yup from 'yup'
-import { createEndClient } from '@/api/endclient_api'
+import { createEndClient } from '@/apiClients/endclient_api'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
 

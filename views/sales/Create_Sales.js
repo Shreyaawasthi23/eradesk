@@ -5,7 +5,7 @@ import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
 import * as Yup from 'yup'
 import moment from 'moment'
-import { CreateSalesParticipant } from '@/api/user_api'
+import { CreateSalesParticipant } from '@/apiClients/user_api'
 
 import styles from './sales.module.scss'
 import EditSalesModal from './EditSalesModal'

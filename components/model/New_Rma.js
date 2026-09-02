@@ -21,7 +21,7 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 import { getUserDetails } from '@/lib/auth'
-import { raiseRma } from '@/api/rma_api'
+import { raiseRma } from '@/apiClients/rma_api'
 
 const New_Rma = ({ visible, setVisible, incident, ...props }) => {
   const router = useRouter()

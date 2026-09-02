@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { editEndClient } from '@/api/endclient_api'
+import { editEndClient } from '@/apiClients/endclient_api'
 
 import styles from './endclient.module.scss'
 import CappedSelect from '@/components/ui/CappedSelect'

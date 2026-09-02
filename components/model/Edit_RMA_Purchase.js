@@ -31,7 +31,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useRouter } from 'next/router'
 import { getUserDetails } from '@/lib/auth'
-import { EditRma, EditRmaPurchase } from '@/api/rma_api'
+import { EditRma, EditRmaPurchase } from '@/apiClients/rma_api'
 
 const Edit_Rma_Purchase = ({
   visible,

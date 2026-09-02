@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 import moment from 'moment'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { EditAsset } from '@/api/assets_api'
+import { EditAsset } from '@/apiClients/assets_api'
 import CappedSelect from '@/components/ui/CappedSelect'
 
 import styles from './assets.module.scss'

@@ -25,11 +25,11 @@ import { useRouter } from 'next/router'
 import { getUserDetails } from '@/lib/auth'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { addNotes } from '@/api/incident_api'
+import { addNotes } from '@/apiClients/incident_api'
 import { useEffect } from 'react'
 import { apiUrl, tenant } from '@/lib/config'
 import moment from 'moment'
-import { CreateRmaPurchase } from '@/api/rma_api'
+import { CreateRmaPurchase } from '@/apiClients/rma_api'
 
 const Rma_Purchase = ({ visible, setVisible, rma, ...props }) => {
   const router = useRouter()

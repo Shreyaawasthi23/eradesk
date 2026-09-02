@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { createBusinessRule, editBusinessRule } from '@/api/rules_api'
+import { createBusinessRule, editBusinessRule } from '@/apiClients/rules_api'
 import RuleModal from './RuleModal'
 import styles from '../itil/itil.module.scss'
 

@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import * as XLSX from 'xlsx'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { runReport, saveReport, deleteReport } from '@/api/reports_api'
+import { runReport, saveReport, deleteReport } from '@/apiClients/reports_api'
 import styles from '../itil/itil.module.scss'
 
 const OPERATORS = ['EQUALS', 'NOT_EQUALS', 'CONTAINS', 'GREATER_THAN', 'LESS_THAN']

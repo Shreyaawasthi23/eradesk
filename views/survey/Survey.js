@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { createSurveyTemplate, editSurveyTemplate } from '@/api/survey_api'
+import { createSurveyTemplate, editSurveyTemplate } from '@/apiClients/survey_api'
 import SurveyTemplateModal from './SurveyTemplateModal'
 import styles from '../itil/itil.module.scss'
 

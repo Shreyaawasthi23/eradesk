@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
-import { login } from '@/api/login_api'
+import { login } from '@/apiClients/login_api'
 import Cookies from 'js-cookie'
 
 import styles from './login.module.scss'

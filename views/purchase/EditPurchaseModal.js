@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 import moment from 'moment'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { editPurchase } from '@/api/purchase_api'
+import { editPurchase } from '@/apiClients/purchase_api'
 import CappedSelect from '@/components/ui/CappedSelect'
 
 import styles from './purchase.module.scss'

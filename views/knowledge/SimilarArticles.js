@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { searchKnowledgeArticles } from '@/api/knowledge_api'
+import { searchKnowledgeArticles } from '@/apiClients/knowledge_api'
 import styles from './knowledge.module.scss'
 
 // Drop-in suggestion box: given free-text (e.g. an incident's problem description),

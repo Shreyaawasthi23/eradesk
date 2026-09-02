@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import { createIncident } from '@/api/incident_api'
+import { createIncident } from '@/apiClients/incident_api'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
 import * as Yup from 'yup'

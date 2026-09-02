@@ -14,7 +14,7 @@ import { useRouter } from 'next/router'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
 import * as Yup from 'yup'
-import { EditSalesParticipant } from '@/api/user_api'
+import { EditSalesParticipant } from '@/apiClients/user_api'
 
 const Edit_Sales = () => {
   const router = useRouter()

@@ -23,7 +23,7 @@ import { useRouter } from 'next/router'
 import { getUserDetails } from '@/lib/auth'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { addChallanTracking } from '@/api/challan_api'
+import { addChallanTracking } from '@/apiClients/challan_api'
 
 const Delivery_Status = ({ visible, setVisible, challan, tracking, ...props }) => {
   const router = useRouter()

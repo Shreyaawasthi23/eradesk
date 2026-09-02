@@ -31,7 +31,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useRouter } from 'next/router'
 import { getUserDetails } from '@/lib/auth'
-import { EditRma } from '@/api/rma_api'
+import { EditRma } from '@/apiClients/rma_api'
 
 const Edit_Rma = ({ visible, setVisible, rmaDetails, setRmaDetails, onSuccess, ...props }) => {
   const router = useRouter()

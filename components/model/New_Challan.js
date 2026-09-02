@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 import { getUserDetails } from '@/lib/auth'
-import { createChallan } from '@/api/challan_api'
+import { createChallan } from '@/apiClients/challan_api'
 import CappedSelect from '@/components/ui/CappedSelect'
 
 import styles from '@/views/rma/rma.module.scss'

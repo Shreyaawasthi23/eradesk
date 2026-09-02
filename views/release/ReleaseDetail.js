@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Swal from 'sweetalert2'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { editRelease, linkToRelease, setReleaseStatus } from '@/api/release_api'
+import { editRelease, linkToRelease, setReleaseStatus } from '@/apiClients/release_api'
 import styles from '../itil/itil.module.scss'
 
 const statusClass = {

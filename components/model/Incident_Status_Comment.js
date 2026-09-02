@@ -14,7 +14,7 @@ import {
 import { useFormik } from 'formik'
 import React from 'react'
 import { useRouter } from 'next/router'
-import { updateIncidentStatus } from '@/api/incident_api'
+import { updateIncidentStatus } from '@/apiClients/incident_api'
 import { getUserDetails } from '@/lib/auth'
 import * as Yup from 'yup'
 

@@ -20,7 +20,7 @@ import { useRouter } from 'next/router'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useEffect } from 'react'
-import { updateChallan } from '@/api/challan_api'
+import { updateChallan } from '@/apiClients/challan_api'
 
 const Edit_Challan = () => {
   const router = useRouter()

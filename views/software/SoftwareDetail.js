@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Swal from 'sweetalert2'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { createLicense, installSoftware, uninstallSoftware } from '@/api/software_api'
+import { createLicense, installSoftware, uninstallSoftware } from '@/apiClients/software_api'
 import styles from '../itil/itil.module.scss'
 
 const SoftwareDetail = () => {

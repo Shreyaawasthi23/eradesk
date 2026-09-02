@@ -15,7 +15,7 @@ import {
 import { useFormik } from 'formik'
 import React from 'react'
 import { useRouter } from 'next/router'
-import { AddAssetReplacement } from '@/api/assets_api'
+import { AddAssetReplacement } from '@/apiClients/assets_api'
 import * as Yup from 'yup'
 
 const Add_Replacement = ({ visible, setVisible, asset, assetList, ...props }) => {

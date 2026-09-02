@@ -22,7 +22,7 @@ import {
 import { useRouter } from 'next/router'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { addNotes } from '@/api/incident_api'
+import { addNotes } from '@/apiClients/incident_api'
 import { getUserDetails } from '@/lib/auth'
 import moment from 'moment'
 

@@ -23,7 +23,7 @@ import {
 import { useRouter } from 'next/router'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { addNotes } from '@/api/incident_api'
+import { addNotes } from '@/apiClients/incident_api'
 import { useEffect } from 'react'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'

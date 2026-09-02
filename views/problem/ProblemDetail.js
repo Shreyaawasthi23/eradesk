@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Swal from 'sweetalert2'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { editProblem, linkIncidentToProblem, setProblemStatus } from '@/api/problem_api'
+import { editProblem, linkIncidentToProblem, setProblemStatus } from '@/apiClients/problem_api'
 import AuditHistory from '../audit/AuditHistory'
 import styles from '../itil/itil.module.scss'
 

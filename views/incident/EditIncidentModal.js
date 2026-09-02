@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 import moment from 'moment'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { editIncident } from '@/api/incident_api'
+import { editIncident } from '@/apiClients/incident_api'
 import CappedSelect from '@/components/ui/CappedSelect'
 
 import styles from './incident.module.scss'

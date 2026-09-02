@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Swal from 'sweetalert2'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { setBusinessHours, createHoliday, deleteHoliday, createSlaPolicy } from '@/api/sla_api'
+import { setBusinessHours, createHoliday, deleteHoliday, createSlaPolicy } from '@/apiClients/sla_api'
 import styles from '../itil/itil.module.scss'
 
 const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']

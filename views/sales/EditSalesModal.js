@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { EditSalesParticipant } from '@/api/user_api'
+import { EditSalesParticipant } from '@/apiClients/user_api'
 
 import styles from './sales.module.scss'
 

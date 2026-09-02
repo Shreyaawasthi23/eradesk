@@ -15,7 +15,7 @@ import { useRouter } from 'next/router'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
 import * as Yup from 'yup'
-import { EditUser } from '@/api/user_api'
+import { EditUser } from '@/apiClients/user_api'
 import { useFormik } from 'formik'
 
 const Users_Edit = () => {

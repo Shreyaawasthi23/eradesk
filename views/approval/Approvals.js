@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Swal from 'sweetalert2'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { decideApproval, cancelApproval } from '@/api/approval_api'
+import { decideApproval, cancelApproval } from '@/apiClients/approval_api'
 import styles from '../itil/itil.module.scss'
 
 const statusClass = { PENDING: 'statusWarning', APPROVED: 'statusSuccess', REJECTED: 'statusDanger', CANCELLED: 'statusNeutral' }

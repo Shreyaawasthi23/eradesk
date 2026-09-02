@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { editFrontClient } from '@/api/frontclient_api'
+import { editFrontClient } from '@/apiClients/frontclient_api'
 
 import styles from './frontclient.module.scss'
 import MultiSelect from '@/components/ui/MultiSelect'

@@ -6,7 +6,7 @@ import {
   createKnowledgeArticle,
   editKnowledgeArticle,
   setKnowledgeArticleStatus,
-} from '@/api/knowledge_api'
+} from '@/apiClients/knowledge_api'
 import Pagination from '@/components/ui/Pagination'
 import KnowledgeArticleModal from './KnowledgeArticleModal'
 import styles from './knowledge.module.scss'

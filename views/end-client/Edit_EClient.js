@@ -12,7 +12,7 @@ import {
 import { useFormik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { editEndClient } from '@/api/endclient_api'
+import { editEndClient } from '@/apiClients/endclient_api'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
 import * as Yup from 'yup'

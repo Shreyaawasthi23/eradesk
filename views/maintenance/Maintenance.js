@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { createMaintenanceWindow, setMaintenanceStatus } from '@/api/maintenance_api'
+import { createMaintenanceWindow, setMaintenanceStatus } from '@/apiClients/maintenance_api'
 import MaintenanceModal from './MaintenanceModal'
 import styles from '../itil/itil.module.scss'
 

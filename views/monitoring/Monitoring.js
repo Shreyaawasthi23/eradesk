@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { apiUrl, tenant } from '@/lib/config'
 import { getUserDetails } from '@/lib/auth'
-import { createMonitoringIntegration } from '@/api/monitoring_api'
+import { createMonitoringIntegration } from '@/apiClients/monitoring_api'
 import MonitoringModal from './MonitoringModal'
 import styles from '../itil/itil.module.scss'
 
