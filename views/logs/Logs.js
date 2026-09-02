@@ -35,7 +35,7 @@ const Logs = () => {
     const filterQuery = buildFilterQuery(filters)
     const url =
       apiUrl +
-      '/api/auth/logs/get-all?page=' +
+      '/api/auth/account/logs/get-all?page=' +
       page +
       '&size=' +
       size +

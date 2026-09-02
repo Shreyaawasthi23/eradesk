@@ -41,7 +41,7 @@ const EditPurchaseModal = ({ purchaseId, router, endClientList, salesList, onClo
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/purchase/get-details?id=' + purchaseId, requestOptions)
+    fetch(apiUrl + '/auth/core/purchase/get-details?id=' + purchaseId, requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         setPurchaseDetails(result || {})

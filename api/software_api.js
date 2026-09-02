@@ -36,13 +36,13 @@ const postJson = async (path, body, router, onSuccess) => {
 }
 
 export const createSoftware = (software, router, onSuccess) =>
-  postJson('/auth/software/software-create', software, router, onSuccess)
+  postJson('/auth/itil/software/software-create', software, router, onSuccess)
 
 export const createLicense = (license, router, onSuccess) =>
-  postJson('/auth/software/license-create', license, router, onSuccess)
+  postJson('/auth/itil/software/license-create', license, router, onSuccess)
 
 export const installSoftware = (licenseId, payload, router, onSuccess) =>
-  postJson('/auth/software/install?id=' + licenseId, payload, router, onSuccess)
+  postJson('/auth/itil/software/install?id=' + licenseId, payload, router, onSuccess)
 
 export const uninstallSoftware = (installationId, router, onSuccess) =>
-  postJson('/auth/software/uninstall?id=' + installationId, {}, router, onSuccess)
+  postJson('/auth/itil/software/uninstall?id=' + installationId, {}, router, onSuccess)

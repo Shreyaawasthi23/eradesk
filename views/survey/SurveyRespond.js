@@ -16,7 +16,7 @@ const SurveyRespond = () => {
     if (!id) return
     const headers = new Headers()
     headers.append('X-Tenant', '' + tenant + '')
-    fetch(apiUrl + '/survey/get-response?id=' + id, { method: 'GET', headers, redirect: 'follow' })
+    fetch(apiUrl + '/api/public/survey/get-response?id=' + id, { method: 'GET', headers, redirect: 'follow' })
       .then((r) => {
         if (!r.ok) throw new Error('not found')
         return r.json()
@@ -39,7 +39,7 @@ const SurveyRespond = () => {
       const payload = {
         answers: Object.entries(answers).map(([questionId, value]) => ({ questionId, value })),
       }
-      const response = await fetch(apiUrl + '/survey/submit?id=' + id, {
+      const response = await fetch(apiUrl + '/api/public/survey/submit?id=' + id, {
         method: 'POST',
         headers,
         body: JSON.stringify(payload),

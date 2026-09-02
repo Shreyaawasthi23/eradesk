@@ -24,7 +24,7 @@ const EditFrontClientModal = ({ clientId, router, salesList, onClose, onSaved })
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/front-client/get-details?id=' + clientId, requestOptions)
+    fetch(apiUrl + '/auth/core/front-client/get-details?id=' + clientId, requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         setClientDetails(result || {})

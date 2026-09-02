@@ -30,7 +30,7 @@ const ReportBuilder = () => {
   }
 
   const getDataSources = async () => {
-    const r = await authFetch('/auth/reports/data-sources')
+    const r = await authFetch('/auth/ops/reports/data-sources')
     if (r.status === 401) return router.push('/')
     const data = await r.json()
     setDataSources(data)
@@ -38,7 +38,7 @@ const ReportBuilder = () => {
   }
 
   const getSavedReports = async () => {
-    const r = await authFetch('/auth/reports/get-all-page?page=0&size=50')
+    const r = await authFetch('/auth/ops/reports/get-all-page?page=0&size=50')
     if (r.status === 401) return router.push('/')
     const data = await r.json()
     setSavedReports(data.content || [])
@@ -75,7 +75,7 @@ const ReportBuilder = () => {
   }
 
   const runSaved = async (report) => {
-    const r = await authFetch('/auth/reports/run-saved?id=' + report.id)
+    const r = await authFetch('/auth/ops/reports/run-saved?id=' + report.id)
     if (r.status === 401) return router.push('/')
     setResult(await r.json())
   }

@@ -36,7 +36,7 @@ const postJson = async (path, body, router, onSuccess) => {
 }
 
 export const createBusinessRule = (rule, router, onSuccess) =>
-  postJson('/auth/rules/create', rule, router, onSuccess)
+  postJson('/auth/ops/rules/create', rule, router, onSuccess)
 
 export const editBusinessRule = (rule, router, onSuccess) =>
-  postJson('/auth/rules/edit?id=' + rule.id, rule, router, onSuccess)
+  postJson('/auth/ops/rules/edit?id=' + rule.id, rule, router, onSuccess)

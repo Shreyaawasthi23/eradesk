@@ -37,7 +37,7 @@ const Edit_FClient = () => {
       }
 
       const response = await fetch(
-        apiUrl + '/auth/front-client/check-by-name?name=' + value,
+        apiUrl + '/auth/core/front-client/check-by-name?name=' + value,
         requestOptions,
       )
       if (response.status === 401) {
@@ -64,7 +64,7 @@ const Edit_FClient = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/front-client/get-details?id=' + id, requestOptions)
+    fetch(apiUrl + '/auth/core/front-client/get-details?id=' + id, requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result !== null) {
@@ -86,7 +86,7 @@ const Edit_FClient = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/front-client/check-by-name?name=' + e.target.value, requestOptions)
+    fetch(apiUrl + '/auth/core/front-client/check-by-name?name=' + e.target.value, requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         console.log(result)

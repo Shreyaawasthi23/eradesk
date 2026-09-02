@@ -35,7 +35,7 @@ const Edit_Sales = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/sales-team/get-details?id=' + id,
+        apiUrl + '/auth/core/sales-team/get-details?id=' + id,
         requestOptions,
       )
       if (response.status === 401) {

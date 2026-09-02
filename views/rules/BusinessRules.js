@@ -19,7 +19,7 @@ const BusinessRules = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/rules/get-all-page?page=0&size=50', {
+      const response = await fetch(apiUrl + '/auth/ops/rules/get-all-page?page=0&size=50', {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',

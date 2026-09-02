@@ -36,19 +36,19 @@ const postJson = async (path, body, router, onSuccess) => {
 }
 
 export const createCI = (ci, router, onSuccess) =>
-  postJson('/auth/cmdb/ci-create', ci, router, (data) => {
+  postJson('/auth/itil/cmdb/ci-create', ci, router, (data) => {
     Swal.fire('Success', data.message, 'success')
     onSuccess && onSuccess(data)
   })
 
 export const editCI = (ci, router, onSuccess) =>
-  postJson('/auth/cmdb/ci-edit?id=' + ci.id, ci, router, onSuccess)
+  postJson('/auth/itil/cmdb/ci-edit?id=' + ci.id, ci, router, onSuccess)
 
 export const createRelationship = (sourceId, targetId, relationshipType, router, onSuccess) =>
-  postJson('/auth/cmdb/relationship-create', { sourceId, targetId, relationshipType }, router, onSuccess)
+  postJson('/auth/itil/cmdb/relationship-create', { sourceId, targetId, relationshipType }, router, onSuccess)
 
 export const deleteRelationship = (id, router, onSuccess) =>
-  postJson('/auth/cmdb/relationship-delete?id=' + id, {}, router, onSuccess)
+  postJson('/auth/itil/cmdb/relationship-delete?id=' + id, {}, router, onSuccess)
 
 export const linkCIToEntity = (ciId, entityType, entityId, router, onSuccess) =>
-  postJson('/auth/cmdb/link-entity?id=' + ciId, { entityType, entityId }, router, onSuccess)
+  postJson('/auth/itil/cmdb/link-entity?id=' + ciId, { entityType, entityId }, router, onSuccess)

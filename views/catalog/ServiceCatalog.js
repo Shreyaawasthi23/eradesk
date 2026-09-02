@@ -37,19 +37,19 @@ const ServiceCatalog = () => {
   }
 
   const getItems = async () => {
-    const r = await authFetch('/auth/catalog/get-all-page?page=0&size=50&activeOnly=true')
+    const r = await authFetch('/auth/service/catalog/get-all-page?page=0&size=50&activeOnly=true')
     if (r.status === 401) return router.push('/')
     setItems(await r.json())
   }
 
   const getMyRequests = async () => {
-    const r = await authFetch('/auth/catalog/request-get-all-page?page=0&size=50&mine=true')
+    const r = await authFetch('/auth/service/catalog/request-get-all-page?page=0&size=50&mine=true')
     if (r.status === 401) return router.push('/')
     setMyRequests(await r.json())
   }
 
   const getEngineers = async () => {
-    const r = await authFetch('/auth/users/get-engineers')
+    const r = await authFetch('/auth/core/users/get-engineers')
     if (r.ok) setEngineerList(await r.json())
   }
 

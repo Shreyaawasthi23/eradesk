@@ -36,7 +36,7 @@ const ConfigurationItems = () => {
     try {
       const url =
         apiUrl +
-        '/auth/cmdb/get-all-page?page=' +
+        '/auth/itil/cmdb/get-all-page?page=' +
         page +
         '&size=' +
         size +
@@ -65,7 +65,7 @@ const ConfigurationItems = () => {
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
       const response = await fetch(
-        apiUrl + '/auth/cmdb/search?q=' + encodeURIComponent(search) + '&page=0&size=50',
+        apiUrl + '/auth/itil/cmdb/search?q=' + encodeURIComponent(search) + '&page=0&size=50',
         { method: 'GET', headers: myHeaders, redirect: 'follow' },
       )
       if (response.status === 401) {

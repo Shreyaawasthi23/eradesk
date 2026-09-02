@@ -28,7 +28,7 @@ export const createEndClient = async (endClient, router) => {
   }
 
   try {
-    const response = await fetch(apiUrl + '/auth/end-client/create', requestOptions)
+    const response = await fetch(apiUrl + '/auth/core/end-client/create', requestOptions)
     if (response.status === 401) {
       router.push('/')
     } else {
@@ -81,7 +81,7 @@ export const editEndClient = (endClient, router, onSuccess) => {
   }
 
   fetch(
-    apiUrl + '/auth/end-client/edit?id=' + endClient.id + '&remarks=' + endClient.remarks + '',
+    apiUrl + '/auth/core/end-client/edit?id=' + endClient.id + '&remarks=' + endClient.remarks + '',
     requestOptions,
   )
     .then((response) => (response.status === 401 ? router.push('/') : response.json()))

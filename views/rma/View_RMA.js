@@ -76,7 +76,7 @@ const View_RMA = () => {
         redirect: 'follow',
       }
 
-      const response = await fetch(apiUrl + '/auth/rma/details?id=' + id, requestOptions)
+      const response = await fetch(apiUrl + '/auth/core/rma/details?id=' + id, requestOptions)
 
       if (response.status === 401) {
         router.push('/')
@@ -104,7 +104,7 @@ const View_RMA = () => {
       }
 
       const response = await fetch(
-        apiUrl + '/auth/rma/get-purchase-by-rma?page=0&size=100&rmaId=' + id + '',
+        apiUrl + '/auth/core/rma/get-purchase-by-rma?page=0&size=100&rmaId=' + id + '',
         requestOptions,
       )
 

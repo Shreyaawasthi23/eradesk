@@ -57,7 +57,7 @@ const RMA = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/rma/get-all?page=' + page + '&size=' + size + '',
+        apiUrl + '/auth/core/rma/get-all?page=' + page + '&size=' + size + '',
         requestOptions,
       )
       if (response.status === 401) {
@@ -103,7 +103,7 @@ const RMA = () => {
       }
 
       const response = await fetch(
-        apiUrl + '/auth/rma/get-rma-pod-details?id=' + option.id,
+        apiUrl + '/auth/core/rma/get-rma-pod-details?id=' + option.id,
         requestOptions,
       )
       const result = await response.json()
@@ -150,17 +150,17 @@ const RMA = () => {
     if (startDate && endDate) {
       runSearch(
         apiUrl +
-          '/auth/rma/rma-between-dates?pageNo=0&size=50000&endDate=' +
+          '/auth/core/rma/rma-between-dates?pageNo=0&size=50000&endDate=' +
           endDate +
           '&startDate=' +
           startDate,
       )
     } else if (incidentId) {
-      runSearch(apiUrl + '/auth/rma/get-by-incident?page=0&size=5000&incidentId=' + incidentId)
+      runSearch(apiUrl + '/auth/core/rma/get-by-incident?page=0&size=5000&incidentId=' + incidentId)
     } else if (rmaNumber) {
-      runSearch(apiUrl + '/auth/rma/rma-search?page=0&size=5000&rmaNumber=' + rmaNumber)
+      runSearch(apiUrl + '/auth/core/rma/rma-search?page=0&size=5000&rmaNumber=' + rmaNumber)
     } else if (poNumber) {
-      runSearch(apiUrl + '/auth/rma/rma-by-po?page=0&size=5000&purchaseOrder=' + poNumber)
+      runSearch(apiUrl + '/auth/core/rma/rma-by-po?page=0&size=5000&purchaseOrder=' + poNumber)
     } else {
       getAllRma(0, 10)
     }

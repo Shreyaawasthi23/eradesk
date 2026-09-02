@@ -76,7 +76,7 @@ const Add_Assets = () => {
         redirect: 'follow',
       }
 
-      fetch(apiUrl + '/auth/purchase/get-state-city?pincode=' + value, requestOptions)
+      fetch(apiUrl + '/auth/core/purchase/get-state-city?pincode=' + value, requestOptions)
         .then((response) => (response.status === 401 ? router.push('/') : response.json()))
         .then((result) => {
           if (result !== null) {
@@ -99,7 +99,7 @@ const Add_Assets = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/end-client/get-all', requestOptions)
+    fetch(apiUrl + '/auth/core/end-client/get-all', requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result !== null) {
@@ -127,7 +127,7 @@ const Add_Assets = () => {
     const filterQuery = buildFilterQuery(filters)
     const url =
       apiUrl +
-      '/auth/assets/get-all-page?page=' +
+      '/auth/core/assets/get-all-page?page=' +
       page +
       '&size=' +
       size +
@@ -194,7 +194,7 @@ const Add_Assets = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/purchase/by-end-client?endClientId=' + value,
+        apiUrl + '/auth/core/purchase/by-end-client?endClientId=' + value,
         requestOptions,
       )
       if (response.status === 401) {

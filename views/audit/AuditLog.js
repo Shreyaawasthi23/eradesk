@@ -32,7 +32,7 @@ const AuditLog = () => {
       if (filters.entityType) params.set('entityType', filters.entityType)
       if (filters.action) params.set('action', filters.action)
       if (filters.userEmail) params.set('userEmail', filters.userEmail)
-      const response = await fetch(apiUrl + '/auth/audit/get-all-page?' + params.toString(), {
+      const response = await fetch(apiUrl + '/auth/ops/audit/get-all-page?' + params.toString(), {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',

@@ -33,7 +33,7 @@ export const AddAssets = (asset, router, onSuccess) => {
     redirect: 'follow',
   }
 
-  fetch(apiUrl + '/auth/assets/add-assets', requestOptions)
+  fetch(apiUrl + '/auth/core/assets/add-assets', requestOptions)
     .then((response) => (response.status === 401 ? router.push('/') : response.json()))
     .then((result) => {
       if (result.statusCode === 200) {
@@ -82,7 +82,7 @@ export const EditAsset = (asset, router, onSuccess) => {
   }
 
   fetch(
-    apiUrl + '/auth/assets/edit-assets?remarks=' + asset.remarks + '&id=' + asset.id + '',
+    apiUrl + '/auth/core/assets/edit-assets?remarks=' + asset.remarks + '&id=' + asset.id + '',
     requestOptions,
   )
     .then((response) => (response.status === 401 ? router.push('/') : response.json()))
@@ -117,7 +117,7 @@ export const AddAssetReplacement = async (values, setVisible, router, assetList)
 
     const response = await fetch(
       apiUrl +
-        '/auth/assets/add-asset-replacement?assetId=' +
+        '/auth/core/assets/add-asset-replacement?assetId=' +
         encodeURIComponent(values.id) +
         '&replacementSerial=' +
         encodeURIComponent(values.replacementSerial) +

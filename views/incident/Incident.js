@@ -156,7 +156,7 @@ const Create_Incident = () => {
     }
 
     try {
-      const response = await fetch(apiUrl + '/api/auth/users/get-engineers', requestOptions)
+      const response = await fetch(apiUrl + '/api/auth/core/users/get-engineers', requestOptions)
       if (response.status === 401) {
         router.push('/')
       } else {
@@ -182,7 +182,7 @@ const Create_Incident = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/incident/get-notes?incidentId=' + item.id + '',
+        apiUrl + '/auth/core/incident/get-notes?incidentId=' + item.id + '',
         requestOptions,
       )
       if (response.status === 401) {
@@ -216,13 +216,13 @@ const Create_Incident = () => {
       if (details?.roles?.includes('ROLE_ENGINEER') && details?.roles?.length === 1) {
         response = await fetch(
           apiUrl +
-            '/auth/incident/incident-engineer-search?page=0&size=5000&engineerId=' +
+            '/auth/core/incident/incident-engineer-search?page=0&size=5000&engineerId=' +
             details?.id,
           requestOptions,
         )
       } else {
         response = await fetch(
-          apiUrl + '/auth/incident/get-all-page?page=' + page + '&size=' + size + '',
+          apiUrl + '/auth/core/incident/get-all-page?page=' + page + '&size=' + size + '',
           requestOptions,
         )
       }
@@ -283,30 +283,30 @@ const Create_Incident = () => {
     if (startDate && endDate) {
       runSearch(
         apiUrl +
-          '/auth/incident/incident-between-dates?pageNo=0&size=50000&endDate=' +
+          '/auth/core/incident/incident-between-dates?pageNo=0&size=50000&endDate=' +
           endDate +
           '&startDate=' +
           startDate,
       )
     } else if (incidentId) {
       runSearch(
-        apiUrl + '/auth/incident/incident-id-search?page=0&size=5000&incidentId=' + incidentId,
+        apiUrl + '/auth/core/incident/incident-id-search?page=0&size=5000&incidentId=' + incidentId,
       )
     } else if (poNumber) {
-      runSearch(apiUrl + '/auth/incident/incident-po-search?page=0&size=5000&poNumber=' + poNumber)
+      runSearch(apiUrl + '/auth/core/incident/incident-po-search?page=0&size=5000&poNumber=' + poNumber)
     } else if (serialNumber) {
       runSearch(
         apiUrl +
-          '/auth/incident/incident-serial-search?page=0&size=5000&serialNumber=' +
+          '/auth/core/incident/incident-serial-search?page=0&size=5000&serialNumber=' +
           serialNumber,
       )
     } else if (engineerId) {
       runSearch(
-        apiUrl + '/auth/incident/incident-engineer-search?page=0&size=5000&engineerId=' + engineerId,
+        apiUrl + '/auth/core/incident/incident-engineer-search?page=0&size=5000&engineerId=' + engineerId,
       )
     } else if (statusFilter) {
       runSearch(
-        apiUrl + '/auth/incident/incident-by-status?page=0&size=10&status=' + statusFilter,
+        apiUrl + '/auth/core/incident/incident-by-status?page=0&size=10&status=' + statusFilter,
       )
     } else {
       getIncidentPage(0, 100)

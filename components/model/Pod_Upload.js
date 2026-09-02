@@ -57,7 +57,7 @@ const Pod_Upload = ({ visible, setVisible, challan, existingPod, setExistingPod,
       }
 
       const response = await fetch(
-        apiUrl + '/auth/challan/add-pod?id=' + challan.id + '&userId=' + details?.id + '',
+        apiUrl + '/auth/uploads/challan/add-pod?id=' + challan.id + '&userId=' + details?.id + '',
         requestOptions,
       )
 

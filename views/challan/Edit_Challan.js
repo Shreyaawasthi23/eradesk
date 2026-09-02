@@ -40,7 +40,7 @@ const Edit_Challan = () => {
     }
 
     try {
-      const response = await fetch(apiUrl + '/auth/challan/details?id=' + id, requestOptions)
+      const response = await fetch(apiUrl + '/auth/core/challan/details?id=' + id, requestOptions)
       const result = await response.json()
       if (result) {
         setChallan(result)

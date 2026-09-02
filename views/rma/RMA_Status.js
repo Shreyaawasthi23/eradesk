@@ -44,7 +44,7 @@ const RMA_Status = () => {
     try {
       var response = await fetch(
         apiUrl +
-          '/auth/rma/rma-by-status?page=' +
+          '/auth/core/rma/rma-by-status?page=' +
           page +
           '&size=' +
           size +
@@ -97,7 +97,7 @@ const RMA_Status = () => {
       }
 
       const response = await fetch(
-        apiUrl + '/auth/rma/get-rma-pod-details?id=' + option.id,
+        apiUrl + '/auth/core/rma/get-rma-pod-details?id=' + option.id,
         requestOptions,
       )
       const result = await response.json()

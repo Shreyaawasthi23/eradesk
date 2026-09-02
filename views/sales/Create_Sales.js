@@ -56,7 +56,7 @@ const Create_Sales = () => {
     const filterQuery = buildFilterQuery(filters)
     const url =
       apiUrl +
-      '/auth/sales-team/get-all?page=' +
+      '/auth/core/sales-team/get-all?page=' +
       page +
       '&size=' +
       size +

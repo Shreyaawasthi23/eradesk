@@ -40,7 +40,7 @@ const EditAssetModal = ({ assetId, router, endClientList, onClose, onSaved }) =>
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/assets/detail?id=' + assetId, requestOptions)
+    fetch(apiUrl + '/auth/core/assets/detail?id=' + assetId, requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         setAssetDetails(result || {})

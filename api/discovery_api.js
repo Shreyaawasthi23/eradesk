@@ -36,16 +36,16 @@ const postJson = async (path, body, router, onSuccess) => {
 }
 
 export const createDiscoveryJob = (job, router, onSuccess) =>
-  postJson('/auth/discovery/job-create', job, router, onSuccess)
+  postJson('/auth/itil/discovery/job-create', job, router, onSuccess)
 
 export const editDiscoveryJob = (job, router, onSuccess) =>
-  postJson('/auth/discovery/job-edit?id=' + job.id, job, router, onSuccess)
+  postJson('/auth/itil/discovery/job-edit?id=' + job.id, job, router, onSuccess)
 
 export const promoteDeviceToCI = (id, router, onSuccess) =>
-  postJson('/auth/discovery/promote-to-ci?id=' + id, {}, router, (data) => {
+  postJson('/auth/itil/discovery/promote-to-ci?id=' + id, {}, router, (data) => {
     Swal.fire('Promoted', data.message, 'success')
     onSuccess && onSuccess(data)
   })
 
 export const ignoreDevice = (id, router, onSuccess) =>
-  postJson('/auth/discovery/ignore-device?id=' + id, {}, router, onSuccess)
+  postJson('/auth/itil/discovery/ignore-device?id=' + id, {}, router, onSuccess)

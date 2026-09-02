@@ -42,7 +42,7 @@ const Knowledge = () => {
     try {
       const url =
         apiUrl +
-        '/auth/knowledge/get-all-page?page=' +
+        '/auth/service/knowledge/get-all-page?page=' +
         page +
         '&size=' +
         size +
@@ -70,7 +70,7 @@ const Knowledge = () => {
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
       const response = await fetch(
-        apiUrl + '/auth/knowledge/search?q=' + encodeURIComponent(search) + '&limit=50',
+        apiUrl + '/auth/service/knowledge/search?q=' + encodeURIComponent(search) + '&limit=50',
         { method: 'GET', headers: myHeaders, redirect: 'follow' },
       )
       if (response.status === 401) {

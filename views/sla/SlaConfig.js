@@ -31,19 +31,19 @@ const SlaConfig = () => {
   }
 
   const getBusinessHours = async () => {
-    const r = await authFetch('/auth/sla/business-hours-get')
+    const r = await authFetch('/auth/ops/sla/business-hours-get')
     if (r.status === 401) return router.push('/')
     setBH(await r.json())
   }
 
   const getHolidays = async () => {
-    const r = await authFetch('/auth/sla/holiday-get-all')
+    const r = await authFetch('/auth/ops/sla/holiday-get-all')
     if (r.status === 401) return router.push('/')
     setHolidays(await r.json())
   }
 
   const getPolicies = async () => {
-    const r = await authFetch('/auth/sla/policy-get-all')
+    const r = await authFetch('/auth/ops/sla/policy-get-all')
     if (r.status === 401) return router.push('/')
     setPolicies(await r.json())
   }

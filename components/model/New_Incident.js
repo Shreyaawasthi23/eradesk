@@ -101,7 +101,7 @@ const New_Incident = ({ visible, setVisible, ...props }) => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/assets/get-asset-details?serialNo=' + serialNo,
+        apiUrl + '/auth/core/assets/get-asset-details?serialNo=' + serialNo,
         requestOptions,
       )
       if (response.status === 401) {
@@ -211,7 +211,7 @@ const New_Incident = ({ visible, setVisible, ...props }) => {
     }
 
     try {
-      const response = await fetch(apiUrl + '/api/auth/users/get-engineers', requestOptions)
+      const response = await fetch(apiUrl + '/api/auth/core/users/get-engineers', requestOptions)
       if (response.status === 401) {
         router.push('/')
       } else {

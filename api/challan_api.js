@@ -41,7 +41,7 @@ export const createChallan = async (challan, router, setVisible, resetForm, setS
     redirect: 'follow',
   }
   try {
-    const response = await fetch(apiUrl + '/auth/challan/create', requestOptions)
+    const response = await fetch(apiUrl + '/auth/core/challan/create', requestOptions)
     if (response.status === 401) {
       router.push('/')
     } else {
@@ -115,7 +115,7 @@ export const updateChallan = async (challan, router) => {
 
   try {
     const response = await fetch(
-      apiUrl + '/auth/challan/edit?id=' + challan.id + '&remarks=' + challan.editRemarks + '',
+      apiUrl + '/auth/core/challan/edit?id=' + challan.id + '&remarks=' + challan.editRemarks + '',
       requestOptions,
     )
     const result = await response.json()
@@ -156,7 +156,7 @@ export const addChallanTracking = async (values, resetForm, router, setVisible) 
   try {
     const response = await fetch(
       apiUrl +
-        '/auth/challan/add-delivery-status?id=' +
+        '/auth/core/challan/add-delivery-status?id=' +
         values.challanId +
         '&status=' +
         values.status +

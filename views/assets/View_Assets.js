@@ -78,7 +78,7 @@ const View_Assets = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/end-client/get-all', requestOptions)
+    fetch(apiUrl + '/auth/core/end-client/get-all', requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result !== null) {
@@ -106,7 +106,7 @@ const View_Assets = () => {
     const filterQuery = buildFilterQuery(filters)
     const url =
       apiUrl +
-      '/auth/assets/get-all-page?page=' +
+      '/auth/core/assets/get-all-page?page=' +
       page +
       '&size=' +
       size +
@@ -167,7 +167,7 @@ const View_Assets = () => {
 
         try {
           const response = await fetch(
-            apiUrl + '/auth/assets/delete-assets?&userId=' + details?.id,
+            apiUrl + '/auth/core/assets/delete-assets?&userId=' + details?.id,
             requestOptions,
           )
           if (response.status === 401) {

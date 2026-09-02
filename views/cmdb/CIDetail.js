@@ -41,7 +41,7 @@ const CIDetail = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/cmdb/get-detail?id=' + id, {
+      const response = await fetch(apiUrl + '/auth/itil/cmdb/get-detail?id=' + id, {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',
@@ -68,7 +68,7 @@ const CIDetail = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/cmdb/relationship-graph?id=' + id, {
+      const response = await fetch(apiUrl + '/auth/itil/cmdb/relationship-graph?id=' + id, {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',

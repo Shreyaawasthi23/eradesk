@@ -24,7 +24,7 @@ const ContractDetail = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/contract/get-detail?id=' + id, {
+      const response = await fetch(apiUrl + '/auth/service/contract/get-detail?id=' + id, {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',

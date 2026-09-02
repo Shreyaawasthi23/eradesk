@@ -77,7 +77,7 @@ const EmailSettings = () => {
     }
 
     try {
-      const response = await fetch(apiUrl + '/auth/email-settings/get', requestOptions)
+      const response = await fetch(apiUrl + '/auth/comms/email-settings/get', requestOptions)
       if (response.status === 401) {
         router.push('/')
       } else {
@@ -123,7 +123,7 @@ const EmailSettings = () => {
     }
 
     try {
-      const response = await fetch(apiUrl + '/auth/email-settings/save', requestOptions)
+      const response = await fetch(apiUrl + '/auth/comms/email-settings/save', requestOptions)
       if (response.status === 401) {
         router.push('/')
       } else {

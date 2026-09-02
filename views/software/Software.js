@@ -25,7 +25,7 @@ const Software = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/software/get-all-page?page=' + page + '&size=' + size, {
+      const response = await fetch(apiUrl + '/auth/itil/software/get-all-page?page=' + page + '&size=' + size, {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',
@@ -52,7 +52,7 @@ const Software = () => {
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
       const response = await fetch(
-        apiUrl + '/auth/software/search?q=' + encodeURIComponent(search) + '&page=0&size=50',
+        apiUrl + '/auth/itil/software/search?q=' + encodeURIComponent(search) + '&page=0&size=50',
         { method: 'GET', headers: myHeaders, redirect: 'follow' },
       )
       if (response.status === 401) {

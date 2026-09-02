@@ -25,7 +25,7 @@ const KnowledgeDetail = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/knowledge/get-detail?id=' + id, {
+      const response = await fetch(apiUrl + '/auth/service/knowledge/get-detail?id=' + id, {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',

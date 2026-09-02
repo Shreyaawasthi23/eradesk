@@ -114,7 +114,7 @@ const Incident_Status = () => {
     }
 
     try {
-      const response = await fetch(apiUrl + '/api/auth/users/get-engineers', requestOptions)
+      const response = await fetch(apiUrl + '/api/auth/core/users/get-engineers', requestOptions)
       if (response.status === 401) {
         router.push('/')
       } else {
@@ -140,7 +140,7 @@ const Incident_Status = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/incident/get-notes?incidentId=' + item.id + '',
+        apiUrl + '/auth/core/incident/get-notes?incidentId=' + item.id + '',
         requestOptions,
       )
       if (response.status === 401) {
@@ -209,7 +209,7 @@ const Incident_Status = () => {
     try {
       var response = await fetch(
         apiUrl +
-          '/auth/incident/incident-by-status?page=' +
+          '/auth/core/incident/incident-by-status?page=' +
           page +
           '&size=' +
           size +

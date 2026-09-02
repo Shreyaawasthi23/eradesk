@@ -24,7 +24,7 @@ export const createKnowledgeArticle = async (article, router, onSuccess) => {
   })
 
   try {
-    const response = await fetch(apiUrl + '/auth/knowledge/create', {
+    const response = await fetch(apiUrl + '/auth/service/knowledge/create', {
       method: 'POST',
       headers: authHeaders({ 'Content-Type': 'application/json' }),
       body: raw,
@@ -56,7 +56,7 @@ export const editKnowledgeArticle = async (article, router, onSuccess) => {
   })
 
   try {
-    const response = await fetch(apiUrl + '/auth/knowledge/edit?id=' + article.id, {
+    const response = await fetch(apiUrl + '/auth/service/knowledge/edit?id=' + article.id, {
       method: 'POST',
       headers: authHeaders({ 'Content-Type': 'application/json' }),
       body: raw,
@@ -80,7 +80,7 @@ export const editKnowledgeArticle = async (article, router, onSuccess) => {
 
 export const setKnowledgeArticleStatus = async (id, status, router, onSuccess) => {
   try {
-    const response = await fetch(apiUrl + '/auth/knowledge/set-status?id=' + id, {
+    const response = await fetch(apiUrl + '/auth/service/knowledge/set-status?id=' + id, {
       method: 'POST',
       headers: authHeaders({ 'Content-Type': 'application/json' }),
       body: JSON.stringify({ status }),
@@ -104,7 +104,7 @@ export const setKnowledgeArticleStatus = async (id, status, router, onSuccess) =
 export const searchKnowledgeArticles = async (query, router, limit = 10) => {
   try {
     const response = await fetch(
-      apiUrl + '/auth/knowledge/search?q=' + encodeURIComponent(query) + '&limit=' + limit,
+      apiUrl + '/auth/service/knowledge/search?q=' + encodeURIComponent(query) + '&limit=' + limit,
       { method: 'GET', headers: authHeaders(), redirect: 'follow' },
     )
     if (response.status === 401) {
@@ -121,7 +121,7 @@ export const searchKnowledgeArticles = async (query, router, limit = 10) => {
 
 export const sendKnowledgeFeedback = async (id, helpful, router) => {
   try {
-    const response = await fetch(apiUrl + '/auth/knowledge/feedback?id=' + id, {
+    const response = await fetch(apiUrl + '/auth/service/knowledge/feedback?id=' + id, {
       method: 'POST',
       headers: authHeaders({ 'Content-Type': 'application/json' }),
       body: JSON.stringify({ helpful }),

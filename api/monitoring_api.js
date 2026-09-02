@@ -13,7 +13,7 @@ const authHeaders = (extra = {}) => {
 
 export const createMonitoringIntegration = async (payload, router, onSuccess) => {
   try {
-    const response = await fetch(apiUrl + '/auth/monitoring/create', {
+    const response = await fetch(apiUrl + '/auth/ops/monitoring/create', {
       method: 'POST',
       headers: authHeaders({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(payload),

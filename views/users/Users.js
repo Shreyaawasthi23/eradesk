@@ -69,7 +69,7 @@ const Users = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/api/auth/users/check-username?username=' + e.target.value + '', requestOptions)
+    fetch(apiUrl + '/api/auth/core/users/check-username?username=' + e.target.value + '', requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result.statusCode === 200) {
@@ -110,7 +110,7 @@ const Users = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/api/auth/users/check-email?email=' + email + '', requestOptions)
+    fetch(apiUrl + '/api/auth/core/users/check-email?email=' + email + '', requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result.statusCode === 200) {
@@ -151,7 +151,7 @@ const Users = () => {
     const filterQuery = buildFilterQuery(filters)
     const url =
       apiUrl +
-      '/api/auth/users/get-users?page=' +
+      '/api/auth/core/users/get-users?page=' +
       page +
       '&size=' +
       size +

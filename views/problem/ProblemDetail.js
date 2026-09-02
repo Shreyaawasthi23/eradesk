@@ -47,7 +47,7 @@ const ProblemDetail = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/problem/get-detail?id=' + id, {
+      const response = await fetch(apiUrl + '/auth/itil/problem/get-detail?id=' + id, {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',

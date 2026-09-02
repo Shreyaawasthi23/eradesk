@@ -35,7 +35,7 @@ const postJson = async (path, body, router, onSuccess) => {
   }
 }
 
-export const createVendor = (vendor, router, onSuccess) => postJson('/auth/vendor/create', vendor, router, onSuccess)
+export const createVendor = (vendor, router, onSuccess) => postJson('/auth/service/vendor/create', vendor, router, onSuccess)
 
 export const editVendor = (vendor, router, onSuccess) =>
-  postJson('/auth/vendor/edit?id=' + vendor.id, vendor, router, onSuccess)
+  postJson('/auth/service/vendor/edit?id=' + vendor.id, vendor, router, onSuccess)

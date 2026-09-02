@@ -36,7 +36,7 @@ const postJson = async (path, body, router, onSuccess) => {
 }
 
 export const createSurveyTemplate = (template, router, onSuccess) =>
-  postJson('/auth/survey/template-create', template, router, onSuccess)
+  postJson('/auth/comms/survey/template-create', template, router, onSuccess)
 
 export const editSurveyTemplate = (template, router, onSuccess) =>
-  postJson('/auth/survey/template-edit?id=' + template.id, template, router, onSuccess)
+  postJson('/auth/comms/survey/template-edit?id=' + template.id, template, router, onSuccess)

@@ -36,10 +36,10 @@ const postJson = async (path, body, router, onSuccess) => {
 }
 
 export const requestApproval = (payload, router, onSuccess) =>
-  postJson('/auth/approval/request', payload, router, onSuccess)
+  postJson('/auth/service/approval/request', payload, router, onSuccess)
 
 export const decideApproval = (id, decision, comment, router, onSuccess) =>
-  postJson('/auth/approval/decide?id=' + id, { decision, comment }, router, onSuccess)
+  postJson('/auth/service/approval/decide?id=' + id, { decision, comment }, router, onSuccess)
 
 export const cancelApproval = (id, router, onSuccess) =>
-  postJson('/auth/approval/cancel?id=' + id, {}, router, onSuccess)
+  postJson('/auth/service/approval/cancel?id=' + id, {}, router, onSuccess)

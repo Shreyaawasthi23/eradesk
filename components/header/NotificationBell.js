@@ -25,7 +25,7 @@ const NotificationBell = () => {
 
   const fetchUnreadCount = async () => {
     try {
-      const response = await fetch(apiUrl + '/auth/notification/unread-count', {
+      const response = await fetch(apiUrl + '/auth/comms/notification/unread-count', {
         method: 'GET',
         headers: authHeaders(),
         redirect: 'follow',
@@ -40,7 +40,7 @@ const NotificationBell = () => {
 
   const fetchList = async () => {
     try {
-      const response = await fetch(apiUrl + '/auth/notification/get-all-page?page=0&size=10', {
+      const response = await fetch(apiUrl + '/auth/comms/notification/get-all-page?page=0&size=10', {
         method: 'GET',
         headers: authHeaders(),
         redirect: 'follow',
@@ -56,7 +56,7 @@ const NotificationBell = () => {
   const openNotification = async (n) => {
     if (!n.read) {
       try {
-        await fetch(apiUrl + '/auth/notification/mark-read?id=' + n.id, {
+        await fetch(apiUrl + '/auth/comms/notification/mark-read?id=' + n.id, {
           method: 'POST',
           headers: authHeaders(),
           redirect: 'follow',
@@ -73,7 +73,7 @@ const NotificationBell = () => {
   const markAllRead = async (e) => {
     e.stopPropagation()
     try {
-      await fetch(apiUrl + '/auth/notification/mark-all-read', {
+      await fetch(apiUrl + '/auth/comms/notification/mark-all-read', {
         method: 'POST',
         headers: authHeaders(),
         redirect: 'follow',

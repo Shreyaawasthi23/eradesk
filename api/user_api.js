@@ -25,7 +25,7 @@ export const CreateUser = async (user, router, onSuccess) => {
     redirect: 'follow',
   }
 
-  return fetch(apiUrl + '/api/auth/users/signup', requestOptions)
+  return fetch(apiUrl + '/api/auth/core/users/signup', requestOptions)
     .then((response) => (response.status === 401 ? router.push('/') : response.json()))
     .then((result) => {
       if (result?.message === 'User registered successfully!') {
@@ -69,7 +69,7 @@ export const EditUser = async (user, router, onSuccess) => {
     redirect: 'follow',
   }
 
-  fetch(apiUrl + '/api/auth/users/edit-user?id=' + user.id, requestOptions)
+  fetch(apiUrl + '/api/auth/core/users/edit-user?id=' + user.id, requestOptions)
     .then((response) => (response.status === 401 ? router.push('/') : response.json()))
     .then((result) => {
       if (result.statusCode === 200) {
@@ -117,7 +117,7 @@ export const CreateSalesParticipant = async (sales, router, getSalesList) => {
     redirect: 'follow',
   }
 
-  fetch(apiUrl + '/auth/sales-team/add-participant', requestOptions)
+  fetch(apiUrl + '/auth/core/sales-team/add-participant', requestOptions)
     .then((response) => (response.status === 401 ? router.push('/') : response.json()))
     .then((result) => {
       if (result.statusCode === 200) {
@@ -154,7 +154,7 @@ export const EditSalesParticipant = async (sales, router, onSuccess) => {
     redirect: 'follow',
   }
 
-  fetch(apiUrl + '/auth/sales-team/edit-participant?id=' + sales.id, requestOptions)
+  fetch(apiUrl + '/auth/core/sales-team/edit-participant?id=' + sales.id, requestOptions)
     .then((response) => (response.status === 401 ? router.push('/') : response.json()))
     .then((result) => {
       if (result.statusCode === 200) {

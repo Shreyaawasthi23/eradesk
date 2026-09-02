@@ -44,3 +44,6 @@ smtp-test.js
 graph-test-creds.local.json
 graph-test.js
 vercel-db-creds.local.json
+
+.vercel
+.env*

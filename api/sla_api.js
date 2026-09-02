@@ -36,13 +36,13 @@ const postJson = async (path, body, router, onSuccess) => {
 }
 
 export const setBusinessHours = (payload, router, onSuccess) =>
-  postJson('/auth/sla/business-hours-set', payload, router, onSuccess)
+  postJson('/auth/ops/sla/business-hours-set', payload, router, onSuccess)
 
 export const createHoliday = (payload, router, onSuccess) =>
-  postJson('/auth/sla/holiday-create', payload, router, onSuccess)
+  postJson('/auth/ops/sla/holiday-create', payload, router, onSuccess)
 
 export const deleteHoliday = (id, router, onSuccess) =>
-  postJson('/auth/sla/holiday-delete?id=' + id, {}, router, onSuccess)
+  postJson('/auth/ops/sla/holiday-delete?id=' + id, {}, router, onSuccess)
 
 export const createSlaPolicy = (payload, router, onSuccess) =>
-  postJson('/auth/sla/policy-create', payload, router, onSuccess)
+  postJson('/auth/ops/sla/policy-create', payload, router, onSuccess)

@@ -39,7 +39,7 @@ const Problem = () => {
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
       const url =
-        apiUrl + '/auth/problem/get-all-page?page=' + page + '&size=' + size + (status ? '&status=' + status : '')
+        apiUrl + '/auth/itil/problem/get-all-page?page=' + page + '&size=' + size + (status ? '&status=' + status : '')
       const response = await fetch(url, { method: 'GET', headers: myHeaders, redirect: 'follow' })
       if (response.status === 401) {
         router.push('/')
@@ -57,7 +57,7 @@ const Problem = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/users/get-engineers', {
+      const response = await fetch(apiUrl + '/auth/core/users/get-engineers', {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',
@@ -81,7 +81,7 @@ const Problem = () => {
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
       const response = await fetch(
-        apiUrl + '/auth/problem/search?q=' + encodeURIComponent(search) + '&page=0&size=50',
+        apiUrl + '/auth/itil/problem/search?q=' + encodeURIComponent(search) + '&page=0&size=50',
         { method: 'GET', headers: myHeaders, redirect: 'follow' },
       )
       if (response.status === 401) {

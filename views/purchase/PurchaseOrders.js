@@ -68,7 +68,7 @@ const PurchaseOrders = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/end-client/get-all', requestOptions)
+    fetch(apiUrl + '/auth/core/end-client/get-all', requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result !== null) {
@@ -89,7 +89,7 @@ const PurchaseOrders = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/sales-team/get-all-list', requestOptions)
+    fetch(apiUrl + '/auth/core/sales-team/get-all-list', requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result !== null) {
@@ -123,7 +123,7 @@ const PurchaseOrders = () => {
     const filterQuery = buildFilterQuery(filters)
     const url =
       apiUrl +
-      '/auth/purchase/get-all-page?page=' +
+      '/auth/core/purchase/get-all-page?page=' +
       page +
       '&size=' +
       size +
@@ -190,7 +190,7 @@ const PurchaseOrders = () => {
           }
 
           const response = await fetch(
-            apiUrl + '/auth/purchase/po-expired?poNumber=' + poNumber,
+            apiUrl + '/auth/core/purchase/po-expired?poNumber=' + poNumber,
             requestOptions,
           )
           if (response.status === 401) {

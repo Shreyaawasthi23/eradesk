@@ -69,7 +69,7 @@ const UploadAssetsModal = ({ onClose, onUploaded }) => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/assets/upload-assets?userId=' + details?.id, requestOptions)
+    fetch(apiUrl + '/auth/core/assets/upload-assets?userId=' + details?.id, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setSubmitBtn(false)

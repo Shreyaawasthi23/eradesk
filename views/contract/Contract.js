@@ -32,7 +32,7 @@ const Contract = () => {
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
       const url =
-        apiUrl + '/auth/contract/get-all-page?page=' + page + '&size=' + size + (status ? '&status=' + status : '')
+        apiUrl + '/auth/service/contract/get-all-page?page=' + page + '&size=' + size + (status ? '&status=' + status : '')
       const response = await fetch(url, { method: 'GET', headers: myHeaders, redirect: 'follow' })
       if (response.status === 401) {
         router.push('/')
@@ -50,7 +50,7 @@ const Contract = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/contract/expiring-contracts?days=30', {
+      const response = await fetch(apiUrl + '/auth/service/contract/expiring-contracts?days=30', {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',
@@ -72,7 +72,7 @@ const Contract = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/vendor/get-all-list', {
+      const response = await fetch(apiUrl + '/auth/service/vendor/get-all-list', {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',

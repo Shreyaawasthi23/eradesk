@@ -51,7 +51,7 @@ const End_Client = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/sales-team/get-all-list', requestOptions)
+    fetch(apiUrl + '/auth/core/sales-team/get-all-list', requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result !== null) {
@@ -72,7 +72,7 @@ const End_Client = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/front-client/get-all-list', requestOptions)
+    fetch(apiUrl + '/auth/core/front-client/get-all-list', requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result !== null) {
@@ -96,7 +96,7 @@ const End_Client = () => {
     const filterQuery = buildFilterQuery(filters)
     const url =
       apiUrl +
-      '/auth/end-client/get-all-page?page=' +
+      '/auth/core/end-client/get-all-page?page=' +
       page +
       '&size=' +
       size +
@@ -180,7 +180,7 @@ const End_Client = () => {
       var myHeaders = new Headers()
       myHeaders.append('X-Tenant', '' + tenant + '')
       myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
-      const response = await fetch(apiUrl + '/auth/end-client/get-all?status=all', {
+      const response = await fetch(apiUrl + '/auth/core/end-client/get-all?status=all', {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',

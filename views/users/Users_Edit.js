@@ -42,7 +42,7 @@ const Users_Edit = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/api/auth/users/get-user-details?id=' + id, requestOptions)
+    fetch(apiUrl + '/api/auth/core/users/get-user-details?id=' + id, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         // console.log(result)
@@ -68,7 +68,7 @@ const Users_Edit = () => {
       }
 
       const response = await fetch(
-        apiUrl + '/api/auth/users/check-username?username=' + value,
+        apiUrl + '/api/auth/core/users/check-username?username=' + value,
         requestOptions,
       )
       if (response.status === 401) {

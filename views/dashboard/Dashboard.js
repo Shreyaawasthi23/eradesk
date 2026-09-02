@@ -98,7 +98,7 @@ const Dashboard = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/purchase/po-monthly-count?year=' + year,
+        apiUrl + '/auth/core/purchase/po-monthly-count?year=' + year,
         requestOptions,
       )
       if (response.status === 401) {
@@ -126,7 +126,7 @@ const Dashboard = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/purchase/po-monthly-value?year=' + year,
+        apiUrl + '/auth/core/purchase/po-monthly-value?year=' + year,
         requestOptions,
       )
       if (response.status === 401) {
@@ -153,7 +153,7 @@ const Dashboard = () => {
     }
 
     try {
-      const response = await fetch(apiUrl + '/auth/purchase/po-available-years', requestOptions)
+      const response = await fetch(apiUrl + '/auth/core/purchase/po-available-years', requestOptions)
       if (response.status === 401) {
         router.push('/')
       } else {
@@ -179,7 +179,7 @@ const Dashboard = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/incident/incident-monthly-chart?year=' + year,
+        apiUrl + '/auth/core/incident/incident-monthly-chart?year=' + year,
         requestOptions,
       )
       if (response.status === 401) {
@@ -206,7 +206,7 @@ const Dashboard = () => {
     }
 
     try {
-      const response = await fetch(apiUrl + '/auth/rma/rma-monthly-chart?year=' + year, requestOptions)
+      const response = await fetch(apiUrl + '/auth/core/rma/rma-monthly-chart?year=' + year, requestOptions)
       if (response.status === 401) {
         router.push('/')
       } else {
@@ -232,7 +232,7 @@ const Dashboard = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/incident/incident-overview-chart',
+        apiUrl + '/auth/core/incident/incident-overview-chart',
         requestOptions,
       )
       if (response.status === 401) {
@@ -260,7 +260,7 @@ const Dashboard = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/incident/support-incident-overview-chart',
+        apiUrl + '/auth/core/incident/support-incident-overview-chart',
         requestOptions,
       )
       if (response.status === 401) {
@@ -288,7 +288,7 @@ const Dashboard = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/incident/incident-status-count?year=' + year,
+        apiUrl + '/auth/core/incident/incident-status-count?year=' + year,
         requestOptions,
       )
       if (response.status === 401) {
@@ -316,7 +316,7 @@ const Dashboard = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/rma/rma-status-count?year=' + year,
+        apiUrl + '/auth/core/rma/rma-status-count?year=' + year,
         requestOptions,
       )
       if (response.status === 401) {
@@ -344,7 +344,7 @@ const Dashboard = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/purchase/po-sales-report?year=' + year + '&compareYear=' + compareYear,
+        apiUrl + '/auth/core/purchase/po-sales-report?year=' + year + '&compareYear=' + compareYear,
         requestOptions,
       )
       if (response.status === 401) {
@@ -372,7 +372,7 @@ const Dashboard = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/assets/asset-type-count?year=' + year,
+        apiUrl + '/auth/core/assets/asset-type-count?year=' + year,
         requestOptions,
       )
       if (response.status === 401) {
@@ -399,7 +399,7 @@ const Dashboard = () => {
     }
 
     try {
-      const response = await fetch(apiUrl + '/auth/purchase/po-type-count', requestOptions)
+      const response = await fetch(apiUrl + '/auth/core/purchase/po-type-count', requestOptions)
       if (response.status === 401) {
         router.push('/')
       } else {

@@ -41,7 +41,7 @@ const Release = () => {
     try {
       const url =
         apiUrl +
-        '/auth/release/get-all-page?page=' +
+        '/auth/itil/release/get-all-page?page=' +
         page +
         '&size=' +
         size +
@@ -64,7 +64,7 @@ const Release = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/users/get-engineers', {
+      const response = await fetch(apiUrl + '/auth/core/users/get-engineers', {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',
@@ -88,7 +88,7 @@ const Release = () => {
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
       const response = await fetch(
-        apiUrl + '/auth/release/search?q=' + encodeURIComponent(search) + '&page=0&size=50',
+        apiUrl + '/auth/itil/release/search?q=' + encodeURIComponent(search) + '&page=0&size=50',
         { method: 'GET', headers: myHeaders, redirect: 'follow' },
       )
       if (response.status === 401) {

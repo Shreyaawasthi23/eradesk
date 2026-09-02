@@ -33,7 +33,7 @@ export const createFrontClient = async (frontClient, router) => {
   }
 
   try {
-    const response = await fetch(apiUrl + '/auth/front-client/create', requestOptions)
+    const response = await fetch(apiUrl + '/auth/core/front-client/create', requestOptions)
     if (response.status === 401) {
       window.location.href = '/'
     } else {
@@ -96,7 +96,7 @@ export const editFrontClient = (editClient, router, onSuccess) => {
   }
 
   fetch(
-    apiUrl + '/auth/front-client/edit?id=' + editClient.id + '&remarks=' + editClient.remarks + '',
+    apiUrl + '/auth/core/front-client/edit?id=' + editClient.id + '&remarks=' + editClient.remarks + '',
     requestOptions,
   )
     .then((response) => (response.status === 401 ? router.push('/') : response.json()))

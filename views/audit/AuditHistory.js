@@ -16,7 +16,7 @@ const AuditHistory = ({ entityType, entityId }) => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     fetch(
-      apiUrl + '/auth/audit/get-for-entity?entityType=' + entityType + '&entityId=' + entityId,
+      apiUrl + '/auth/ops/audit/get-for-entity?entityType=' + entityType + '&entityId=' + entityId,
       { method: 'GET', headers: myHeaders, redirect: 'follow' },
     )
       .then((r) => (r.ok ? r.json() : []))

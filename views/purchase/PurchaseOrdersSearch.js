@@ -48,7 +48,7 @@ const PurchaseOrdersSearch = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/end-client/get-all', requestOptions)
+    fetch(apiUrl + '/auth/core/end-client/get-all', requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result !== null) {
@@ -69,7 +69,7 @@ const PurchaseOrdersSearch = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/sales-team/get-all-list', requestOptions)
+    fetch(apiUrl + '/auth/core/sales-team/get-all-list', requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result !== null) {
@@ -113,7 +113,7 @@ const PurchaseOrdersSearch = () => {
     const filterQuery = buildFilterQuery(filters)
     const url =
       apiUrl +
-      '/auth/purchase/get-all-page?page=' +
+      '/auth/core/purchase/get-all-page?page=' +
       page +
       '&size=' +
       size +
@@ -186,7 +186,7 @@ const PurchaseOrdersSearch = () => {
           }
 
           const response = await fetch(
-            apiUrl + '/auth/purchase/po-expired?poNumber=' + poNumber,
+            apiUrl + '/auth/core/purchase/po-expired?poNumber=' + poNumber,
             requestOptions,
           )
           if (response.status === 401) {
@@ -250,7 +250,7 @@ const PurchaseOrdersSearch = () => {
       myHeaders.append('X-Tenant', '' + tenant + '')
       myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
       const response = await fetch(
-        apiUrl + '/auth/purchase/get-all-page?page=0&size=100000',
+        apiUrl + '/auth/core/purchase/get-all-page?page=0&size=100000',
         { method: 'GET', headers: myHeaders, redirect: 'follow' },
       )
       if (response.status === 401) {

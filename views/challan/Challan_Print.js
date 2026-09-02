@@ -24,7 +24,7 @@ const Challan_Print = () => {
     }
 
     try {
-      const response = await fetch(apiUrl + '/auth/challan/details?id=' + id, requestOptions)
+      const response = await fetch(apiUrl + '/auth/core/challan/details?id=' + id, requestOptions)
       if (response.status === 401) {
         router.push('/')
       } else {

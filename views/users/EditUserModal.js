@@ -41,7 +41,7 @@ const EditUserModal = ({ userId, router, onClose, onSaved }) => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/api/auth/users/get-user-details?id=' + userId, requestOptions)
+    fetch(apiUrl + '/api/auth/core/users/get-user-details?id=' + userId, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setUser(result || {})

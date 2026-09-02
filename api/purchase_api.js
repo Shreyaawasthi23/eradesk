@@ -33,7 +33,7 @@ export const createPurchase = async (purchase, router, onSuccess) => {
   }
 
   try {
-    const response = await fetch(apiUrl + '/auth/purchase/add', requestOptions)
+    const response = await fetch(apiUrl + '/auth/core/purchase/add', requestOptions)
     if (response.status === 401) {
       router.push('/')
     } else {
@@ -92,7 +92,7 @@ export const editPurchase = (purchase, router, onSuccess) => {
   }
 
   fetch(
-    apiUrl + '/auth/purchase/edit?locationId=' + purchase.id + '&remarks=' + purchase.remarks + '',
+    apiUrl + '/auth/core/purchase/edit?locationId=' + purchase.id + '&remarks=' + purchase.remarks + '',
     requestOptions,
   )
     .then((response) => (response.status === 401 ? router.push('/') : response.json()))

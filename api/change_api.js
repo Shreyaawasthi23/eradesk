@@ -36,19 +36,19 @@ const postJson = async (path, body, router, onSuccess) => {
 }
 
 export const createChange = (change, router, onSuccess) =>
-  postJson('/auth/change/create', change, router, (data) => {
+  postJson('/auth/itil/change/create', change, router, (data) => {
     Swal.fire('Success', data.message, 'success')
     onSuccess && onSuccess(data)
   })
 
 export const editChange = (change, router, onSuccess) =>
-  postJson('/auth/change/edit?id=' + change.id, change, router, onSuccess)
+  postJson('/auth/itil/change/edit?id=' + change.id, change, router, onSuccess)
 
 export const submitChangeForApproval = (id, router, onSuccess) =>
-  postJson('/auth/change/submit-for-approval?id=' + id, {}, router, onSuccess)
+  postJson('/auth/itil/change/submit-for-approval?id=' + id, {}, router, onSuccess)
 
 export const decideChange = (id, decision, comment, router, onSuccess) =>
-  postJson('/auth/change/decide?id=' + id, { decision, comment }, router, onSuccess)
+  postJson('/auth/itil/change/decide?id=' + id, { decision, comment }, router, onSuccess)
 
 export const setChangeStatus = (id, status, extra, router, onSuccess) =>
-  postJson('/auth/change/set-status?id=' + id, { status, ...extra }, router, onSuccess)
+  postJson('/auth/itil/change/set-status?id=' + id, { status, ...extra }, router, onSuccess)

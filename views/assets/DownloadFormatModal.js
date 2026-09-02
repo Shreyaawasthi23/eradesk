@@ -26,7 +26,7 @@ const DownloadFormatModal = ({ onClose }) => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/end-client/get-all', requestOptions)
+    fetch(apiUrl + '/auth/core/end-client/get-all', requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result !== null) {
@@ -49,7 +49,7 @@ const DownloadFormatModal = ({ onClose }) => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/purchase/by-end-client?endClientId=' + value,
+        apiUrl + '/auth/core/purchase/by-end-client?endClientId=' + value,
         requestOptions,
       )
       if (response.status === 401) {

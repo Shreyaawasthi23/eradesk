@@ -20,7 +20,7 @@ const Survey = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/survey/template-get-all-page?page=0&size=50', {
+      const response = await fetch(apiUrl + '/auth/comms/survey/template-get-all-page?page=0&size=50', {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',
@@ -42,7 +42,7 @@ const Survey = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/survey/report?templateId=' + templateId, {
+      const response = await fetch(apiUrl + '/auth/comms/survey/report?templateId=' + templateId, {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',

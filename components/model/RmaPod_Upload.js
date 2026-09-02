@@ -52,7 +52,7 @@ function RmaPod_Upload({ visible, setVisible, rma, existingPod, setExistingPod, 
       }
 
       const response = await fetch(
-        apiUrl + '/auth/rma/add-rma-pod?id=' + rma?.id + '&userId=' + details?.id + '',
+        apiUrl + '/auth/uploads/rma/add-rma-pod?id=' + rma?.id + '&userId=' + details?.id + '',
         requestOptions,
       )
 

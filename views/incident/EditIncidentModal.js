@@ -67,7 +67,7 @@ const EditIncidentModal = ({ incidentId, router, engineerList, onClose, onSaved 
     }
     try {
       const response = await fetch(
-        apiUrl + '/auth/incident/get-detail?id=' + incidentId,
+        apiUrl + '/auth/core/incident/get-detail?id=' + incidentId,
         requestOptions,
       )
       if (response.status === 401) {
@@ -101,7 +101,7 @@ const EditIncidentModal = ({ incidentId, router, engineerList, onClose, onSaved 
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/assets/get-asset-details?serialNo=' + serialNo, requestOptions)
+    fetch(apiUrl + '/auth/core/assets/get-asset-details?serialNo=' + serialNo, requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (!result) return

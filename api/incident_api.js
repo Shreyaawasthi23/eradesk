@@ -38,7 +38,7 @@ export const createIncident = (incident, router, setVisible, resetForm, setIsLoa
     redirect: 'follow',
   }
 
-  fetch(apiUrl + '/auth/incident/create', requestOptions)
+  fetch(apiUrl + '/auth/core/incident/create', requestOptions)
     .then((response) => (response.status === 401 ? router.push('/') : response.json()))
     .then((result) => {
       if (result.statusCode === 200) {
@@ -110,7 +110,7 @@ export const editIncident = (incident, router, onSuccess) => {
   }
 
   fetch(
-    apiUrl + '/auth/incident/edit?id=' + incident.id + '&userId=' + incident.userId,
+    apiUrl + '/auth/core/incident/edit?id=' + incident.id + '&userId=' + incident.userId,
     requestOptions,
   )
     .then((response) => (response.status === 401 ? router.push('/') : response.json()))
@@ -156,7 +156,7 @@ export const addNotes = async (note, resetForm, router, setVisible) => {
   try {
     const response = await fetch(
       apiUrl +
-        '/auth/incident/add-notes?note=' +
+        '/auth/core/incident/add-notes?note=' +
         note.note +
         '&userId=' +
         note.userId +
@@ -217,7 +217,7 @@ export const updateIncidentStatus = async (
 
     const response = await fetch(
       apiUrl +
-        '/auth/incident/incident-status-update?incidentId=' +
+        '/auth/core/incident/incident-status-update?incidentId=' +
         incident.incidentId +
         '&status=' +
         incident.status +
@@ -282,7 +282,7 @@ export const assignEngineer = async (
 
     const response = await fetch(
       apiUrl +
-        '/auth/incident/incident-engineer-assign?incidentId=' +
+        '/auth/core/incident/incident-engineer-assign?incidentId=' +
         incidentId +
         '&engineerId=' +
         engineerId +

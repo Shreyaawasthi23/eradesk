@@ -25,7 +25,7 @@ const Vendor = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/vendor/get-all-page?page=' + page + '&size=' + size, {
+      const response = await fetch(apiUrl + '/auth/service/vendor/get-all-page?page=' + page + '&size=' + size, {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',

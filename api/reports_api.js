@@ -36,8 +36,8 @@ const postJson = async (path, body, router, onSuccess) => {
   }
 }
 
-export const runReport = (spec, router, onSuccess) => postJson('/auth/reports/run', spec, router, onSuccess)
+export const runReport = (spec, router, onSuccess) => postJson('/auth/ops/reports/run', spec, router, onSuccess)
 
-export const saveReport = (spec, router, onSuccess) => postJson('/auth/reports/save', spec, router, onSuccess)
+export const saveReport = (spec, router, onSuccess) => postJson('/auth/ops/reports/save', spec, router, onSuccess)
 
-export const deleteReport = (id, router, onSuccess) => postJson('/auth/reports/delete?id=' + id, {}, router, onSuccess)
+export const deleteReport = (id, router, onSuccess) => postJson('/auth/ops/reports/delete?id=' + id, {}, router, onSuccess)

@@ -40,7 +40,7 @@ const ReleaseDetail = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/release/get-detail?id=' + id, {
+      const response = await fetch(apiUrl + '/auth/itil/release/get-detail?id=' + id, {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',

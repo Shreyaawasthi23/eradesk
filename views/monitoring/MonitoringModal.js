@@ -20,7 +20,7 @@ const MonitoringModal = ({ onClose, onSubmit }) => {
   })
 
   if (created) {
-    const curlSample = `curl -X POST "${apiUrl}/monitoring/events?integrationId=${created.id}" \\\n  -H "X-Tenant: ${tenant}" \\\n  -H "X-Webhook-Token: ${created.webhookToken}" \\\n  -H "Content-Type: application/json" \\\n  -d '{"alertId":"srv-01-down","title":"Server DOWN","description":"Health check failing","source":"Datadog"}'`
+    const curlSample = `curl -X POST "${apiUrl}/api/public/monitoring/events?integrationId=${created.id}" \\\n  -H "X-Tenant: ${tenant}" \\\n  -H "X-Webhook-Token: ${created.webhookToken}" \\\n  -H "Content-Type: application/json" \\\n  -d '{"alertId":"srv-01-down","title":"Server DOWN","description":"Health check failing","source":"Datadog"}'`
     return (
       <div className={styles.modalOverlay} onClick={onClose}>
         <div className={styles.modal} onClick={(e) => e.stopPropagation()}>

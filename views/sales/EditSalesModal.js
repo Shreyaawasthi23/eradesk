@@ -23,7 +23,7 @@ const EditSalesModal = ({ salesId, router, onClose, onSaved }) => {
     }
 
     try {
-      const response = await fetch(apiUrl + '/auth/sales-team/get-details?id=' + salesId, requestOptions)
+      const response = await fetch(apiUrl + '/auth/core/sales-team/get-details?id=' + salesId, requestOptions)
       if (response.status === 401) {
         router.push('/')
       } else {

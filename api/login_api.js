@@ -8,7 +8,7 @@ export const login = async (email, password, router) => {
     headers: { 'Content-Type': 'application/json', 'X-Tenant': '' + tenant + '' },
     body: '{"email":"' + email + '","password":"' + password + '"}',
   }
-  fetch(apiUrl + '/api/auth/signin/email', options)
+  fetch(apiUrl + '/api/auth/account/signin/email', options)
     .then((response) => response.json())
     .then((response) => {
       if (response.token != null) {

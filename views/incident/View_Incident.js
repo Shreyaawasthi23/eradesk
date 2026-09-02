@@ -98,7 +98,7 @@ const View_Incident = () => {
       redirect: 'follow',
     }
     try {
-      const response = await fetch(apiUrl + '/auth/incident/get-detail?id=' + id, requestOptions)
+      const response = await fetch(apiUrl + '/auth/core/incident/get-detail?id=' + id, requestOptions)
       if (response.status === 401) {
         router.push('/')
       } else {
@@ -124,7 +124,7 @@ const View_Incident = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/incident/get-notes?incidentId=' + id, requestOptions)
+    fetch(apiUrl + '/auth/core/incident/get-notes?incidentId=' + id, requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         setNotes(result)
@@ -145,7 +145,7 @@ const View_Incident = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/rma/get-incident?incidentId=' + id,
+        apiUrl + '/auth/core/rma/get-incident?incidentId=' + id,
         requestOptions,
       )
       if (response.status === 401) {
@@ -175,7 +175,7 @@ const View_Incident = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/mail/get-incidentRef?incidentRefId=' + id,
+        apiUrl + '/auth/account/mail/get-incidentRef?incidentRefId=' + id,
         requestOptions,
       )
       if (response.status === 401) {
@@ -206,7 +206,7 @@ const View_Incident = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/microsoft/fetch-mails?incidentId=' + incidentDetails.incidentId,
+        apiUrl + '/auth/account/microsoft/fetch-mails?incidentId=' + incidentDetails.incidentId,
         requestOptions,
       )
       if (response.status === 401) {
@@ -257,7 +257,7 @@ const View_Incident = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/incident/check-sla?incidentId=' + id,
+        apiUrl + '/auth/core/incident/check-sla?incidentId=' + id,
         requestOptions,
       )
       if (response.status === 401) {
@@ -307,7 +307,7 @@ const View_Incident = () => {
 
     try {
       const response = await fetch(
-        apiUrl + '/auth/challan/by-incident?incidentId=' + id,
+        apiUrl + '/auth/core/challan/by-incident?incidentId=' + id,
         requestOptions,
       )
       if (response.status === 401) {
@@ -337,7 +337,7 @@ const View_Incident = () => {
       }
 
       const response = await fetch(
-        apiUrl + '/api/auth/users/get-user-details-general?id=' + userId,
+        apiUrl + '/api/auth/core/users/get-user-details-general?id=' + userId,
         requestOptions,
       )
       if (response.status === 401) {

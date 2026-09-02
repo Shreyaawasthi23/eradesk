@@ -47,7 +47,7 @@ const Edit_EClient = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/front-client/get-all-list', requestOptions)
+    fetch(apiUrl + '/auth/core/front-client/get-all-list', requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result !== null) {
@@ -67,7 +67,7 @@ const Edit_EClient = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/end-client/details?id=' + id, requestOptions)
+    fetch(apiUrl + '/auth/core/end-client/details?id=' + id, requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         if (result !== null) {

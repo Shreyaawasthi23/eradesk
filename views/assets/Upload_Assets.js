@@ -95,7 +95,7 @@ const Upload_Assets = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/assets/upload-assets?userId=' + details?.id, requestOptions)
+    fetch(apiUrl + '/auth/core/assets/upload-assets?userId=' + details?.id, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.statusCode === 200) {

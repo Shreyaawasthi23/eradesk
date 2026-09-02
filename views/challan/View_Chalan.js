@@ -67,7 +67,7 @@ const View_Chalan = () => {
     try {
       const response = await fetch(
         apiUrl +
-          '/auth/challan/get-all-page?page=' +
+          '/auth/core/challan/get-all-page?page=' +
           page +
           '&size=' +
           size +
@@ -109,7 +109,7 @@ const View_Chalan = () => {
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/challan/get-delivery-status?id=' + option.id, requestOptions)
+    fetch(apiUrl + '/auth/core/challan/get-delivery-status?id=' + option.id, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setTrackingStatus(result)
@@ -136,7 +136,7 @@ const View_Chalan = () => {
       }
 
       const response = await fetch(
-        apiUrl + '/auth/challan/get-pod-details?id=' + option.id,
+        apiUrl + '/auth/core/challan/get-pod-details?id=' + option.id,
         requestOptions,
       )
       const result = await response.json()
@@ -181,9 +181,9 @@ const View_Chalan = () => {
   const applyFilters = () => {
     setCurrentPage(0)
     if (incidentId) {
-      runSearch(apiUrl + '/auth/challan/get-by-incident?page=0&size=5000&incidentId=' + incidentId)
+      runSearch(apiUrl + '/auth/core/challan/get-by-incident?page=0&size=5000&incidentId=' + incidentId)
     } else if (rmaNo) {
-      runSearch(apiUrl + '/auth/challan/get-by-rma?page=0&size=5000&rmaNo=' + rmaNo)
+      runSearch(apiUrl + '/auth/core/challan/get-by-rma?page=0&size=5000&rmaNo=' + rmaNo)
     } else {
       getAllChallans(0, 10, { startDate, endDate })
     }
@@ -243,7 +243,7 @@ const View_Chalan = () => {
       if (startDate) params.set('startDate', startDate)
       if (endDate) params.set('endDate', endDate)
       const response = await fetch(
-        apiUrl + '/auth/challan/get-all-page?page=0&size=100000' +
+        apiUrl + '/auth/core/challan/get-all-page?page=0&size=100000' +
           (params.toString() ? '&' + params.toString() : ''),
         { method: 'GET', headers: myHeaders, redirect: 'follow' },
       )

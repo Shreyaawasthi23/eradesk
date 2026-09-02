@@ -36,13 +36,13 @@ const postJson = async (path, body, router, onSuccess) => {
 }
 
 export const createCatalogItem = (item, router, onSuccess) =>
-  postJson('/auth/catalog/create', item, router, onSuccess)
+  postJson('/auth/service/catalog/create', item, router, onSuccess)
 
 export const submitServiceRequest = (payload, router, onSuccess) =>
-  postJson('/auth/catalog/submit-request', payload, router, (data) => {
+  postJson('/auth/service/catalog/submit-request', payload, router, (data) => {
     Swal.fire('Submitted', data.message, 'success')
     onSuccess && onSuccess(data)
   })
 
 export const setServiceRequestStatus = (id, status, extra, router, onSuccess) =>
-  postJson('/auth/catalog/request-set-status?id=' + id, { status, ...extra }, router, onSuccess)
+  postJson('/auth/service/catalog/request-set-status?id=' + id, { status, ...extra }, router, onSuccess)

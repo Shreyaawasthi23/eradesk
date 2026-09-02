@@ -36,22 +36,22 @@ const postJson = async (path, body, router, onSuccess) => {
 }
 
 export const createProblem = (problem, router, onSuccess) =>
-  postJson('/auth/problem/create', problem, router, (data) => {
+  postJson('/auth/itil/problem/create', problem, router, (data) => {
     Swal.fire('Success', data.message, 'success')
     onSuccess && onSuccess(data)
   })
 
 export const createProblemFromIncident = (payload, router, onSuccess) =>
-  postJson('/auth/problem/create-from-incident', payload, router, (data) => {
+  postJson('/auth/itil/problem/create-from-incident', payload, router, (data) => {
     Swal.fire('Success', data.message, 'success')
     onSuccess && onSuccess(data)
   })
 
 export const editProblem = (problem, router, onSuccess) =>
-  postJson('/auth/problem/edit?id=' + problem.id, problem, router, onSuccess)
+  postJson('/auth/itil/problem/edit?id=' + problem.id, problem, router, onSuccess)
 
 export const linkIncidentToProblem = (problemId, incidentId, router, onSuccess) =>
-  postJson('/auth/problem/link-incident?id=' + problemId, { incidentId }, router, onSuccess)
+  postJson('/auth/itil/problem/link-incident?id=' + problemId, { incidentId }, router, onSuccess)
 
 export const setProblemStatus = (id, status, closureNotes, router, onSuccess) =>
-  postJson('/auth/problem/set-status?id=' + id, { status, closureNotes }, router, onSuccess)
+  postJson('/auth/itil/problem/set-status?id=' + id, { status, closureNotes }, router, onSuccess)

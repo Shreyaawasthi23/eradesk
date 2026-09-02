@@ -36,10 +36,10 @@ const postJson = async (path, body, router, onSuccess) => {
 }
 
 export const createContract = (contract, router, onSuccess) =>
-  postJson('/auth/contract/create', contract, router, onSuccess)
+  postJson('/auth/service/contract/create', contract, router, onSuccess)
 
 export const editContract = (contract, router, onSuccess) =>
-  postJson('/auth/contract/edit?id=' + contract.id, contract, router, onSuccess)
+  postJson('/auth/service/contract/edit?id=' + contract.id, contract, router, onSuccess)
 
 export const setContractStatus = (id, status, router, onSuccess) =>
-  postJson('/auth/contract/set-status?id=' + id, { status }, router, onSuccess)
+  postJson('/auth/service/contract/set-status?id=' + id, { status }, router, onSuccess)

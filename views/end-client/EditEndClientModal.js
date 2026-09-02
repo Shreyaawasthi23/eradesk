@@ -25,7 +25,7 @@ const EditEndClientModal = ({ clientId, router, frontClientList, salesList, onCl
       redirect: 'follow',
     }
 
-    fetch(apiUrl + '/auth/end-client/details?id=' + clientId, requestOptions)
+    fetch(apiUrl + '/auth/core/end-client/details?id=' + clientId, requestOptions)
       .then((response) => (response.status === 401 ? router.push('/') : response.json()))
       .then((result) => {
         setClientDetails(result || {})

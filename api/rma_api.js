@@ -39,7 +39,7 @@ export const raiseRma = async (rma, router, setVisible, resetForm, setSubmitStat
     redirect: 'follow',
   }
   try {
-    const response = await fetch(apiUrl + '/auth/rma/create', requestOptions)
+    const response = await fetch(apiUrl + '/auth/core/rma/create', requestOptions)
     if (response.status === 401) {
       router.push('/')
     } else {
@@ -98,7 +98,7 @@ export const EditRma = (rma, router, setVisible, resetForm, setSubmitState, onSu
     redirect: 'follow',
   }
 
-  fetch(apiUrl + '/auth/rma/edit?id=' + rma.id + '&remarks=' + rma.remarks + '', requestOptions)
+  fetch(apiUrl + '/auth/core/rma/edit?id=' + rma.id + '&remarks=' + rma.remarks + '', requestOptions)
     .then((response) => (response.status === 401 ? router.push('/') : response.json()))
     .then((result) => {
       if (result.statusCode === 200) {
@@ -145,7 +145,7 @@ export const UpdateRmaStatus = async (status, rmaId, router, onSuccess) => {
 
     const response = await fetch(
       apiUrl +
-        '/auth/rma/rma-status-update?rmaId=' +
+        '/auth/core/rma/rma-status-update?rmaId=' +
         rmaId +
         '&status=' +
         status +
@@ -199,7 +199,7 @@ export const CreateRmaPurchase = async (
     redirect: 'follow',
   }
   try {
-    const response = await fetch(apiUrl + '/auth/rma/create-purchase-rma', requestOptions)
+    const response = await fetch(apiUrl + '/auth/core/rma/create-purchase-rma', requestOptions)
     if (response.status === 401) {
       router.push('/')
     } else {
@@ -256,7 +256,7 @@ export const EditRmaPurchase = (rmaPurchase, router, setVisible, resetForm, setS
     redirect: 'follow',
   }
 
-  fetch(apiUrl + '/auth/rma/edit-purchase-rma?id=' + rmaPurchase.id + '', requestOptions)
+  fetch(apiUrl + '/auth/core/rma/edit-purchase-rma?id=' + rmaPurchase.id + '', requestOptions)
     .then((response) => (response.status === 401 ? router.push('/') : response.json()))
     .then((result) => {
       if (result.statusCode === 200) {

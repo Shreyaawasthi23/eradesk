@@ -36,10 +36,10 @@ const postJson = async (path, body, router, onSuccess) => {
 }
 
 export const createMaintenanceWindow = (payload, router, onSuccess) =>
-  postJson('/auth/maintenance/create', payload, router, onSuccess)
+  postJson('/auth/ops/maintenance/create', payload, router, onSuccess)
 
 export const setMaintenanceStatus = (id, status, router, onSuccess) =>
-  postJson('/auth/maintenance/set-status?id=' + id, { status }, router, onSuccess)
+  postJson('/auth/ops/maintenance/set-status?id=' + id, { status }, router, onSuccess)
 
 export const createAnnouncement = (payload, router, onSuccess) =>
-  postJson('/auth/announcement/create', payload, router, onSuccess)
+  postJson('/auth/ops/announcement/create', payload, router, onSuccess)

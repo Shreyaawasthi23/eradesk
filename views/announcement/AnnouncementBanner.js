@@ -16,7 +16,7 @@ const AnnouncementBanner = () => {
     const headers = new Headers()
     headers.append('X-Tenant', '' + tenant + '')
     headers.append('Authorization', 'Bearer ' + details?.token + '')
-    fetch(apiUrl + '/auth/announcement/get-active', { method: 'GET', headers, redirect: 'follow' })
+    fetch(apiUrl + '/auth/ops/announcement/get-active', { method: 'GET', headers, redirect: 'follow' })
       .then((r) => (r.ok ? r.json() : []))
       .then((data) => setAnnouncements(Array.isArray(data) ? data : []))
       .catch(() => setAnnouncements([]))

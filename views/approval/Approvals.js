@@ -20,7 +20,7 @@ const Approvals = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/approval/get-pending-for-me', {
+      const response = await fetch(apiUrl + '/auth/service/approval/get-pending-for-me', {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',
@@ -41,7 +41,7 @@ const Approvals = () => {
     myHeaders.append('X-Tenant', '' + tenant + '')
     myHeaders.append('Authorization', 'Bearer ' + details?.token + '')
     try {
-      const response = await fetch(apiUrl + '/auth/approval/get-all-page?page=0&size=50', {
+      const response = await fetch(apiUrl + '/auth/service/approval/get-all-page?page=0&size=50', {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',
