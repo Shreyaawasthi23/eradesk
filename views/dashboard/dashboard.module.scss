@@ -5,7 +5,7 @@
   --dash-ink-muted: #64748b;
   --dash-border: #ebe9e2;
   --dash-accent: #0f766e;
-  --dash-accent-deep: #0d2b2e;
+  --dash-accent-deep: #1c4b48;
   --dash-warm: #d97706;
   --dash-success: #16a34a;
   --dash-warning: #d97706;
@@ -180,7 +180,7 @@
 
 .cardDark {
   composes: card;
-  background: linear-gradient(160deg, #16403e 0%, #0d2b2e 100%);
+  background: linear-gradient(160deg, #235953 0%, #1c4b48 100%);
   border-color: #1c4d4a;
 }
 
