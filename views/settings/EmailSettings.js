@@ -13,7 +13,7 @@ const DEFAULT_NEW_TICKET_TEMPLATE =
   'Hi {{name}},\n\nThank you for contacting support. Your incident has been logged with reference {{incidentId}}. Our team will get back to you shortly.\n\nRegards,\nSupport Team'
 
 const DEFAULT_EXPIRED_TICKET_TEMPLATE =
-  'Hi {{name}},\n\nThank you for contacting support. Your incident has been logged with reference {{incidentId}}. Please note the AMC/support contract for serial number {{serialNumber}} has expired — our team will reach out regarding renewal along with resolving this request.\n\nRegards,\nSupport Team'
+  'Hi {{name}},\n\nThank you for contacting support. Please note the AMC/support contract for serial number {{serialNumber}} has expired, so we are unable to log an incident for this request. Our team will reach out regarding renewal.\n\nRegards,\nSupport Team'
 
 const DEFAULT_NOT_SUPPORTED_TEMPLATE =
   'Hi {{name}},\n\nThank you for reaching out. We could not find serial number {{serialNumber}} under our AMC/support coverage, so no incident has been created. Please contact our sales team for support options.\n\nRegards,\nSupport Team'
@@ -36,10 +36,10 @@ const EmailSettings = () => {
     },
     {
       key: 'expiredTicket',
-      label: 'New Ticket (Expired)',
+      label: 'Expired Contract',
       description:
-        "Sent when a new incident is created for a serial number whose linked Purchase Order has expired. Sales Team is cc'd.",
-      placeholders: ['{{name}}', '{{incidentId}}', '{{serialNumber}}'],
+        "Sent when a matching serial number's AMC/support contract has expired — no incident is created. Sales Team is cc'd.",
+      placeholders: ['{{name}}', '{{serialNumber}}'],
     },
     {
       key: 'notSupported',
