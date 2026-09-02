@@ -1,12 +1,13 @@
 .page {
-  --fc-bg: #f1f3f6;
+  --fc-bg: #f7f6f2;
   --fc-surface: #ffffff;
   --fc-ink: #0f172a;
   --fc-ink-muted: #64748b;
-  --fc-border: #e6e9ef;
-  --fc-accent: #6d28d9;
-  --fc-accent-light: #8b5cf6;
-  --fc-accent-blue: #3b82f6;
+  --fc-border: #ebe9e2;
+  --fc-accent: #0f766e;
+  --fc-accent-light: #14b8a6;
+  --fc-accent-blue: #14b8a6;
+  --fc-warm: #d97706;
   --fc-danger: #dc2626;
 
   min-height: 100vh;
@@ -166,15 +167,17 @@
   padding: 13px 32px;
   border-radius: 10px;
   border: none;
-  background: var(--fc-accent);
+  background: var(--fc-warm);
   color: #ffffff;
   cursor: pointer;
   margin-top: 8px;
-  transition: background-color 0.15s ease, transform 0.12s ease;
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--fc-warm) 35%, transparent);
+  transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
 }
 
 .loginBtn:hover {
-  background: color-mix(in srgb, var(--fc-accent) 85%, black);
+  background: color-mix(in srgb, var(--fc-warm) 85%, black);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--fc-warm) 45%, transparent);
 }
 
 .loginBtn:active {
@@ -209,7 +212,7 @@
   margin: 12px;
   border-radius: 20px;
   overflow: hidden;
-  background: linear-gradient(150deg, #8b5cf6 0%, #6d28d9 45%, #3b82f6 100%);
+  background: linear-gradient(150deg, #14b8a6 0%, #0f766e 55%, #1c4b48 100%);
   color: #ffffff;
 }
 
