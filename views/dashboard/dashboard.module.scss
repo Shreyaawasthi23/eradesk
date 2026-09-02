@@ -21,9 +21,10 @@
 }
 
 .pageTitle {
-  font-size: 21px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
   margin: 0 0 2px;
   color: var(--dash-ink);
 }
@@ -197,16 +198,51 @@
 
 .kpiCard {
   composes: card;
-  padding: 14px 16px;
+  position: relative;
+  padding: 18px 20px 16px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  overflow: visible;
+}
+
+.kpiCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  border-radius: 0 0 2px 2px;
+  background: var(--dash-accent);
+  opacity: 0.55;
+}
+
+.kpiCard:nth-child(2)::before {
+  background: var(--dash-warm);
+}
+
+.kpiCard:nth-child(3)::before {
+  background: var(--dash-success);
+}
+
+.kpiCard:nth-child(4)::before {
+  background: var(--dash-accent);
+}
+
+.kpiTopRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 8px;
 }
 
 .kpiLabel {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--dash-ink-muted);
-  font-weight: 500;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .kpiValueRow {
@@ -216,16 +252,17 @@
 }
 
 .kpiValue {
-  font-size: 22px;
-  font-weight: 700;
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   color: var(--dash-ink);
 }
 
 .kpiTrend {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12.5px;
+  font-weight: 700;
   display: inline-flex;
   align-items: center;
   gap: 2px;
@@ -242,22 +279,21 @@
 }
 
 .kpiIcon {
-  width: 42px;
-  height: 42px;
-  border-radius: 11px;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--dash-warm), #b45309);
-  color: #ffffff;
-  align-self: flex-start;
-  box-shadow: 0 4px 12px color-mix(in srgb, var(--dash-warm) 35%, transparent);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: color-mix(in srgb, var(--dash-ink-muted) 10%, transparent);
+  color: var(--dash-ink-muted);
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .kpiCard:hover .kpiIcon {
-  transform: scale(1.08);
-  box-shadow: 0 6px 16px color-mix(in srgb, var(--dash-accent-deep) 45%, transparent);
+  color: var(--dash-accent);
+  background: color-mix(in srgb, var(--dash-accent) 12%, transparent);
 }
 
 /* Year select */

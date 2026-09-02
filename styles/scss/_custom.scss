@@ -1,13 +1,16 @@
 // Here you can add other styles
 
 body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 14px;
   line-height: 1.55;
   background: #f7f6f2;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  letter-spacing: -0.01em;
+  font-family: 'Manrope', 'Inter', -apple-system, sans-serif;
+  letter-spacing: -0.015em;
+  font-weight: 700;
 }
 
 .card {

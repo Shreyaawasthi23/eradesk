@@ -8,12 +8,14 @@ const KpiCard = ({ label, value, trend, icon }) => {
 
   return (
     <div className={styles.kpiCard}>
-      {icon && (
-        <div className={styles.kpiIcon}>
-          <CIcon icon={icon} size="lg" />
-        </div>
-      )}
-      <div className={styles.kpiLabel}>{label}</div>
+      <div className={styles.kpiTopRow}>
+        <div className={styles.kpiLabel}>{label}</div>
+        {icon && (
+          <div className={styles.kpiIcon}>
+            <CIcon icon={icon} size="sm" />
+          </div>
+        )}
+      </div>
       <div className={styles.kpiValueRow}>
         <span className={styles.kpiValue}>{value}</span>
         {hasTrend && (

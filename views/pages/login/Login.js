@@ -103,13 +103,29 @@ const Login = () => {
         </div>
 
         <div className={styles.brandSide}>
-          <span className={styles.brandShapeOne} />
-          <span className={styles.brandShapeTwo} />
-          <div className={styles.brandMark}>ED</div>
-          <h2 className={styles.brandTitle}>ERADESK</h2>
-          <p className={styles.brandText}>
-            Manage incidents, assets, purchase orders and RMAs in one place.
-          </p>
+          <span className={styles.brandGrid} />
+          <div className={styles.brandContent}>
+            <span className={styles.brandEyebrow}>IT Service Management</span>
+            <h2 className={styles.brandTitle}>
+              Every ticket, asset,
+              <br />
+              and change — one desk.
+            </h2>
+            <ul className={styles.brandFeatureList}>
+              <li>
+                <span className={styles.brandFeatureDot} />
+                Incidents, problems &amp; changes tracked end to end
+              </li>
+              <li>
+                <span className={styles.brandFeatureDot} />
+                Full asset &amp; CMDB visibility, always current
+              </li>
+              <li>
+                <span className={styles.brandFeatureDot} />
+                Approvals and SLAs that enforce themselves
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
