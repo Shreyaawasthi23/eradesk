@@ -19,7 +19,6 @@ import {
   faBuildingUser,
   faFileInvoiceDollar,
   faLifeRing,
-  faHeadset,
   faArrowsRotate,
   faTruckMoving,
   faDatabase,
@@ -91,12 +90,6 @@ const _nav = [
     name: 'Incident',
     to: '/incident',
     icon: <FontAwesomeIcon icon={faLifeRing} className="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Service Request',
-    to: '/incident',
-    icon: <FontAwesomeIcon icon={faHeadset} className="nav-icon" />,
   },
   {
     component: CNavItem,
@@ -254,12 +247,6 @@ const admin_nav = [
     name: 'Incident',
     to: '/incident',
     icon: <FontAwesomeIcon icon={faLifeRing} className="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Service Request',
-    to: '/incident',
-    icon: <FontAwesomeIcon icon={faHeadset} className="nav-icon" />,
   },
   {
     component: CNavItem,
@@ -455,12 +442,6 @@ const mod_nav = [
   },
   {
     component: CNavItem,
-    name: 'Service Request',
-    to: '/incident',
-    icon: <FontAwesomeIcon icon={faHeadset} className="nav-icon" />,
-  },
-  {
-    component: CNavItem,
     name: 'Service Catalog',
     to: '/catalog',
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
@@ -614,12 +595,6 @@ const support_nav = [
     name: 'Incident',
     to: '/incident',
     icon: <FontAwesomeIcon icon={faLifeRing} className="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Service Request',
-    to: '/incident',
-    icon: <FontAwesomeIcon icon={faHeadset} className="nav-icon" />,
   },
   {
     component: CNavItem,
